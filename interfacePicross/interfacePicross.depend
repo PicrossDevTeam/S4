@@ -1,0 +1,6 @@
+# depslib dependency file v1.0
+1519826518 source:/home/omiganox/Bureau/interfacePicross/main.cpp
+	<stdlib.h>
+	<stdio.h>
+	<SDL2/SDL.h>
+
