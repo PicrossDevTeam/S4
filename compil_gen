@@ -1,0 +1,11 @@
+PROG = test
+CC = gcc
+OBJS = generation.o
+FUNC = generation.c
+
+${PROG}: ${OBJS}
+	${CC} $< -o $@
+${OBJS}: ${FUNC}
+	${CC} -c $^
+clean:
+	rm *.o
