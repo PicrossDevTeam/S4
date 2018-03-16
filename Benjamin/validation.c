@@ -3,16 +3,13 @@
 #include <math.h>
 
 /* Taille matrice périphérique fixée pour éviter un parcours trop long */
-const int periph=2;
+const int periph=20;
 
 /* Taille matrice globale en hauteur */
-int tlle_mat_glo_h;
+int tlle_mat_glo_h=20;
 
 /* Taille matrice globale en longueur */
-int tlle_mat_glo_l;
-
-/* Taille des matrices qui composent la matrice globale */
-int tlle_mat;
+int tlle_mat_glo_l=20;
 
 /* Valeur pour se déplacer dans la matrice utilisateur après vérification */
 int avance;
@@ -20,11 +17,11 @@ int avance;
 /* Indices de parcours de la matrice globale de solution par l'utilisateur */
 int i,j;
 
-double matrice_peripherique_dessus[tlle_mat_glo_l][periph];
-double matrice_peripherique_gauche[periph][tlle_mat_glo_h];
+int matrice_peripherique_dessus[20][20];
+int matrice_peripherique_gauche[20][20]; //1ere périph
 
 /* La fonction de vérification de la matrice périphérique du haut change également la valeur de avance qui est utile pour la suite */
-int verif_peri_h(double matrice_globale[tlle_mat_glo_l][tlle_mat_glo_h]){
+int verif_peri_h(int matrice_globale[tlle_mat_glo_l][tlle_mat_glo_h]){
 	int k;
 	int compt;
 
@@ -54,7 +51,7 @@ int verif_peri_h(double matrice_globale[tlle_mat_glo_l][tlle_mat_glo_h]){
 	return 1;
 }
 
-int verif_peri_g(double matrice_globale[tlle_mat_glo_l][tlle_mat_glo_h]){
+int verif_peri_g(int matrice_globale[tlle_mat_glo_l][tlle_mat_glo_h]){
 	int l;
 	int compt;
 
@@ -81,7 +78,7 @@ int verif_peri_g(double matrice_globale[tlle_mat_glo_l][tlle_mat_glo_h]){
 	return 1;
 }
 
-int validation(double matrice_globale[tlle_mat_glo_l][tlle_mat_glo_h]){
+int validation(int matrice_globale[tlle_mat_glo_l][tlle_mat_glo_h]){
 
 	int verif_h;
 	int verif_g;
@@ -89,17 +86,17 @@ int validation(double matrice_globale[tlle_mat_glo_l][tlle_mat_glo_h]){
 
 	/* Parcours de la matrice de l'utilisateur */
 	for(i=0; i<tlle_mat_glo_l; i++){
-		for(j=0, j<tlle_mat_glo_h; j++){
+		for(j=0; j<tlle_mat_glo_h; j++){
 
 			/* Si une case est cochée */
 			if(matrice_globale[i][j]==1){
 
 				/* On vérifie par rapport aux matrices périphériques */
 
-				verif_h=verif_peri_h(matrice_globale, matrice_peripherique_dessus, i, j);
+				verif_h=verif_peri_h(matrice_globale);
 				if(verif_h==0)
 					return 0;
-				verif_g=verif_peri_g(matrice_globale, matrice_peripherique_gauche, i, j);
+				verif_g=verif_peri_g(matrice_globale);
 				if(verif_g==0)
 					return 0;
 
@@ -109,13 +106,4 @@ int validation(double matrice_globale[tlle_mat_glo_l][tlle_mat_glo_h]){
 		}
 	}
 	return 1;
-}
-
-int main(){
-	double matrice_globale[tlle_mat_glo_l][tlle_mat_glo_h];
-
-	if(validation(matrice_globale) == 1)
-		printf("Vous avez réussi !");
-	else
-		printf("Vous avez échoué !")
 }
