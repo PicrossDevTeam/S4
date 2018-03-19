@@ -1,0 +1,10 @@
+PROG = test
+CC = gcc
+GEN = generation
+
+${PROG}: ${GEN}.o
+	${CC} $< -o $@
+${GEN}.o: ${GEN}.c
+	${CC} -c $^
+clean:
+	rm *.o
