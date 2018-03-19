@@ -74,8 +74,9 @@ void aff_peri_gauche(int mat_ori[T][T]){
 	}
 }
 
+/*
 int main(){
-	/* Taille matrice globale */
+	
 	T = N * 5;
 
 	P = N * 2;
@@ -95,3 +96,5 @@ int main(){
 	creer_peri_gauche(mat_peri_gauche);
 	aff_peri_gauche(mat_peri_gauche);
 }
+
+*/
