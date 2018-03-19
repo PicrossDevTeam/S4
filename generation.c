@@ -1,11 +1,37 @@
+/**
+* \file generatin.c
+* \author KAJAK Rémi
+* \version 1.0
+* \date 19/03/2018
+* \brief Fichier ayant servi à l'élaboration de la fonction de lecture du fichier texte qui contient les nombres générateurs de la matrice principale.
+*/
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 
+/**
+* \def N
+* \brief Nombre de lignes de la matrice test
+*/
 #define N 10
+/**
+* \def M
+* \brief Nombre de colonnes de la matrice test
+*/
 #define M 5
+/**
+* \def mat[N][M]
+* \brief Matrice test pour l'insertion - non-fonctionnelle
+*/
 int mat[N][M];
 
+/**
+* \fn lecture_fic(char *nom, int niveau)
+* \brief Lit un fichier avec un format spécifique et renseigne les nombres contenus dans les matrices adjacentes
+* \param nom Nom du fichier texte à analyser
+* \param niveau Nombre du puzzle à trouver dans le fichier
+* \return Ne retourne aucun résultat
+*/
 void lecture_fic(char *nom_fic, int niveau) { /* Lecture du fichier contenant les puzzles prédéfinis */
 	FILE * fic_gen;
 	char cle[4] = "PHVF", carac;
