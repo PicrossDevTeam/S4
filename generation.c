@@ -14,16 +14,6 @@
 * \brief Nombre de lignes de la matrice test
 */
 #define N 10
-/**
-* \def M
-* \brief Nombre de colonnes de la matrice test
-*/
-#define M 5
-/**
-* \def mat[N][M]
-* \brief Matrice test pour l'insertion - non-fonctionnelle
-*/
-int mat[N][M];
 
 /**
 * \fn lecture_fic(char *nom, int niveau)
@@ -32,7 +22,7 @@ int mat[N][M];
 * \param niveau Nombre du puzzle à trouver dans le fichier
 * \return Ne retourne aucun résultat
 */
-void lecture_fic(char *nom_fic, int niveau) { /* Lecture du fichier contenant les puzzles prédéfinis */
+void lecture_fic(char *nom_fic, int niveau, int H[N][N], int V[N][N]) { /* Lecture du fichier contenant les puzzles prédéfinis */
 	FILE * fic_gen;
 	char cle[4] = "PHVF", carac;
 	int ligne, colonne, num_puz, nb_case;
@@ -58,7 +48,8 @@ void lecture_fic(char *nom_fic, int niveau) { /* Lecture du fichier contenant le
 					if(carac == ' ' || carac == '\n') {
 						fscanf(fic_gen,"%i",&nb_case);
 						printf("%i",nb_case);
-						mat[ligne][colonne] = nb_case;
+						if(cle[i] == 'H') H[colonne][ligne] = nb_case;
+						else if(cle[i] == 'V') V[ligne][colonne] = nb_case;
 						colonne++;
 					}
 					else if(carac == '+') {
@@ -78,8 +69,42 @@ void lecture_fic(char *nom_fic, int niveau) { /* Lecture du fichier contenant le
 	printf("Sortie du fichier\n");
 }
 
+void init_matrices(int H[N][N], int V[N][N]) {
+	int i, j;
+	
+	for(i = 0; i < N; i++) {
+		for(j = 0; j < N; j++) {
+			H[i][j] = 0;
+			V[i][j] = 0;
+		}
+	}
+}
+
+void afficher_matrice(int mat[N][N], char cle) {
+	int i, j;
+	
+	if(cle == 'H') {
+		printf("Matrice périphérique horizontale :\n");
+		for(i = 0; i < N/2; i++) {
+			for(j = 0; j < N; j++) printf("%i ",mat[i][j]);
+		}
+		printf("\n\n");
+	}
+	else if(cle == 'V') {
+		printf("Matrice périphérique verticale :\n");
+		for(i = 0; i < N; i++) {
+			for(j = 0; j < N/2; j++) printf("%i ",mat[i][j]);
+		}
+		printf("\n\n");
+	}
+}
+
 int main() {
 	char *saisie = "nombres_puzzle.txt";
+	int matH[N][N], matV[N][N];
 	
-	lecture_fic(saisie,2);
+	init_matrices(matH,matV);
+	lecture_fic(saisie,2,matH,matV);
+	afficher_matrice(matH,'H');
+	afficher_matrice(matV,'V');
 }
