@@ -25,24 +25,24 @@
 void lecture_fic(char *nom_fic, int niveau, int H[N][N], int V[N][N]) { /* Lecture du fichier contenant les puzzles prédéfinis */
 	FILE * fic_gen;
 	char cle[4] = "PHVF", carac;
-	int ligne, colonne, num_puz, nb_case;
-	
+	int ligne, colonne, num_puz, nb_case, i;
+
 	fic_gen = fopen(nom_fic,"r");
 	fscanf(fic_gen,"%c %i",&carac,&num_puz);
-	
+
 	while(!feof(fic_gen)) { // Tant que la fin du fichier n'a pas été atteinte
 		if(carac == cle[0] && num_puz == niveau) { // Si on trouve le bon niveau de puzzle
 			printf("%c %i\n",carac,num_puz);
-			for(int i = 1; i <= 2; i++) { // Lecture successive des clés
+			for(i = 1; i <= 2; i++) { // Lecture successive des clés
 				ligne = 0;
 				colonne = 0;
-				
+
 				while(carac != cle[i]) { // Tant que l'on n'a pas trouvé la clé de départ
 					fscanf(fic_gen,"%c",&carac);
 				}
 				printf("%c",carac);
 				fscanf(fic_gen,"%c",&carac);
-				
+
 				while(carac != cle[i+1]) { // Tant que l'on n'a pas trouvé la clé de fin
 					printf("%c",carac);
 					if(carac == ' ' || carac == '\n') {
@@ -71,7 +71,11 @@ void lecture_fic(char *nom_fic, int niveau, int H[N][N], int V[N][N]) { /* Lectu
 
 void init_matrices(int H[N][N], int V[N][N]) {
 	int i, j;
+<<<<<<< HEAD
 	
+=======
+
+>>>>>>> f4e57341a03ad6a47a8736aabd4e59cd69ffc46f
 	for(i = 0; i < N; i++) {
 		for(j = 0; j < N; j++) {
 			H[i][j] = 0;
@@ -82,13 +86,21 @@ void init_matrices(int H[N][N], int V[N][N]) {
 
 void afficher_matrice(int mat[N][N], char cle) {
 	int i, j;
+<<<<<<< HEAD
 	
+=======
+
+>>>>>>> f4e57341a03ad6a47a8736aabd4e59cd69ffc46f
 	if(cle == 'H') {
 		printf("Matrice périphérique horizontale :\n");
 		for(i = 0; i < N/2; i++) {
 			for(j = 0; j < N; j++) printf("%i ",mat[i][j]);
 		}
+<<<<<<< HEAD
 		printf("\n\n");
+=======
+		printf("\n");
+>>>>>>> f4e57341a03ad6a47a8736aabd4e59cd69ffc46f
 	}
 	else if(cle == 'V') {
 		printf("Matrice périphérique verticale :\n");
@@ -96,13 +108,23 @@ void afficher_matrice(int mat[N][N], char cle) {
 			for(j = 0; j < N/2; j++) printf("%i ",mat[i][j]);
 		}
 		printf("\n\n");
+<<<<<<< HEAD
 	}
+=======
+
+	}
+	printf("\n\n");
+>>>>>>> f4e57341a03ad6a47a8736aabd4e59cd69ffc46f
 }
 
 int main() {
 	char *saisie = "nombres_puzzle.txt";
 	int matH[N][N], matV[N][N];
+<<<<<<< HEAD
 	
+=======
+
+>>>>>>> f4e57341a03ad6a47a8736aabd4e59cd69ffc46f
 	init_matrices(matH,matV);
 	lecture_fic(saisie,2,matH,matV);
 	afficher_matrice(matH,'H');
