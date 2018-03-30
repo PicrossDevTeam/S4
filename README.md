@@ -5,7 +5,7 @@ Membres du groupe :
 	* KAJAK Rémi
 	* KINZI Erick
 	* MAROUF Taous
-	* NOVELIERE Benjamin
+	* NOUVELIERE Benjamin
 
 Programme développé : Picross
 Description : 
