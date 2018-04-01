@@ -15,22 +15,41 @@
 */
 #define N 5
 
+/**
+* \fn afficher_matrice(int mat[N][N], char cle)
+* \brief Affiche une matrice reçue en paramètre selon un modèle prédéfini.
+* \param mat Une matrice de taille fixe
+* \param cle Un caractère qui définit le mode d'affichage : "C" pour afficher horizontalement les nombres de la matrice périphérique des colonnes, "L" pour afficher verticalement les nombres de la matrice périphérique des lignes et "S" pour afficher une grille complète
+* \return Ne retourne aucun résultat
+*/
 void afficher_matrice(int mat[N][N], char cle) {
 	int i, j;
 	
 	printf("\n");
 	if(cle == 'C') {
 		printf("Matrice périphérique des colonnes :\n\n");
-		for(i = 0; i < N/2; i++) {
-			for(j = 0; j < N; j++) printf("%i ",mat[i][j]);
+		for(i = N-1; i >= 0; i--) {
+			for(j = N-1; j >= 0; j--) {
+				if(i == 0) printf("%i ",mat[i][j]);
+				else {
+					if(mat[i][j] > 0) printf("%i ",mat[i][j]);
+					else printf("  ");
+				}
+			}
 			printf("\n");
 		}
 		
 	}
 	else if(cle == 'L') {
 		printf("Matrice périphérique des lignes :\n\n");
-		for(i = 0; i < N; i++) {
-			for(j = 0; j < N/2; j++) printf("%i ",mat[i][j]);
+		for(i = N-1; i >= 0; i--) {
+			for(j = N-1; j >= 0; j--) {
+				if(j == 0) printf("%i ",mat[i][j]);
+				else {
+					if(mat[i][j] > 0) printf("%i ",mat[i][j]);
+					else printf("  ");
+				}
+			}
 			printf("\n");
 		}
 	}
@@ -40,6 +59,19 @@ void afficher_matrice(int mat[N][N], char cle) {
 			for(j = 0; j < N; j++) printf("%i ",mat[i][j]);
 			printf("\n");
 		}
+	}
+}
+
+void afficher_matrice_claire(int mat[N][N]) {
+	int i, j;
+	
+	printf("\nMatrice solution éclaircie :\n\n");
+	for(i = 0; i < N; i++) {
+		for(j = 0; j < N; j++) {
+			if(mat[i][j]%2 == 0) printf("%i ",0);
+			else printf("%i ",1);
+		}
+		printf("\n");
 	}
 }
 
@@ -173,22 +205,22 @@ void init_compteurs_periph(int cptC[N], int cptL[N]) {
 
 /**
 * \fn gen_solution(int S[N][N], int C[N][N], int L[N][N])
-* \brief Initialise la matrice solution grâce aux données des matrices périphériques.
+* \brief Initialise la matrice solution grâce aux données des matrices périphériques. Pour gérer le remplissage progressif et les cas d'erreur, un système de numérotation des cases a été mis en place : 0 => case vide non-testée, 1 => case cochée, 2 => case vide déjà testée, 3 => case cochée validée.
 * \param S La matrice solution qui va contenir le motif du puzzle
 * \param C La matrice périphérique des colonnes (situé en haut de la grille du Picross)
 * \param L La matrice périphérique des lignes (situé à gauche de la grille du Picross)
 * \return Ne retourne aucun résultat
 */
 void gen_solution(int S[N][N], int C[N][N], int L[N][N]) {
-	int nbC[N], nbL[N], completionC[N], completionL[N]; // Tableaux
+	int nombres_C[N], nombres_L[N], completionC[N], completionL[N]; // Tableaux
 	int i, j, k, l, decalage, verif, lecture_grille = 0, respect_regles = 0, tour_ligne = 1;
 	
 	// Dans un premier temps, on dénombre les chiffres présents dans chacune des lignes des matrices périphériques
-	init_compteurs_periph(nbC,nbL);
+	init_compteurs_periph(nombres_C,nombres_L);
 	for(i = 0; i < N; i++) {
 		for(j = 0; j < N; j++) {
-			if(C[j][i] > 0) nbC[i] = nbC[i] + 1;
-			if(L[i][j] > 0) nbL[i] = nbL[i] + 1;
+			if(C[j][i] > 0) nombres_C[i] = nombres_C[i] + 1;
+			if(L[i][j] > 0) nombres_L[i] = nombres_L[i] + 1;
 		}
 	}
 	
@@ -204,31 +236,38 @@ void gen_solution(int S[N][N], int C[N][N], int L[N][N]) {
 		printf("\nTour n°%i",i);
 		
 		// Lorsque toutes les rangées auront été lues au moins une fois pour la complétion, on effectue une vérification globale pour passer à la troisième étape de la génération
-		//if(lecture_grille >= 2) verif_adequation_globale(S,C,L,completionC,completionL);
+		//if(lecture_grille >= 1) verif_adequation_globale(S,C,L,completionC,completionL);
 		
 		if(tour_ligne == 1) { // On commence par remplir les lignes
-			verif = adequation_rangee_et_nombres(S,C,nbC[i],j,'C');
-			printf("\nVérification : %i ",verif);
+			// On remplit les cases en fonction du ou des nombres indiqués dans la colonne de la matrice périphérique
+			if(nombres_L[i] > 0) {
+				decalage = j;
 			
-			if(verif == 0) { // Si la complétion correspond aux rangées lues
-				i++;
-				j++;
-			}
-			else if(verif == -1) {		// S'il manque un groupe
-				if(verif == -2) i++;	// S'il y a un débordement sur un groupe, on passe à la ligne suivante
-				j++;
-			}
-			decalage = j;
-			
-			for(k = 0; k < nbL[i]; k++) {				// Si le nombre relevé est supérieure à 0 (au moins un groupe de case existant)
-				if(nbL[k] > 0) {						// Pour chaque nombre de la ligne lue dans la matrice périphérique
-					for(l = 0; l < L[i][k]; l++) {		// Pour chaque nombre lu dans la matrice périphérique, on remplit les cases
-						S[i][decalage] = 1;
-						decalage++;
+				for(k = 0; k < nombres_L[i]; k++) {
+					if(L[i][k] > 0 && L[i][k] < N) {
+						for(l = 0; l < L[i][k]; l++) {
+							S[i][decalage] = 1;
+							decalage++;
+						}
+						if(lecture_grille == 0) decalage++; // On effectue un décalage d'une unité entre chaque groupe à la première lecture
 					}
-					if(lecture_grille == 0) decalage++;
+					else if(L[i][k] == N) for(l = 0; l < N; l++) S[i][l] = 3;
 				}
 			}
+			else for(l = 0; l < N; l++) S[i][l] = 2;
+			
+			if(L[i][i] > 0 && L[i][i] < N) {
+				verif = adequation_rangee_et_nombres(S,C,nombres_C[i],j,'C');
+				printf("\nVérification : %i ",verif);
+			
+				if(verif == 0) { // Si la complétion correspond aux rangées lues
+					i++;
+					j++;
+				}
+				else if(verif == -1) i++;
+				else if(verif == -2) j++;
+			}
+			else i++;
 			
 			if(i >= N) {
 				lecture_grille++;
@@ -240,33 +279,46 @@ void gen_solution(int S[N][N], int C[N][N], int L[N][N]) {
 			printf("\n\n");
 		}
 		else { // Puis on passe au remplissage des colonnes
-			decalage = i;
+			// On remplit les cases en fonction du ou des nombres indiqués dans la colonne de la matrice périphérique
+			if(nombres_C[j] > 0) {
+				decalage = i;
 			
-			for(k = 0; k < nbL[j]; k++) {				// Si le nombre relevé est supérieure à 0 (au moins un groupe de case existant)
-				if(nbL[k] > 0) {						// Pour chaque nombre de la ligne lue dans la matrice périphérique
-					for(l = 0; l < L[j][k]; l++) {		// Pour chaque nombre lu dans la matrice périphérique, on remplit les cases
-						S[decalage][j] = 1;
-						decalage++;
+				for(k = 0; k < nombres_C[j]; k++) {
+					if(C[k][j] > 0 && C[k][j] < N) {
+						for(l = 0; l < C[k][j]; l++) {
+							S[decalage][j] = 1;
+							decalage++;
+						}
+						decalage++; // On effectue un décalage d'une unité entre chaque groupe à la première lecture
 					}
+					else if(C[i][k] == N) for(l = 0; l < N; l++) S[i][l] = 3;
 				}
 			}
-			verif = adequation_rangee_et_nombres(S,L,nbL[j],i,'L');
-			printf("\nVérification : %i ",verif);
-			j++;
+			else for(l = 0; l < N; l++) S[i][l] = 2;
 			
-			if(verif >= 0) i++;
+			if(L[j][j] > 0 && L[j][j] < N) {
+				verif = adequation_rangee_et_nombres(S,L,nombres_L[j],i,'L');
+				printf("\nVérification : %i ",verif);
+			
+				if(verif == 0) { // Si la complétion correspond aux rangées lues
+					i++;
+					j++;
+				}
+				else if(verif == -1) j++;
+				else if(verif == -2) i++;
+			}
+			else j++;
 			
 			if(j >= N) {
 				lecture_grille++;
-				tour_ligne = 1;
+				tour_ligne = 0;
 				i = 0;
 				j = 0;
 			}
-			
 			afficher_matrice(S,'S');
 			printf("\n\n");
 		}
-		if(lecture_grille == 1) respect_regles = 1;
+		if(lecture_grille == 2) respect_regles = 1;
 	}
 }
 
@@ -287,8 +339,12 @@ int main() {
 	int matC[N][N], matL[N][N], soluce[N][N];
 	
 	init_matrices(soluce,matC,matL);
-	lecture_fic(saisie,1,matC,matL);
+	lecture_fic(saisie,2,matC,matL);
+	
+	//afficher_matrice(matC,'C');
+	//afficher_matrice(matL,'L');
 	
 	gen_solution(soluce,matC,matL);
+	afficher_matrice_claire(soluce);
 	printf("\n");
 }
