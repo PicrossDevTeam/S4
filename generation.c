@@ -20,7 +20,7 @@ void afficher_matrice(int mat[N][N], char cle) {
 	
 	printf("\n");
 	if(cle == 'C') {
-		printf("Matrice périphérique horizontale :\n");
+		printf("Matrice périphérique des colonnes :\n\n");
 		for(i = 0; i < N/2; i++) {
 			for(j = 0; j < N; j++) printf("%i ",mat[i][j]);
 			printf("\n");
@@ -28,14 +28,14 @@ void afficher_matrice(int mat[N][N], char cle) {
 		
 	}
 	else if(cle == 'L') {
-		printf("Matrice périphérique verticale :\n");
+		printf("Matrice périphérique des lignes :\n\n");
 		for(i = 0; i < N; i++) {
 			for(j = 0; j < N/2; j++) printf("%i ",mat[i][j]);
 			printf("\n");
 		}
 	}
 	else {
-		printf("Matrice solution :\n");
+		printf("Matrice solution :\n\n");
 		for(i = 0; i < N; i++) {
 			for(j = 0; j < N; j++) printf("%i ",mat[i][j]);
 			printf("\n");
@@ -90,75 +90,74 @@ void lecture_fic(char *nom_fic, int niveau, int C[N][N], int L[N][N]) { /* Lectu
 }
 
 /**
+* \fn verif_adequation_globale(int soluce[N][N], int C[N][N], int L[N][N], int reglesC[N], int reglesL[N])
+* \brief Lorsque deux itérations de la boucle principale de la fonction "gen_solution" ont été effectuées, cette fonction a pour rôle de vérifier toutes les rangées en utilisant la fonction "adequation_rangee_et_nombres". Elle remplie les tableaux "regles_" avec un indicateur numérique : 0 pour une rangée qui ne respecte pas les règles, 1 pour un résultat positif. 
+* \param solune La matrice solution
+* \param C La matrice périphérique des colonnes
+* \param L La matrice périphérique des lignes
+* \param reglesC Le tableau qui va contenir les résultats du test pour les colonnes des matrices soluce et C
+* \param reglesL Le tableau qui va contenir les résultats du test pour les lignes des matrices soluce et L
+* \return Ne retourne aucune variable
+*/
+void verif_adequation_globale(int soluce[N][N], int C[N][N], int L[N][N], int reglesC[N], int reglesL[N]) {
+	
+}
+
+/**
 * \fn adequation_rangee_et_nombres(int S[N][N], int periph[N][N], int cpt[N], int rangee, char type_rangee)
-* \brief Lérifie dans la matrice solution, pour une matrice périphérique, un compteur d'indice et une rangée précise donnés, si le remplissage d'une rangée de type "ligne" correspond aux nombres de la rangée de type "colonne" (et inversement).
+* \brief Vérifie dans la matrice solution, pour une matrice périphérique, un compteur d'indice et une rangée précise donnés, si le remplissage d'une rangée de type "ligne" correspond aux nombres de la rangée de type "colonne" (et inversement).
 * \param S La matrice solution dans laquelle on vérifie l'adéquation d'une rangée par rapport à une autre
 * \param periph La matrice périphérique qui contient les nombres nécessaires à la vérification
-* \param cpt La taille du groupe de nombres vérifié
+* \param groupes_defaut La taille normale du groupe de nombres de la rangée
 * \param rangee La rangée de la matrice solution qui va être vérifiée
 * \param type_rangee La nature de la rangée (ligne ou colonne)
-* \return 1 s'il y a un débordement, 0 si les données correspondent, -1 s'il reste des cases à compléter
+* \return Cinq valeurs possibles : 2 si un groupe possède plus de cases que prévu, 1 si des groupes supplémentaires sont détectés, 0 si les données correspondent, -1 s'il reste des groupes à créer, -2 s'il reste des cases à compléter
 */
-int adequation_rangee_et_nombres(int S[N][N], int periph[N][N], int cpt, int rangee, char type_rangee) {
-	int i, sortie = 0, sortie_groupe, cpt_verif = 0, liste_taille_groupe[cpt], valeur_nombres = 0;
+int adequation_rangee_et_nombres(int S[N][N], int periph[N][N], int groupes_defaut, int rangee, char type_rangee) {
+	int i, j, k, taille_groupe[groupes_defaut], nb_groupe = 0;
 	
 	// Avant toute opération, on initialise la liste de vérification des nombres
-	for(i = 0; i < cpt; i++) liste_taille_groupe[i] = 0;
+	for(i = 0; i < groupes_defaut; i++) taille_groupe[i] = 0;
 	
-	// On parcourt la rangée analysée
-	if(type_rangee == 'C') {
-		for(i = 0; i < N; i++) {
-			if(S[i][rangee] != 0 && S[i][rangee] != 2) {
-				sortie_groupe = 0;
-				liste_taille_groupe[cpt_verif] = liste_taille_groupe[cpt_verif] + 1;	
-			}
-			else sortie_groupe = 1;
-			
-			if(S[i-1][rangee] != 0 && S[i-1][rangee] != 2 && sortie_groupe == 1) cpt_verif++;
-		}
+	if(type_rangee == 'C') { // Rangée de type colonne
 		i = 0;
-		
-		while(i < cpt && sortie == 0) {
-			if(liste_taille_groupe[i] < periph[i][rangee]) {
-				valeur_nombres = -1;
-				sortie = 1;
-			}
-			else if(liste_taille_groupe[i] > periph[i][rangee]) {
-				valeur_nombres = 1;
-				sortie = 1;
-			}
-			i++;
-		}
+		j = rangee;
 	}
-	else if(type_rangee == 'L') {
-		for(i = 0; i < N; i++) {
-			if(S[rangee][i] != 0 && S[rangee][i] != 2) liste_taille_groupe[cpt_verif] = liste_taille_groupe[cpt_verif] + 1;
-			else cpt_verif++;
-		}
-		i = 0;
-		
-		while(i < N && sortie == 0) {
-			if(liste_taille_groupe[i] < periph[rangee][i]) {
-				valeur_nombres = -1;
-				sortie = 1;
-			}
-			else if(liste_taille_groupe[i] > periph[rangee][i]) {
-				valeur_nombres = 1;
-				sortie = 1;
-			}
-			i++;
-		}
+	else if(type_rangee == 'L') { // Rangée de type ligne
+		i = rangee;
+		j = 0;
 	}
-	printf("\nCompteur défaut : %i",cpt);
-	printf("\nCompteur verif : %i, Valeur nombres : %i",cpt_verif,valeur_nombres);
-	if(cpt_verif < cpt || valeur_nombres == -1) return -1;
-	else if(cpt_verif > cpt || valeur_nombres == 1) return 1;
-	else if(cpt_verif == cpt || valeur_nombres == 0) return 0;
+	
+	for(i = 0; i < N; i++) {
+		if(S[i][j]%2 == 1) taille_groupe[nb_groupe] = taille_groupe[nb_groupe] + 1; // Si on rentre dans un groupe de cases pleines
+		else if(i != 0 && S[i-1][j]%2 == 1 && S[i][j]%2 == 0)  nb_groupe++; // Si on sort du groupe vérfié
+	}
+	printf("\nNombre de groupes par défaut : %i, rangée %c vérifiée : %i",groupes_defaut,type_rangee,rangee);
+	printf("\nNombre de groupes identifiés dans la rangée : %i",nb_groupe);
+	for(k = 0; k < nb_groupe; k++) printf("\nNombre de cases pour le groupe n°%i : %i",k+1,taille_groupe[k]);
+	k = 0;
+	
+	while(k < groupes_defaut) {
+		if(nb_groupe < groupes_defaut) return -1;		// Moins de groupes que prévu
+		else if(nb_groupe > groupes_defaut) return 1;	// Plus de groupes que prévu (cas improbable, néanmoins)
+		else {
+			if(type_rangee == 'C') {
+				if(taille_groupe[k] < periph[k][j]) return -2;		// Un groupe possède moins de cases que prévu
+				else if(taille_groupe[k] > periph[k][j]) return 2;	// Un groupe possède plus de cases que prévu
+			}
+			else if(type_rangee == 'L') {
+				if(taille_groupe[k] < periph[i][k]) return -2;
+				else if(taille_groupe[k] > periph[i][k]) return 2;
+			}
+		}
+		k++;
+	}
+	return 0; // La rangée analysée correspond aux attentes de la rangée de la matrice périphérique
 }
 
 /**
 * \fn init_compteurs_periph(int cptC[N], int cptL[N])
-* \brief Initialise les compteurs des matrices périphériques. Leur rôle est d'indiquer combien de nombres sont contenus dans chaque rangée (ligne/colonne) de chaque matrice périphérique. Ces compteurs sont utilisés dans la fonction gen_solution(int S[N][N], int C[N][N], int L[N][N]).
+* \brief Initialise les compteurs des matrices périphériques. Leur rôle est d'indiquer combien de nombres sont contenus dans chaque rangée (ligne/colonne) de chaque matrice périphérique. Ces compteurs sont utilisés dans la fonction "gen_solution".
 * \param cptC Tableau d'indices de la matrice périphérique des colonnes
 * \param cptL Tableau d'indices de la matrice périphérique des lignes
 * \return Ne retourne aucun résultat
@@ -181,7 +180,8 @@ void init_compteurs_periph(int cptC[N], int cptL[N]) {
 * \return Ne retourne aucun résultat
 */
 void gen_solution(int S[N][N], int C[N][N], int L[N][N]) {
-	int nbC[N], nbL[N], i, j, k, l, decalage, verif, respect_regles = 0, tour_lignes = 1;
+	int nbC[N], nbL[N], completionC[N], completionL[N]; // Tableaux
+	int i, j, k, l, decalage, verif, lecture_grille = 0, respect_regles = 0, tour_ligne = 1;
 	
 	// Dans un premier temps, on dénombre les chiffres présents dans chacune des lignes des matrices périphériques
 	init_compteurs_periph(nbC,nbL);
@@ -200,24 +200,73 @@ void gen_solution(int S[N][N], int C[N][N], int L[N][N]) {
 	
 	// Ensuite, on boucle la matrice jusqu'à ce que la solution soit correctement générée
 	while(respect_regles != 1) {
-		if(tour_lignes == 1) {							// On commence par remplir les lignes
+		printf("\nLecture de la grille n°%i",lecture_grille);
+		printf("\nTour n°%i",i);
+		
+		// Lorsque toutes les rangées auront été lues au moins une fois pour la complétion, on effectue une vérification globale pour passer à la troisième étape de la génération
+		//if(lecture_grille >= 2) verif_adequation_globale(S,C,L,completionC,completionL);
+		
+		if(tour_ligne == 1) { // On commence par remplir les lignes
+			verif = adequation_rangee_et_nombres(S,C,nbC[i],j,'C');
+			printf("\nVérification : %i ",verif);
+			
+			if(verif == 0) { // Si la complétion correspond aux rangées lues
+				i++;
+				j++;
+			}
+			else if(verif == -1) {		// S'il manque un groupe
+				if(verif == -2) i++;	// S'il y a un débordement sur un groupe, on passe à la ligne suivante
+				j++;
+			}
 			decalage = j;
 			
 			for(k = 0; k < nbL[i]; k++) {				// Si le nombre relevé est supérieure à 0 (au moins un groupe de case existant)
 				if(nbL[k] > 0) {						// Pour chaque nombre de la ligne lue dans la matrice périphérique
-					for(l = 0; l < L[i][j]; l++) {		// Pour chaque nombre lu dans la matrice périphérique, on remplit les cases
+					for(l = 0; l < L[i][k]; l++) {		// Pour chaque nombre lu dans la matrice périphérique, on remplit les cases
 						S[i][decalage] = 1;
 						decalage++;
 					}
-					decalage++;
+					if(lecture_grille == 0) decalage++;
 				}
 			}
-			verif = adequation_rangee_et_nombres(S,C,nbC[i],j,'C');
-			printf("\nVérification : %i\n\n",verif);
-			i++;
-			if(verif != -1) j++;
+			
+			if(i >= N) {
+				lecture_grille++;
+				tour_ligne = 0;
+				i = 0;
+				j = 0;
+			}
+			afficher_matrice(S,'S');
+			printf("\n\n");
 		}
-		if(i >= N) respect_regles = 1;
+		else { // Puis on passe au remplissage des colonnes
+			decalage = i;
+			
+			for(k = 0; k < nbL[j]; k++) {				// Si le nombre relevé est supérieure à 0 (au moins un groupe de case existant)
+				if(nbL[k] > 0) {						// Pour chaque nombre de la ligne lue dans la matrice périphérique
+					for(l = 0; l < L[j][k]; l++) {		// Pour chaque nombre lu dans la matrice périphérique, on remplit les cases
+						S[decalage][j] = 1;
+						decalage++;
+					}
+				}
+			}
+			verif = adequation_rangee_et_nombres(S,L,nbL[j],i,'L');
+			printf("\nVérification : %i ",verif);
+			j++;
+			
+			if(verif >= 0) i++;
+			
+			if(j >= N) {
+				lecture_grille++;
+				tour_ligne = 1;
+				i = 0;
+				j = 0;
+			}
+			
+			afficher_matrice(S,'S');
+			printf("\n\n");
+		}
+		if(lecture_grille == 1) respect_regles = 1;
 	}
 }
 
@@ -241,6 +290,5 @@ int main() {
 	lecture_fic(saisie,1,matC,matL);
 	
 	gen_solution(soluce,matC,matL);
-	afficher_matrice(soluce,'S');
 	printf("\n");
 }
