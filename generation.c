@@ -1,8 +1,8 @@
 /**
 * \file generatin.c
 * \author KAJAK Rémi
-* \version 1.0
-* \date 19/03/2018
+* \version 1.2
+* \date 02/04/2018
 * \brief Fichier ayant servi à l'élaboration de la fonction de lecture du fichier texte qui contient les nombres générateurs de la matrice principale et la fonction de génération de la matrice solution.
 */
 #include <stdio.h>
@@ -15,6 +15,16 @@
 */
 #define N 5
 
+void init_matrice(int mat[N][N]) { // Fonction test pour ce fichier
+	int i, j;
+	
+	for(i = 0; i < N; i++) {
+		for(j = 0; j < N; j++) {
+			mat[i][j] = 0;
+		}
+	}
+}
+
 /**
 * \fn afficher_matrice(int mat[N][N], char cle)
 * \brief Affiche une matrice reçue en paramètre selon un modèle prédéfini.
@@ -23,13 +33,13 @@
 * \return Ne retourne aucun résultat
 */
 void afficher_matrice(int mat[N][N], char cle) {
-	int i, j;
+	int i, j, k = 0, mat_inversee[N][N];
 	
 	printf("\n");
 	if(cle == 'C') {
 		printf("Matrice périphérique des colonnes :\n\n");
 		for(i = N-1; i >= 0; i--) {
-			for(j = N-1; j >= 0; j--) {
+			for(j = 0; j < N; j++) {
 				if(i == 0) printf("%i ",mat[i][j]);
 				else {
 					if(mat[i][j] > 0) printf("%i ",mat[i][j]);
@@ -41,12 +51,25 @@ void afficher_matrice(int mat[N][N], char cle) {
 		
 	}
 	else if(cle == 'L') {
-		printf("Matrice périphérique des lignes :\n\n");
-		for(i = N-1; i >= 0; i--) {
+		init_matrice(mat_inversee);
+		
+		// On attribue les nombres dans une seconde matrice pour éviter une lecture erronée à l'affichage (nombres inversés)
+		for(i = 0; i < N; i++) {
 			for(j = N-1; j >= 0; j--) {
-				if(j == 0) printf("%i ",mat[i][j]);
+				if(mat[i][j] > 0) {
+					mat_inversee[i][k] = mat[i][j];
+					k++;
+				}
+			}
+			k = 0;
+		}
+		printf("Matrice périphérique des lignes :\n\n");
+		
+		for(i = 0; i < N; i++) {
+			for(j = N-1; j >= 0; j--) {
+				if(j == 0) printf("%i ",mat_inversee[i][j]);
 				else {
-					if(mat[i][j] > 0) printf("%i ",mat[i][j]);
+					if(mat[i][j] > 0) printf("%i ",mat_inversee[i][j]);
 					else printf("  ");
 				}
 			}
@@ -62,7 +85,7 @@ void afficher_matrice(int mat[N][N], char cle) {
 	}
 }
 
-void afficher_matrice_claire(int mat[N][N]) {
+void afficher_matrice_claire(int mat[N][N]) { // Fonction test pour ce fichier
 	int i, j;
 	
 	printf("\nMatrice solution éclaircie :\n\n");
@@ -82,7 +105,7 @@ void afficher_matrice_claire(int mat[N][N]) {
 * \param niveau Nombre du puzzle à trouver dans le fichier
 * \return Ne retourne aucun résultat
 */
-void lecture_fic(char *nom_fic, int niveau, int C[N][N], int L[N][N]) { /* Lecture du fichier contenant les puzzles prédéfinis */
+void lecture_fic(char *nom_fic, int niveau, int C[N][N], int L[N][N]) {
 	FILE * fic_gen;
 	char cle[4] = "PCLF", carac;
 	int ligne, colonne, num_puz, nb_case, i;
@@ -95,11 +118,9 @@ void lecture_fic(char *nom_fic, int niveau, int C[N][N], int L[N][N]) { /* Lectu
 			for(i = 1; i <= 2; i++) { // Lecture successive des clés
 				ligne = 0;
 				colonne = 0;
-
-				while(carac != cle[i]) { // Tant que l'on n'a pas trouvé la clé de départ
-					fscanf(fic_gen,"%c",&carac);
-				}
-				fscanf(fic_gen,"%c",&carac);
+				
+				// Tant que l'on n'a pas trouvé la clé de départ
+				while(carac != cle[i]) fscanf(fic_gen,"%c",&carac);
 
 				while(carac != cle[i+1]) { // Tant que l'on n'a pas trouvé la clé de fin
 					if(carac == ' ' || carac == '\n') {
@@ -122,8 +143,47 @@ void lecture_fic(char *nom_fic, int niveau, int C[N][N], int L[N][N]) { /* Lectu
 }
 
 /**
+* \fn init_compteur_groupes(int S[N][N], int nombres[N], int rangee, char type_rangee)
+* \brief Initialise une liste d'entiers avec, pour chaque entier, le nombre de cases pleines d'un groupe analysé verticalement ou horizontalement.
+* \param S La matrice solution qui contient les données nécessaires à l'anaylse
+* \param nombres La liste cotnenant chaque nombre qui correspond individuellement à un groupe de cases pleines trouvé par la fonction 
+* \param rangee L'indice numérique de la rangée analysée
+* \param type_rangee La nature de la rangée (ligne ou colonne)
+* \return La taille finale de la liste d'entiers.
+*/
+int init_compteur_groupes(int S[N][N], int nombres[N], int rangee, char type_rangee) {
+	int i, j, taille = 0;
+	
+	// Avant toute opération, on initialise la liste de vérification des nombres
+	for(i = 0; i < N; i++) nombres[i] = 0;
+	
+	if(type_rangee == 'C') { // Rangée de type colonne
+		i = 0;
+		j = rangee;
+	}
+	else if(type_rangee == 'L') { // Rangée de type ligne
+		i = rangee;
+		j = 0;
+	}
+	
+	while(i < N && j < N) {
+		if(S[i][j]%2 == 1) nombres[taille] = nombres[taille] + 1;	// Si on rentre dans un groupe de cases pleines
+	
+		if(type_rangee == 'C') {
+			if(i != 0 && S[i-1][j]%2 == 1 && S[i][j]%2 == 0) taille++; // Si on sort du groupe vertical vérfié
+			i++;
+		}
+		else {
+			if(j != 0 && S[i][j-1]%2 == 1 && S[i][j]%2 == 0) taille++; // Si on sort du groupe horizontal vérfié
+			j++;
+		}
+	}
+	return taille;
+}
+
+/**
 * \fn verif_adequation_globale(int soluce[N][N], int C[N][N], int L[N][N], int reglesC[N], int reglesL[N])
-* \brief Lorsque deux itérations de la boucle principale de la fonction "gen_solution" ont été effectuées, cette fonction a pour rôle de vérifier toutes les rangées en utilisant la fonction "adequation_rangee_et_nombres". Elle remplie les tableaux "regles_" avec un indicateur numérique : 0 pour une rangée qui ne respecte pas les règles, 1 pour un résultat positif. 
+* \brief Lorsqu'une itération de la boucle principale de la fonction "gen_solution" a été effectuée, cette fonction a pour rôle de vérifier l'état de toutes les rangées. Elle remplie les tableaux "respect_" avec un indicateur numérique : 0 pour une rangée qui ne respecte pas ses règles, 1 pour un résultat positif. 
 * \param solune La matrice solution
 * \param C La matrice périphérique des colonnes
 * \param L La matrice périphérique des lignes
@@ -131,8 +191,21 @@ void lecture_fic(char *nom_fic, int niveau, int C[N][N], int L[N][N]) { /* Lectu
 * \param reglesL Le tableau qui va contenir les résultats du test pour les lignes des matrices soluce et L
 * \return Ne retourne aucune variable
 */
-void verif_adequation_globale(int soluce[N][N], int C[N][N], int L[N][N], int reglesC[N], int reglesL[N]) {
+void verif_adequation_globale(int soluce[N][N], int C[N][N], int L[N][N], int respect_C[N], int respect_L[N]) {
+	int i, j;
 	
+	// On commence par vérifier l'état des lignes
+	for(i = 0; i < N; i++) {
+		for(j = 0; j < N; j++) {
+			
+		}
+	}
+	// Puis on vérifie l'état des colonnes
+	for(i = 0; i < N; i++) {
+		for(j = 0; j < N; j++) {
+		
+		}
+	}
 }
 
 /**
@@ -145,33 +218,19 @@ void verif_adequation_globale(int soluce[N][N], int C[N][N], int L[N][N], int re
 * \param type_rangee La nature de la rangée (ligne ou colonne)
 * \return Cinq valeurs possibles : 2 si un groupe possède plus de cases que prévu, 1 si des groupes supplémentaires sont détectés, 0 si les données correspondent, -1 s'il reste des groupes à créer, -2 s'il reste des cases à compléter
 */
-int adequation_rangee_et_nombres(int S[N][N], int periph[N][N], int groupes_defaut, int rangee, char type_rangee) {
-	int i, j, k, taille_groupe[groupes_defaut], nb_groupe = 0;
+int adequation_rangee_et_nombres(int S[N][N], int periph[N][N], int nb_groupes_defaut, int rangee, char type_rangee) {
+	int i, j, k, taille_groupe[nb_groupes_defaut], nb_groupes = 0;
 	
-	// Avant toute opération, on initialise la liste de vérification des nombres
-	for(i = 0; i < groupes_defaut; i++) taille_groupe[i] = 0;
+	nb_groupes = init_compteur_groupes(S,taille_groupe,rangee,type_rangee);
 	
-	if(type_rangee == 'C') { // Rangée de type colonne
-		i = 0;
-		j = rangee;
-	}
-	else if(type_rangee == 'L') { // Rangée de type ligne
-		i = rangee;
-		j = 0;
-	}
-	
-	for(i = 0; i < N; i++) {
-		if(S[i][j]%2 == 1) taille_groupe[nb_groupe] = taille_groupe[nb_groupe] + 1; // Si on rentre dans un groupe de cases pleines
-		else if(i != 0 && S[i-1][j]%2 == 1 && S[i][j]%2 == 0)  nb_groupe++; // Si on sort du groupe vérfié
-	}
-	printf("\nNombre de groupes par défaut : %i, rangée %c vérifiée : %i",groupes_defaut,type_rangee,rangee);
-	printf("\nNombre de groupes identifiés dans la rangée : %i",nb_groupe);
-	for(k = 0; k < nb_groupe; k++) printf("\nNombre de cases pour le groupe n°%i : %i",k+1,taille_groupe[k]);
+	printf("\nNombre de groupes par défaut : %i, rangée %c vérifiée : %i",nb_groupes_defaut,type_rangee,rangee);
+	printf("\nNombre de groupes identifiés dans la rangée : %i",nb_groupes);
+	for(k = 0; k < nb_groupes; k++) printf("\nNombre de cases pour le groupe n°%i : %i",k+1,taille_groupe[k]);
 	k = 0;
 	
-	while(k < groupes_defaut) {
-		if(nb_groupe < groupes_defaut) return -1;		// Moins de groupes que prévu
-		else if(nb_groupe > groupes_defaut) return 1;	// Plus de groupes que prévu (cas improbable, néanmoins)
+	while(k < nb_groupes_defaut) {
+		if(nb_groupes < nb_groupes_defaut) return -1;		// Moins de groupes que prévu
+		else if(nb_groupes > nb_groupes_defaut) return 1;	// Plus de groupes que prévu (cas improbable, néanmoins)
 		else {
 			if(type_rangee == 'C') {
 				if(taille_groupe[k] < periph[k][j]) return -2;		// Un groupe possède moins de cases que prévu
@@ -194,12 +253,21 @@ int adequation_rangee_et_nombres(int S[N][N], int periph[N][N], int groupes_defa
 * \param cptL Tableau d'indices de la matrice périphérique des lignes
 * \return Ne retourne aucun résultat
 */
-void init_compteurs_periph(int cptC[N], int cptL[N]) {
-	int i;
+void init_compteurs_periph(int periph_C[N][N], int cpt_C[N], int periph_L[N][N], int cpt_L[N]) {
+	int i, j;
 	
+	// Initialisation des colonnes des listes
 	for(i = 0; i < N; i++) {
-		cptC[i] = 0;
-		cptL[i] = 0;
+		cpt_C[i] = 0;
+		cpt_L[i] = 0;
+	}
+	
+	// Remplissage des listes avec les données des matrices périphériques
+	for(i = 0; i < N; i++) {
+		for(j = 0; j < N; j++) {
+			if(periph_C[j][i] > 0) cpt_C[i] = cpt_C[i] + 1;
+			if(periph_L[i][j] > 0) cpt_L[i] = cpt_L[i] + 1;
+		}
 	}
 }
 
@@ -212,17 +280,11 @@ void init_compteurs_periph(int cptC[N], int cptL[N]) {
 * \return Ne retourne aucun résultat
 */
 void gen_solution(int S[N][N], int C[N][N], int L[N][N]) {
-	int nombres_C[N], nombres_L[N], completionC[N], completionL[N]; // Tableaux
+	int nombres_C[N], nombres_L[N], completionC[N], completionL[N]; // Tableaux à une dimension
 	int i, j, k, l, decalage, verif, lecture_grille = 0, respect_regles = 0, tour_ligne = 1;
 	
 	// Dans un premier temps, on dénombre les chiffres présents dans chacune des lignes des matrices périphériques
-	init_compteurs_periph(nombres_C,nombres_L);
-	for(i = 0; i < N; i++) {
-		for(j = 0; j < N; j++) {
-			if(C[j][i] > 0) nombres_C[i] = nombres_C[i] + 1;
-			if(L[i][j] > 0) nombres_L[i] = nombres_L[i] + 1;
-		}
-	}
+	init_compteurs_periph(C,nombres_C,L,nombres_L);
 	
 	// Initialisation des variables d'incrémentation
 	i = 0;
@@ -236,7 +298,7 @@ void gen_solution(int S[N][N], int C[N][N], int L[N][N]) {
 		printf("\nTour n°%i",i);
 		
 		// Lorsque toutes les rangées auront été lues au moins une fois pour la complétion, on effectue une vérification globale pour passer à la troisième étape de la génération
-		//if(lecture_grille >= 1) verif_adequation_globale(S,C,L,completionC,completionL);
+		if(lecture_grille >= 1) verif_adequation_globale(S,C,L,completionC,completionL);
 		
 		if(tour_ligne == 1) { // On commence par remplir les lignes
 			// On remplit les cases en fonction du ou des nombres indiqués dans la colonne de la matrice périphérique
@@ -256,18 +318,20 @@ void gen_solution(int S[N][N], int C[N][N], int L[N][N]) {
 			}
 			else for(l = 0; l < N; l++) S[i][l] = 2;
 			
-			if(L[i][i] > 0 && L[i][i] < N) {
-				verif = adequation_rangee_et_nombres(S,C,nombres_C[i],j,'C');
-				printf("\nVérification : %i ",verif);
+			if(lecture_grille == 0) {
+				if(L[i][i] > 0 && L[i][i] < N) {
+					verif = adequation_rangee_et_nombres(S,C,nombres_C[i],j,'C');
+					printf("\nVérification : %i ",verif);
 			
-				if(verif == 0) { // Si la complétion correspond aux rangées lues
-					i++;
-					j++;
+					if(verif == 0) { // Si la complétion correspond aux rangées lues
+						i++;
+						j++;
+					}
+					else if(verif == -1) i++;
+					else if(verif == -2) j++;
 				}
-				else if(verif == -1) i++;
-				else if(verif == -2) j++;
+				else i++;
 			}
-			else i++;
 			
 			if(i >= N) {
 				lecture_grille++;
@@ -279,6 +343,8 @@ void gen_solution(int S[N][N], int C[N][N], int L[N][N]) {
 			printf("\n\n");
 		}
 		else { // Puis on passe au remplissage des colonnes
+			verif_adequation_globale(S,C,L,completionC,completionL);
+			
 			// On remplit les cases en fonction du ou des nombres indiqués dans la colonne de la matrice périphérique
 			if(nombres_C[j] > 0) {
 				decalage = i;
@@ -318,28 +384,26 @@ void gen_solution(int S[N][N], int C[N][N], int L[N][N]) {
 			afficher_matrice(S,'S');
 			printf("\n\n");
 		}
-		if(lecture_grille == 2) respect_regles = 1;
+		if(lecture_grille == 1) respect_regles = 1;
 	}
 }
 
-void init_matrices(int S[N][N], int C[N][N], int L[N][N]) {
-	int i, j;
-	
-	for(i = 0; i < N; i++) {
-		for(j = 0; j < N; j++) {
-			S[i][j] = 0;
-			C[i][j] = 0;
-			L[i][j] = 0;
-		}
-	}
-}
-
+// Main test pour ce fichier
+/*
+* Cas n°1 : Succès avec une seule itération de gen_solution
+* Cas n°2 : Succès avec une seule itération de gen_solution - À tester avec deux itérations (seconde étape de la génération)
+* Cas n°3 : Échec - Erreur de segmentation avec une seule itération de gen_solution
+* Cas n°4 : Échec avec une seule itération de gen_solution
+* Cas n°5 : Testé rapidement - aucune analyse effectuée entre la génération et le résultat attendu (échec certain avec une seule itération)
+*/
 int main() {
 	char *saisie = "nombres_puzzle.txt";
 	int matC[N][N], matL[N][N], soluce[N][N];
 	
-	init_matrices(soluce,matC,matL);
-	lecture_fic(saisie,2,matC,matL);
+	init_matrice(soluce);
+	init_matrice(matC);
+	init_matrice(matL);
+	lecture_fic(saisie,3,matC,matL);
 	
 	//afficher_matrice(matC,'C');
 	//afficher_matrice(matL,'L');
