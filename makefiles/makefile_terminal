@@ -1,0 +1,11 @@
+PROG = terminal
+CC = gcc
+GEN = generation
+TERM = terminal
+
+${PROG}: ${GEN}.o ${TERM}.c
+	${CC} $^ -o $@
+${GEN}.o: ${GEN}.c ${GEN}.h
+	${CC} -c $^
+clean:
+	rm *.o

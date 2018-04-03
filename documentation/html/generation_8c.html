@@ -1,0 +1,499 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+<meta name="generator" content="Doxygen 1.8.8"/>
+<title>PROJET PICROSS: Référence du fichier generation.c</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/search.js"></script>
+<script type="text/javascript">
+  $(document).ready(function() { searchBox.OnSelectItem(0); });
+</script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td style="padding-left: 0.5em;">
+   <div id="projectname">PROJET PICROSS
+   </div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Généré par Doxygen 1.8.8 -->
+<script type="text/javascript">
+var searchBox = new SearchBox("searchBox", "search",false,'Recherche');
+</script>
+  <div id="navrow1" class="tabs">
+    <ul class="tablist">
+      <li><a href="index.html"><span>Page&#160;principale</span></a></li>
+      <li><a href="pages.html"><span>Pages&#160;associées</span></a></li>
+      <li><a href="annotated.html"><span>Classes</span></a></li>
+      <li class="current"><a href="files.html"><span>Fichiers</span></a></li>
+      <li>
+        <div id="MSearchBox" class="MSearchBoxInactive">
+        <span class="left">
+          <img id="MSearchSelect" src="search/mag_sel.png"
+               onmouseover="return searchBox.OnSearchSelectShow()"
+               onmouseout="return searchBox.OnSearchSelectHide()"
+               alt=""/>
+          <input type="text" id="MSearchField" value="Recherche" accesskey="S"
+               onfocus="searchBox.OnSearchFieldFocus(true)" 
+               onblur="searchBox.OnSearchFieldFocus(false)" 
+               onkeyup="searchBox.OnSearchFieldChange(event)"/>
+          </span><span class="right">
+            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><img id="MSearchCloseImg" border="0" src="search/close.png" alt=""/></a>
+          </span>
+        </div>
+      </li>
+    </ul>
+  </div>
+  <div id="navrow2" class="tabs2">
+    <ul class="tablist">
+      <li><a href="files.html"><span>Liste&#160;des&#160;fichiers</span></a></li>
+      <li><a href="globals.html"><span>Membres&#160;de&#160;fichier</span></a></li>
+    </ul>
+  </div>
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>Tout</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Fichiers</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Fonctions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Macros</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Pages</a></div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+</div><!-- top -->
+<div class="header">
+  <div class="summary">
+<a href="#define-members">Macros</a> &#124;
+<a href="#func-members">Fonctions</a>  </div>
+  <div class="headertitle">
+<div class="title">Référence du fichier generation.c</div>  </div>
+</div><!--header-->
+<div class="contents">
+
+<p>Fichier ayant servi à l'élaboration de la fonction de lecture du fichier texte qui contient les nombres générateurs de la matrice principale et la fonction de génération de la matrice solution.  
+<a href="#details">Plus de détails...</a></p>
+<div class="textblock"><code>#include &lt;stdio.h&gt;</code><br />
+<code>#include &lt;stdlib.h&gt;</code><br />
+<code>#include &lt;string.h&gt;</code><br />
+</div><div class="textblock"><div class="dynheader">
+Graphe des dépendances par inclusion de generation.c:</div>
+<div class="dyncontent">
+<div class="center"><img src="generation_8c__incl.png" border="0" usemap="#generation_8c" alt=""/></div>
+</div>
+</div><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="define-members"></a>
+Macros</h2></td></tr>
+<tr class="memitem:a0240ac851181b84ac374872dc5434ee4"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a0240ac851181b84ac374872dc5434ee4"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="generation_8c.html#a0240ac851181b84ac374872dc5434ee4">N</a>&#160;&#160;&#160;5</td></tr>
+<tr class="memdesc:a0240ac851181b84ac374872dc5434ee4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Nombre de lignes de la matrice test. <br /></td></tr>
+<tr class="separator:a0240ac851181b84ac374872dc5434ee4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
+Fonctions</h2></td></tr>
+<tr class="memitem:a8e4027957e4267b9b97d419638f868c7"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a8e4027957e4267b9b97d419638f868c7"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>init_matrice</b> (int mat[<a class="el" href="generation_8c.html#a0240ac851181b84ac374872dc5434ee4">N</a>][<a class="el" href="generation_8c.html#a0240ac851181b84ac374872dc5434ee4">N</a>])</td></tr>
+<tr class="separator:a8e4027957e4267b9b97d419638f868c7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa674403aac33bd93374ed5dc6d454794"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="generation_8c.html#aa674403aac33bd93374ed5dc6d454794">afficher_matrice</a> (int mat[<a class="el" href="generation_8c.html#a0240ac851181b84ac374872dc5434ee4">N</a>][<a class="el" href="generation_8c.html#a0240ac851181b84ac374872dc5434ee4">N</a>], char cle)</td></tr>
+<tr class="memdesc:aa674403aac33bd93374ed5dc6d454794"><td class="mdescLeft">&#160;</td><td class="mdescRight">Affiche une matrice reçue en paramètre selon un modèle prédéfini.  <a href="#aa674403aac33bd93374ed5dc6d454794">Plus de détails...</a><br /></td></tr>
+<tr class="separator:aa674403aac33bd93374ed5dc6d454794"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aeff4fc12f7319f96bc93b56595119c4e"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aeff4fc12f7319f96bc93b56595119c4e"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>afficher_matrice_claire</b> (int mat[<a class="el" href="generation_8c.html#a0240ac851181b84ac374872dc5434ee4">N</a>][<a class="el" href="generation_8c.html#a0240ac851181b84ac374872dc5434ee4">N</a>])</td></tr>
+<tr class="separator:aeff4fc12f7319f96bc93b56595119c4e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2cb90a6c2b1078f42bfc2ca3ddd74526"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="generation_8c.html#a2cb90a6c2b1078f42bfc2ca3ddd74526">lecture_fic</a> (char *nom_fic, int niveau, int C[<a class="el" href="generation_8c.html#a0240ac851181b84ac374872dc5434ee4">N</a>][<a class="el" href="generation_8c.html#a0240ac851181b84ac374872dc5434ee4">N</a>], int L[<a class="el" href="generation_8c.html#a0240ac851181b84ac374872dc5434ee4">N</a>][<a class="el" href="generation_8c.html#a0240ac851181b84ac374872dc5434ee4">N</a>])</td></tr>
+<tr class="memdesc:a2cb90a6c2b1078f42bfc2ca3ddd74526"><td class="mdescLeft">&#160;</td><td class="mdescRight">Lit un fichier avec un format spécifique et renseigne les nombres contenus dans les matrices périphériques.  <a href="#a2cb90a6c2b1078f42bfc2ca3ddd74526">Plus de détails...</a><br /></td></tr>
+<tr class="separator:a2cb90a6c2b1078f42bfc2ca3ddd74526"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7434f3ce262fae716119736b914f244f"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="generation_8c.html#a7434f3ce262fae716119736b914f244f">init_compteur_groupes</a> (int S[<a class="el" href="generation_8c.html#a0240ac851181b84ac374872dc5434ee4">N</a>][<a class="el" href="generation_8c.html#a0240ac851181b84ac374872dc5434ee4">N</a>], int nombres[<a class="el" href="generation_8c.html#a0240ac851181b84ac374872dc5434ee4">N</a>], int rangee, char type_rangee)</td></tr>
+<tr class="memdesc:a7434f3ce262fae716119736b914f244f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initialise une liste d'entiers avec, pour chaque entier, le nombre de cases pleines d'un groupe analysé verticalement ou horizontalement.  <a href="#a7434f3ce262fae716119736b914f244f">Plus de détails...</a><br /></td></tr>
+<tr class="separator:a7434f3ce262fae716119736b914f244f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2bbf30f7c3bae82eebb0a23b11e8a26b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="generation_8c.html#a2bbf30f7c3bae82eebb0a23b11e8a26b">verif_adequation_globale</a> (int soluce[<a class="el" href="generation_8c.html#a0240ac851181b84ac374872dc5434ee4">N</a>][<a class="el" href="generation_8c.html#a0240ac851181b84ac374872dc5434ee4">N</a>], int C[<a class="el" href="generation_8c.html#a0240ac851181b84ac374872dc5434ee4">N</a>][<a class="el" href="generation_8c.html#a0240ac851181b84ac374872dc5434ee4">N</a>], int L[<a class="el" href="generation_8c.html#a0240ac851181b84ac374872dc5434ee4">N</a>][<a class="el" href="generation_8c.html#a0240ac851181b84ac374872dc5434ee4">N</a>], int respect_C[<a class="el" href="generation_8c.html#a0240ac851181b84ac374872dc5434ee4">N</a>], int respect_L[<a class="el" href="generation_8c.html#a0240ac851181b84ac374872dc5434ee4">N</a>])</td></tr>
+<tr class="memdesc:a2bbf30f7c3bae82eebb0a23b11e8a26b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Lorsqu'une itération de la boucle principale de la fonction "gen_solution" a été effectuée, cette fonction a pour rôle de vérifier l'état de toutes les rangées.  <a href="#a2bbf30f7c3bae82eebb0a23b11e8a26b">Plus de détails...</a><br /></td></tr>
+<tr class="separator:a2bbf30f7c3bae82eebb0a23b11e8a26b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a598c8580eddc01743c3d146157842232"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="generation_8c.html#a598c8580eddc01743c3d146157842232">adequation_rangee_et_nombres</a> (int S[<a class="el" href="generation_8c.html#a0240ac851181b84ac374872dc5434ee4">N</a>][<a class="el" href="generation_8c.html#a0240ac851181b84ac374872dc5434ee4">N</a>], int periph[<a class="el" href="generation_8c.html#a0240ac851181b84ac374872dc5434ee4">N</a>][<a class="el" href="generation_8c.html#a0240ac851181b84ac374872dc5434ee4">N</a>], int nb_groupes_defaut, int rangee, char type_rangee)</td></tr>
+<tr class="memdesc:a598c8580eddc01743c3d146157842232"><td class="mdescLeft">&#160;</td><td class="mdescRight">Vérifie dans la matrice solution, pour une matrice périphérique, un compteur d'indice et une rangée précise donnés, si le remplissage d'une rangée de type "ligne" correspond aux nombres de la rangée de type "colonne" (et inversement).  <a href="#a598c8580eddc01743c3d146157842232">Plus de détails...</a><br /></td></tr>
+<tr class="separator:a598c8580eddc01743c3d146157842232"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2255a5f398e1a373aa825dd97e539084"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="generation_8c.html#a2255a5f398e1a373aa825dd97e539084">init_compteurs_periph</a> (int periph_C[<a class="el" href="generation_8c.html#a0240ac851181b84ac374872dc5434ee4">N</a>][<a class="el" href="generation_8c.html#a0240ac851181b84ac374872dc5434ee4">N</a>], int cpt_C[<a class="el" href="generation_8c.html#a0240ac851181b84ac374872dc5434ee4">N</a>], int periph_L[<a class="el" href="generation_8c.html#a0240ac851181b84ac374872dc5434ee4">N</a>][<a class="el" href="generation_8c.html#a0240ac851181b84ac374872dc5434ee4">N</a>], int cpt_L[<a class="el" href="generation_8c.html#a0240ac851181b84ac374872dc5434ee4">N</a>])</td></tr>
+<tr class="memdesc:a2255a5f398e1a373aa825dd97e539084"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initialise les compteurs des matrices périphériques.  <a href="#a2255a5f398e1a373aa825dd97e539084">Plus de détails...</a><br /></td></tr>
+<tr class="separator:a2255a5f398e1a373aa825dd97e539084"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6bdd5ea72d2f954eec695d989d3b4e62"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="generation_8c.html#a6bdd5ea72d2f954eec695d989d3b4e62">gen_solution</a> (int S[<a class="el" href="generation_8c.html#a0240ac851181b84ac374872dc5434ee4">N</a>][<a class="el" href="generation_8c.html#a0240ac851181b84ac374872dc5434ee4">N</a>], int C[<a class="el" href="generation_8c.html#a0240ac851181b84ac374872dc5434ee4">N</a>][<a class="el" href="generation_8c.html#a0240ac851181b84ac374872dc5434ee4">N</a>], int L[<a class="el" href="generation_8c.html#a0240ac851181b84ac374872dc5434ee4">N</a>][<a class="el" href="generation_8c.html#a0240ac851181b84ac374872dc5434ee4">N</a>])</td></tr>
+<tr class="memdesc:a6bdd5ea72d2f954eec695d989d3b4e62"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initialise la matrice solution grâce aux données des matrices périphériques.  <a href="#a6bdd5ea72d2f954eec695d989d3b4e62">Plus de détails...</a><br /></td></tr>
+<tr class="separator:a6bdd5ea72d2f954eec695d989d3b4e62"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae66f6b31b5ad750f1fe042a706a4e3d4"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ae66f6b31b5ad750f1fe042a706a4e3d4"></a>
+int&#160;</td><td class="memItemRight" valign="bottom"><b>main</b> ()</td></tr>
+<tr class="separator:ae66f6b31b5ad750f1fe042a706a4e3d4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">Description détaillée</h2>
+<div class="textblock"><p>Fichier ayant servi à l'élaboration de la fonction de lecture du fichier texte qui contient les nombres générateurs de la matrice principale et la fonction de génération de la matrice solution. </p>
+<dl class="section author"><dt>Auteur</dt><dd>KAJAK Rémi </dd></dl>
+<dl class="section version"><dt>Version</dt><dd>1.2 </dd></dl>
+<dl class="section date"><dt>Date</dt><dd>02/04/2018 </dd></dl>
+</div><h2 class="groupheader">Documentation des fonctions</h2>
+<a class="anchor" id="a598c8580eddc01743c3d146157842232"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">adequation_rangee_et_nombres </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>S</em>[N][N], </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>periph</em>[N][N], </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>nb_groupes_defaut</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>rangee</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">char&#160;</td>
+          <td class="paramname"><em>type_rangee</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Vérifie dans la matrice solution, pour une matrice périphérique, un compteur d'indice et une rangée précise donnés, si le remplissage d'une rangée de type "ligne" correspond aux nombres de la rangée de type "colonne" (et inversement). </p>
+<dl class="params"><dt>Paramètres</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">S</td><td>La matrice solution dans laquelle on vérifie l'adéquation d'une rangée par rapport à une autre </td></tr>
+    <tr><td class="paramname">periph</td><td>La matrice périphérique qui contient les nombres nécessaires à la vérification </td></tr>
+    <tr><td class="paramname">nb_groupes_defaut</td><td>La taille normale du groupe de nombres de la rangée </td></tr>
+    <tr><td class="paramname">rangee</td><td>La rangée de la matrice solution qui va être vérifiée </td></tr>
+    <tr><td class="paramname">type_rangee</td><td>La nature de la rangée (ligne ou colonne) </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Renvoie</dt><dd>Cinq valeurs possibles : 2 si un groupe possède plus de cases que prévu, 1 si des groupes supplémentaires sont détectés, 0 si les données correspondent, -1 s'il reste des groupes à créer, -2 s'il reste des cases à compléter </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="aa674403aac33bd93374ed5dc6d454794"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">afficher_matrice </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>mat</em>[N][N], </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">char&#160;</td>
+          <td class="paramname"><em>cle</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Affiche une matrice reçue en paramètre selon un modèle prédéfini. </p>
+<dl class="params"><dt>Paramètres</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">mat</td><td>Une matrice de taille fixe </td></tr>
+    <tr><td class="paramname">cle</td><td>Un caractère qui définit le mode d'affichage : "C" pour afficher horizontalement les nombres de la matrice périphérique des colonnes, "L" pour afficher verticalement les nombres de la matrice périphérique des lignes et "S" pour afficher une grille complète </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Renvoie</dt><dd>Ne retourne aucun résultat </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="a6bdd5ea72d2f954eec695d989d3b4e62"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">gen_solution </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>S</em>[N][N], </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>C</em>[N][N], </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>L</em>[N][N]&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Initialise la matrice solution grâce aux données des matrices périphériques. </p>
+<p>Pour gérer le remplissage progressif et les cas d'erreur, un système de numérotation des cases a été mis en place : 0 =&gt; case vide non-testée, 1 =&gt; case cochée, 2 =&gt; case vide déjà testée, 3 =&gt; case cochée validée. </p><dl class="params"><dt>Paramètres</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">S</td><td>La matrice solution qui va contenir le motif du puzzle </td></tr>
+    <tr><td class="paramname">C</td><td>La matrice périphérique des colonnes (situé en haut de la grille du Picross) </td></tr>
+    <tr><td class="paramname">L</td><td>La matrice périphérique des lignes (situé à gauche de la grille du Picross) </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Renvoie</dt><dd>Ne retourne aucun résultat </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="a7434f3ce262fae716119736b914f244f"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">init_compteur_groupes </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>S</em>[N][N], </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>nombres</em>[N], </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>rangee</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">char&#160;</td>
+          <td class="paramname"><em>type_rangee</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Initialise une liste d'entiers avec, pour chaque entier, le nombre de cases pleines d'un groupe analysé verticalement ou horizontalement. </p>
+<dl class="params"><dt>Paramètres</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">S</td><td>La matrice solution qui contient les données nécessaires à l'anaylse </td></tr>
+    <tr><td class="paramname">nombres</td><td>La liste cotnenant chaque nombre qui correspond individuellement à un groupe de cases pleines trouvé par la fonction </td></tr>
+    <tr><td class="paramname">rangee</td><td>L'indice numérique de la rangée analysée </td></tr>
+    <tr><td class="paramname">type_rangee</td><td>La nature de la rangée (ligne ou colonne) </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Renvoie</dt><dd>La taille finale de la liste d'entiers. </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="a2255a5f398e1a373aa825dd97e539084"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">init_compteurs_periph </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>periph_C</em>[N][N], </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>cptC</em>[N], </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>periph_L</em>[N][N], </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>cptL</em>[N]&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Initialise les compteurs des matrices périphériques. </p>
+<p>Leur rôle est d'indiquer combien de nombres sont contenus dans chaque rangée (ligne/colonne) de chaque matrice périphérique. Ces compteurs sont utilisés dans la fonction "gen_solution". </p><dl class="params"><dt>Paramètres</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">periph_C</td><td>La matrice périphérique des colonnes </td></tr>
+    <tr><td class="paramname">cptC</td><td>Tableau d'indices de la matrice périphérique des colonnes </td></tr>
+    <tr><td class="paramname">periph_L</td><td>La matrice périphérique des lignes </td></tr>
+    <tr><td class="paramname">cptL</td><td>Tableau d'indices de la matrice périphérique des lignes </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Renvoie</dt><dd>Ne retourne aucun résultat </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="a2cb90a6c2b1078f42bfc2ca3ddd74526"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">lecture_fic </td>
+          <td>(</td>
+          <td class="paramtype">char *&#160;</td>
+          <td class="paramname"><em>nom</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>niveau</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>C</em>[N][N], </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>L</em>[N][N]&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Lit un fichier avec un format spécifique et renseigne les nombres contenus dans les matrices périphériques. </p>
+<dl class="params"><dt>Paramètres</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">nom</td><td>Nom du fichier texte à analyser </td></tr>
+    <tr><td class="paramname">niveau</td><td>Nombre du puzzle à trouver dans le fichier </td></tr>
+    <tr><td class="paramname">C</td><td>La matrice périphérique des colonnes </td></tr>
+    <tr><td class="paramname">L</td><td>La matrice périphérique des lignes </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Renvoie</dt><dd>Ne retourne aucun résultat </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="a2bbf30f7c3bae82eebb0a23b11e8a26b"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">verif_adequation_globale </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>soluce</em>[N][N], </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>C</em>[N][N], </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>L</em>[N][N], </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>respect_C</em>[N], </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>respect_L</em>[N]&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Lorsqu'une itération de la boucle principale de la fonction "gen_solution" a été effectuée, cette fonction a pour rôle de vérifier l'état de toutes les rangées. </p>
+<p>Elle remplie les tableaux "respect_" avec un indicateur numérique : 0 pour une rangée qui ne respecte pas ses règles, 1 pour un résultat positif. </p><dl class="params"><dt>Paramètres</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">solune</td><td>La matrice solution </td></tr>
+    <tr><td class="paramname">C</td><td>La matrice périphérique des colonnes </td></tr>
+    <tr><td class="paramname">L</td><td>La matrice périphérique des lignes </td></tr>
+    <tr><td class="paramname">respect_C</td><td>Le tableau qui va contenir les résultats du test pour les colonnes des matrices soluce et C </td></tr>
+    <tr><td class="paramname">respect_L</td><td>Le tableau qui va contenir les résultats du test pour les lignes des matrices soluce et L </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Renvoie</dt><dd>Ne retourne aucune variable </dd></dl>
+
+</div>
+</div>
+</div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+Généré le Mardi 3 Avril 2018 08:42:52 pour PROJET PICROSS par &#160;<a href="http://www.doxygen.org/index.html">
+<img class="footer" src="doxygen.png" alt="doxygen"/>
+</a> 1.8.8
+</small></address>
+</body>
+</html>

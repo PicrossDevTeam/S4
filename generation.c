@@ -1,5 +1,5 @@
 /**
-* \file generatin.c
+* \file generation.c
 * \author KAJAK Rémi
 * \version 1.2
 * \date 02/04/2018
@@ -8,12 +8,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-
-/**
-* \def N
-* \brief Nombre de lignes de la matrice test
-*/
-#define N 5
+#include "generation.h"
 
 void init_matrice(int mat[N][N]) { // Fonction test pour ce fichier
 	int i, j;
@@ -99,35 +94,54 @@ void afficher_matrice_claire(int mat[N][N]) { // Fonction test pour ce fichier
 }
 
 /**
-* \fn lecture_fic(char *nom, int niveau)
-* \brief Lit un fichier avec un format spécifique et renseigne les nombres contenus dans les matrices périphériques.
+* \fn lecture_fic(char *nom, int niveau, int C[N][N], int L[N][N])
+* \brief Lit un fichier avec un format spécifique et renseigne les nombres contenus dans les matrices périphériques. Elle renvoie la largeur maximum d'une rangée pour améliorer les affichages et les traitements des matrices.
 * \param nom Nom du fichier texte à analyser
 * \param niveau Nombre du puzzle à trouver dans le fichier
-* \return Ne retourne aucun résultat
+* \param C La matrice périphérique des colonnes
+* \param L La matrice périphérique des lignes
+* \param solveur Booléen qui indique si la lecture du fichier concerne le solveur ou pas
+* \return Retourne la largeur maximum d'une matrice
 */
-void lecture_fic(char *nom_fic, int niveau, int C[N][N], int L[N][N]) {
+int lecture_fic(char *nom_fic, int niveau, int C[N][N], int L[N][N], int solveur) {
 	FILE * fic_gen;
-	char cle[4] = "PCLF", carac;
-	int ligne, colonne, num_puz, nb_case, i;
+	char cle[5] = "PCLFD", carac;
+	int colonne = 0, ligne = 0, largeur_max = 0, num_puz, nb_case, i;
 
 	fic_gen = fopen(nom_fic,"r");
 	fscanf(fic_gen,"%c %i",&carac,&num_puz);
 
 	while(!feof(fic_gen)) { // Tant que la fin du fichier n'a pas été atteinte
 		if(carac == cle[0] && num_puz == niveau) { // Si on trouve le bon niveau de puzzle
-			for(i = 1; i <= 2; i++) { // Lecture successive des clés
-				ligne = 0;
-				colonne = 0;
-				
-				// Tant que l'on n'a pas trouvé la clé de départ
-				while(carac != cle[i]) fscanf(fic_gen,"%c",&carac);
+			if(solveur == 1) {
+				for(i = 1; i <= 2; i++) { // Lecture successive des clés
+					while(carac != cle[i]) fscanf(fic_gen,"%c",&carac); // Tant que l'on n'a pas trouvé la clé de départ (ici, "C")
 
-				while(carac != cle[i+1]) { // Tant que l'on n'a pas trouvé la clé de fin
+					while(carac != cle[i+1]) { // Tant que l'on n'a pas trouvé la clé de fin
+						if(carac == ' ' || carac == '\n') {
+							fscanf(fic_gen,"%i",&nb_case);
+							if(cle[i] == 'C') C[colonne][ligne] = nb_case;
+							else if(cle[i] == 'L') L[ligne][colonne] = nb_case;
+							colonne++;
+							if(colonne > largeur_max) largeur_max = colonne;
+						}
+						else if(carac == '+') {
+							ligne++;
+							colonne = 0;
+						}
+						fscanf(fic_gen,"%c",&carac);
+					}
+				}
+			} 
+			else {
+				while(carac != cle[4]) fscanf(fic_gen,"%c",&carac); // Tant que l'on n'a pas trouvé la clé de départ (ici, "D")
+				
+				while(carac != cle[3]) { // Tant que l'on n'a pas trouvé la clé de fin
 					if(carac == ' ' || carac == '\n') {
 						fscanf(fic_gen,"%i",&nb_case);
-						if(cle[i] == 'C') C[colonne][ligne] = nb_case;
-						else if(cle[i] == 'L') L[ligne][colonne] = nb_case;
+						C[ligne][colonne] = nb_case;
 						colonne++;
+						if(colonne > largeur_max) largeur_max = colonne;
 					}
 					else if(carac == '+') {
 						ligne++;
@@ -140,6 +154,7 @@ void lecture_fic(char *nom_fic, int niveau, int C[N][N], int L[N][N]) {
 		fscanf(fic_gen,"%c %i",&carac,&num_puz);
 	}
 	fclose(fic_gen);
+	return largeur_max;
 }
 
 /**
@@ -182,13 +197,13 @@ int init_compteur_groupes(int S[N][N], int nombres[N], int rangee, char type_ran
 }
 
 /**
-* \fn verif_adequation_globale(int soluce[N][N], int C[N][N], int L[N][N], int reglesC[N], int reglesL[N])
+* \fn verif_adequation_globale(int soluce[N][N], int C[N][N], int L[N][N], int respect_C[N], int respect_L[N])
 * \brief Lorsqu'une itération de la boucle principale de la fonction "gen_solution" a été effectuée, cette fonction a pour rôle de vérifier l'état de toutes les rangées. Elle remplie les tableaux "respect_" avec un indicateur numérique : 0 pour une rangée qui ne respecte pas ses règles, 1 pour un résultat positif. 
 * \param solune La matrice solution
 * \param C La matrice périphérique des colonnes
 * \param L La matrice périphérique des lignes
-* \param reglesC Le tableau qui va contenir les résultats du test pour les colonnes des matrices soluce et C
-* \param reglesL Le tableau qui va contenir les résultats du test pour les lignes des matrices soluce et L
+* \param respect_C Le tableau qui va contenir les résultats du test pour les colonnes des matrices soluce et C
+* \param respect_L Le tableau qui va contenir les résultats du test pour les lignes des matrices soluce et L
 * \return Ne retourne aucune variable
 */
 void verif_adequation_globale(int soluce[N][N], int C[N][N], int L[N][N], int respect_C[N], int respect_L[N]) {
@@ -209,11 +224,11 @@ void verif_adequation_globale(int soluce[N][N], int C[N][N], int L[N][N], int re
 }
 
 /**
-* \fn adequation_rangee_et_nombres(int S[N][N], int periph[N][N], int cpt[N], int rangee, char type_rangee)
+* \fn adequation_rangee_et_nombres(int S[N][N], int periph[N][N], int nb_groupes_defaut, int rangee, char type_rangee)
 * \brief Vérifie dans la matrice solution, pour une matrice périphérique, un compteur d'indice et une rangée précise donnés, si le remplissage d'une rangée de type "ligne" correspond aux nombres de la rangée de type "colonne" (et inversement).
 * \param S La matrice solution dans laquelle on vérifie l'adéquation d'une rangée par rapport à une autre
 * \param periph La matrice périphérique qui contient les nombres nécessaires à la vérification
-* \param groupes_defaut La taille normale du groupe de nombres de la rangée
+* \param nb_groupes_defaut La taille normale du groupe de nombres de la rangée
 * \param rangee La rangée de la matrice solution qui va être vérifiée
 * \param type_rangee La nature de la rangée (ligne ou colonne)
 * \return Cinq valeurs possibles : 2 si un groupe possède plus de cases que prévu, 1 si des groupes supplémentaires sont détectés, 0 si les données correspondent, -1 s'il reste des groupes à créer, -2 s'il reste des cases à compléter
@@ -247,9 +262,11 @@ int adequation_rangee_et_nombres(int S[N][N], int periph[N][N], int nb_groupes_d
 }
 
 /**
-* \fn init_compteurs_periph(int cptC[N], int cptL[N])
+* \fn init_compteurs_periph(int periph_C[N][N], int cptC[N], int periph_L[N][N], int cptL[N])
 * \brief Initialise les compteurs des matrices périphériques. Leur rôle est d'indiquer combien de nombres sont contenus dans chaque rangée (ligne/colonne) de chaque matrice périphérique. Ces compteurs sont utilisés dans la fonction "gen_solution".
+* \param periph_C La matrice périphérique des colonnes
 * \param cptC Tableau d'indices de la matrice périphérique des colonnes
+* \param periph_L La matrice périphérique des lignes
 * \param cptL Tableau d'indices de la matrice périphérique des lignes
 * \return Ne retourne aucun résultat
 */
@@ -395,7 +412,7 @@ void gen_solution(int S[N][N], int C[N][N], int L[N][N]) {
 * Cas n°3 : Échec - Erreur de segmentation avec une seule itération de gen_solution
 * Cas n°4 : Échec avec une seule itération de gen_solution
 * Cas n°5 : Testé rapidement - aucune analyse effectuée entre la génération et le résultat attendu (échec certain avec une seule itération)
-*/
+
 int main() {
 	char *saisie = "nombres_puzzle.txt";
 	int matC[N][N], matL[N][N], soluce[N][N];
@@ -403,7 +420,7 @@ int main() {
 	init_matrice(soluce);
 	init_matrice(matC);
 	init_matrice(matL);
-	lecture_fic(saisie,3,matC,matL);
+	lecture_fic(saisie,3,matC,matL,1);
 	
 	//afficher_matrice(matC,'C');
 	//afficher_matrice(matL,'L');
@@ -411,4 +428,4 @@ int main() {
 	gen_solution(soluce,matC,matL);
 	afficher_matrice_claire(soluce);
 	printf("\n");
-}
+} //*/
