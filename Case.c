@@ -57,23 +57,20 @@ int changerEtat(int c){/*changer l'etat de la case  de blanche representé par u
 
 int max_h_Case(int a){/*limite cases horizontales*/
 
-int m= a-1 ;
-
   if(a%2==1){
+    a=a-1;
+    a++;}
 
-    m++;}
-
-return m;
+return a;
 
  }
 int max_v_Case(int b){/*limite cases verticales*/
 
-int m= b-1;
-
   if(b%2==1){
-    m++;}
+     b=b-1;
+     b++;}
 
-return m;
+return b;
 
 
  }
