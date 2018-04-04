@@ -19,10 +19,9 @@ int main() {
 	init_matrice(lignes);
 	
 	taille = lecture_fic(nom_fic1,1,test,NULL,0);
-	afficher_matrice(test,taille,'T');
-	
 	gen_peripheriques(test,colonnes,lignes,taille);
 	
+	afficher_matrice(test,taille,'T');
 	afficher_matrice(colonnes,taille,'C');
 	afficher_matrice(lignes,taille,'L');
 	printf("\n");

@@ -40,8 +40,8 @@ void afficher_matrice(int mat[N][N], int taille_max, char cle) {
 	printf("\n");
 	if(cle == 'C') {
 		printf("Matrice périphérique des colonnes :\n\n");
-		for(i = N-1; i >= 0; i--) {
-			for(j = 0; j < N; j++) {
+		for(i = taille_max-1; i >= 0; i--) {
+			for(j = 0; j < taille_max; j++) {
 				if(i == 0) printf("%i ",mat[i][j]);
 				else {
 					if(mat[i][j] > 0) printf("%i ",mat[i][j]);
@@ -67,8 +67,8 @@ void afficher_matrice(int mat[N][N], int taille_max, char cle) {
 		}
 		printf("Matrice périphérique des lignes :\n\n");
 		
-		for(i = 0; i < N; i++) {
-			for(j = N-1; j >= 0; j--) {
+		for(i = 0; i < taille_max; i++) {
+			for(j = taille_max-1; j >= 0; j--) {
 				if(j == 0) printf("%i ",mat_inversee[i][j]);
 				else {
 					if(mat[i][j] > 0) printf("%i ",mat_inversee[i][j]);
@@ -80,8 +80,8 @@ void afficher_matrice(int mat[N][N], int taille_max, char cle) {
 	}
 	else {
 		printf("Matrice solution :\n\n");
-		for(i = 0; i < N; i++) {
-			for(j = 0; j < N; j++) printf("%i ",mat[i][j]);
+		for(i = 0; i < taille_max; i++) {
+			for(j = 0; j < taille_max; j++) printf("%i ",mat[i][j]);
 			printf("\n");
 		}
 	}
@@ -133,7 +133,7 @@ int lecture_fic(char *nom_fic, int niveau, int C[N][N], int L[N][N], int solveur
 							if(cle[i] == 'C') C[colonne][ligne] = nb_case;
 							else if(cle[i] == 'L') L[ligne][colonne] = nb_case;
 							colonne++;
-							//if(colonne > largeur_max) largeur_max = colonne;
+							if(colonne > largeur_max) largeur_max = colonne;
 						}
 						else if(carac == '+') {
 							ligne++;
@@ -168,23 +168,26 @@ int lecture_fic(char *nom_fic, int niveau, int C[N][N], int L[N][N], int solveur
 }
 
 void gen_peripheriques(int S[N][N], int C[N][N], int L[N][N], int taille_max) {
-	int i, j, k = 0, groupe = 0, taille_groupe = 0;
+	int i, j, nb_groupes, taille_groupe;
+	
+	// Remplissage de la matrice périphérique des colonnes
+	
 	
 	// Remplissage de la matrice périphérique des lignes
 	for(i = 0; i < taille_max; i++) {
+		nb_groupes = 0;
+		taille_groupe = 0;
+		
 		for(j = 0; j < taille_max; j++) {
-			if(S[i][j]%2 == 1) groupe = 1;
-			else if(S[i][j]%2 == 1 || j == taille_max-1) groupe = 0;
-			
-			if(groupe == 1) taille_groupe++;
-			else if(groupe == 0 && S[i][j-1]%2 == 1) {
-				L[i][k] = taille_groupe;
-				taille_groupe = 0;
-				k++;
+			if(S[i][j]%2 == 1) {
+				taille_groupe++;
+				
+				if(j == taille_max-1) L[i][nb_groupes] = taille_groupe;
 			}
-			else {
-				L[i][k] = 0;
-				k++;
+			else if(S[i][j]%2 == 0 && S[i][j-1]%2 == 1) {
+				L[i][nb_groupes] = taille_groupe;
+				taille_groupe = 0;
+				nb_groupes++;
 			}
 		}
 	}
