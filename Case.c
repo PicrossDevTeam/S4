@@ -27,12 +27,12 @@ void  init_case(int matr[N][N]){/*initialiser toutes les cases Ã  0 */
 
 int i,j;
 
-	for(i=1 ; i<= N ; i++)
+	for(i=0 ; i<= N ; i++)
 	
-		for(j=1 ; j<= N ; j++){
+		for(j=0 ; j<= N ; j++){
 		
 			matr[i][j] = 0;
-		printf("\n");		
+			
 				}
 	
 }
@@ -48,9 +48,9 @@ void  verif_matrice(int matr[N][N] ){/*verification du contenu de la matrice */
 
 int i,j;
 
-	for(i=1 ; i<= N ; i++){
+	for(i=0 ; i<= N ; i++){
 	
-		for(j=1 ; j<= N ; j++){
+		for(j=0 ; j<= N ; j++){
 		
 			printf("|%i|", matr[i][j]);
 						
@@ -60,24 +60,53 @@ int i,j;
 }
 /*********************************************************************************************/
 /**
- * \fn changerEtat(int c)
+ * \fn changerEtat(int matr[N][N], int x, int y)
  * \brief Fonction qui permet de changer l'etat de la case .
  *
- * \param la valeur qui represente la case.
+ * \param la matrice ui represente la grille.
  */
 
-int changerEtat(int c){/*changer l'etat de la case  de blanche representÃ© par un '0' Ã  noire representÃ© par un '1' et de noire Ã  blanche ou croix reprÃ©sentÃ© par un '2' */
+int changerEtat(int matr[N][N], int x, int y){/*changer l'etat de la case  de blanche representÃ© par un '0' Ã  noire representÃ© par un '1' et de noire Ã  blanche ou croix reprÃ©sentÃ© par un '2' */
 
 
-	if(c==0)
-		return 1;
-	else if(c==1)
-		return 2;
+	if(matr[x][y]==0)
+		matr[x][y]= 1;
+	else if(matr[x][y]==1)
+		matr[x][y] = 2;
 	else
-		return 0;
+		matr[x][y] = 0;
 	
 	
 		
+}
+
+int saisir_coord(int matr[N][N], int niveau){
+	int i = 0, j =0,  taille = 0;
+	
+	
+	if(niveau == 1)
+		taille =3;
+	else if(niveau == 2)
+		taille =4;
+	else if(niveau == 3)
+		taille =5;
+	else if(niveau == 4)
+		taille =10;
+
+	while((i < 1 || i > taille) && (j < 1 || j > taille)) {
+		
+		printf("i=");
+		scanf("%i", &i);
+		printf("j=");
+		scanf("%i", &j);
+		
+		if(i==-1 && j==-1) 
+			return 1;
+
+ 	}
+	changerEtat(matr,i-1,j-1);
+	return 0;
+
 }
 
 /*********************************************************************************************/
@@ -241,36 +270,19 @@ int main()
 
 {
 
-int U[5][5];
+int U[5][5], c;
 _Bool b=false;
-int i,j;
 
-int coup = 0;
 
-     
+
 init_case(U);
 verif_matrice(U);
 printf("---------------\n");
-for(i=1 ; i<=5 ; i++){
-	for(j=1 ; j<=5 ; j++){
-		printf("i=");
-		scanf("%i", &i);
-		printf("j=");
-		scanf("%i", &j);
-		printf("---------------\n");
-		U[i][j]=changerEtat(U[i][j]);
-		verif_matrice(U);
-		coup++;
-		printf("\nnombre des coups %d\n",coup);
-		printf("-------------\n");
-/*
-U[i][j]=changerEtat(U[i][j]);
+
+
+c = saisir_coord(U,2);
 verif_matrice(U);
-printf("----------------\n");
-U[i][j]=changerEtat(U[i][j]);
-verif_matrice(U);*/
-	}
-}
+printf("\n c = %i\n\n",c);
 
  int k= max_h_Case(5);
     	printf("%d\n",k);
