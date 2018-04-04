@@ -11,12 +11,19 @@
 #include "generation.h"
 
 int main() {
-	char *nom_fichier = "puzzles_binaires.txt";
+	char *nom_fic1 = "puzzles_binaires.txt", *nom_fic2 = "nombres_puzzle.txt";
 	int test[N][N], colonnes[N][N], lignes[N][N], taille;
 	
 	init_matrice(test);
-	taille = lecture_fic(nom_fichier,1,test,NULL,0);
+	init_matrice(colonnes);
+	init_matrice(lignes);
 	
-	afficher_matrice(test,'T');
-	printf("\nTaille de la rangée : %i\n",taille);
+	taille = lecture_fic(nom_fic1,1,test,NULL,0);
+	afficher_matrice(test,taille,'T');
+	
+	gen_peripheriques(test,colonnes,lignes,taille);
+	
+	afficher_matrice(colonnes,taille,'C');
+	afficher_matrice(lignes,taille,'L');
+	printf("\n");
 }

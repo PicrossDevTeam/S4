@@ -10,6 +10,12 @@
 #include <string.h>
 #include "generation.h"
 
+/**
+* \fn init_matrice(int mat[N][N])
+* \brief Initialise une matrice avec des 0.
+* \param mat Une matrice de taille fixe
+* \return Ne retourne aucun résultat
+*/
 void init_matrice(int mat[N][N]) { // Fonction test pour ce fichier
 	int i, j;
 	
@@ -24,10 +30,11 @@ void init_matrice(int mat[N][N]) { // Fonction test pour ce fichier
 * \fn afficher_matrice(int mat[N][N], char cle)
 * \brief Affiche une matrice reçue en paramètre selon un modèle prédéfini.
 * \param mat Une matrice de taille fixe
+* \param taille_max La taille maximum relevée pour les matrices périphériques
 * \param cle Un caractère qui définit le mode d'affichage : "C" pour afficher horizontalement les nombres de la matrice périphérique des colonnes, "L" pour afficher verticalement les nombres de la matrice périphérique des lignes et "S" pour afficher une grille complète
 * \return Ne retourne aucun résultat
 */
-void afficher_matrice(int mat[N][N], char cle) {
+void afficher_matrice(int mat[N][N], int taille_max, char cle) {
 	int i, j, k = 0, mat_inversee[N][N];
 	
 	printf("\n");
@@ -115,6 +122,9 @@ int lecture_fic(char *nom_fic, int niveau, int C[N][N], int L[N][N], int solveur
 		if(carac == cle[0] && num_puz == niveau) { // Si on trouve le bon niveau de puzzle
 			if(solveur == 1) {
 				for(i = 1; i <= 2; i++) { // Lecture successive des clés
+					colonne = 0;
+					ligne = 0;
+					
 					while(carac != cle[i]) fscanf(fic_gen,"%c",&carac); // Tant que l'on n'a pas trouvé la clé de départ (ici, "C")
 
 					while(carac != cle[i+1]) { // Tant que l'on n'a pas trouvé la clé de fin
@@ -123,7 +133,7 @@ int lecture_fic(char *nom_fic, int niveau, int C[N][N], int L[N][N], int solveur
 							if(cle[i] == 'C') C[colonne][ligne] = nb_case;
 							else if(cle[i] == 'L') L[ligne][colonne] = nb_case;
 							colonne++;
-							if(colonne > largeur_max) largeur_max = colonne;
+							//if(colonne > largeur_max) largeur_max = colonne;
 						}
 						else if(carac == '+') {
 							ligne++;
@@ -155,6 +165,29 @@ int lecture_fic(char *nom_fic, int niveau, int C[N][N], int L[N][N], int solveur
 	}
 	fclose(fic_gen);
 	return largeur_max;
+}
+
+void gen_peripheriques(int S[N][N], int C[N][N], int L[N][N], int taille_max) {
+	int i, j, k = 0, groupe = 0, taille_groupe = 0;
+	
+	// Remplissage de la matrice périphérique des lignes
+	for(i = 0; i < taille_max; i++) {
+		for(j = 0; j < taille_max; j++) {
+			if(S[i][j]%2 == 1) groupe = 1;
+			else if(S[i][j]%2 == 1 || j == taille_max-1) groupe = 0;
+			
+			if(groupe == 1) taille_groupe++;
+			else if(groupe == 0 && S[i][j-1]%2 == 1) {
+				L[i][k] = taille_groupe;
+				taille_groupe = 0;
+				k++;
+			}
+			else {
+				L[i][k] = 0;
+				k++;
+			}
+		}
+	}
 }
 
 /**
@@ -294,9 +327,10 @@ void init_compteurs_periph(int periph_C[N][N], int cpt_C[N], int periph_L[N][N],
 * \param S La matrice solution qui va contenir le motif du puzzle
 * \param C La matrice périphérique des colonnes (situé en haut de la grille du Picross)
 * \param L La matrice périphérique des lignes (situé à gauche de la grille du Picross)
+* \param largeur La taille maximum des rangées pour les matrices périphériques
 * \return Ne retourne aucun résultat
 */
-void gen_solution(int S[N][N], int C[N][N], int L[N][N]) {
+void gen_solution(int S[N][N], int C[N][N], int L[N][N], int largeur) {
 	int nombres_C[N], nombres_L[N], completionC[N], completionL[N]; // Tableaux à une dimension
 	int i, j, k, l, decalage, verif, lecture_grille = 0, respect_regles = 0, tour_ligne = 1;
 	
@@ -307,7 +341,7 @@ void gen_solution(int S[N][N], int C[N][N], int L[N][N]) {
 	i = 0;
 	j = 0;
 	
-	afficher_matrice(C,'C');
+	afficher_matrice(C,largeur,'C');
 	
 	// Ensuite, on boucle la matrice jusqu'à ce que la solution soit correctement générée
 	while(respect_regles != 1) {
@@ -356,7 +390,7 @@ void gen_solution(int S[N][N], int C[N][N], int L[N][N]) {
 				i = 0;
 				j = 0;
 			}
-			afficher_matrice(S,'S');
+			afficher_matrice(S,largeur,'S');
 			printf("\n\n");
 		}
 		else { // Puis on passe au remplissage des colonnes
@@ -398,7 +432,7 @@ void gen_solution(int S[N][N], int C[N][N], int L[N][N]) {
 				i = 0;
 				j = 0;
 			}
-			afficher_matrice(S,'S');
+			afficher_matrice(S,largeur,'S');
 			printf("\n\n");
 		}
 		if(lecture_grille == 1) respect_regles = 1;
@@ -415,17 +449,17 @@ void gen_solution(int S[N][N], int C[N][N], int L[N][N]) {
 
 int main() {
 	char *saisie = "nombres_puzzle.txt";
-	int matC[N][N], matL[N][N], soluce[N][N];
+	int matC[N][N], matL[N][N], soluce[N][N], taille;
 	
 	init_matrice(soluce);
 	init_matrice(matC);
 	init_matrice(matL);
-	lecture_fic(saisie,3,matC,matL,1);
+	taille = lecture_fic(saisie,4,matC,matL,1);
 	
-	//afficher_matrice(matC,'C');
-	//afficher_matrice(matL,'L');
+	afficher_matrice(matC,taille,'C');
+	afficher_matrice(matL,taille,'L');
 	
-	gen_solution(soluce,matC,matL);
-	afficher_matrice_claire(soluce);
+	//gen_solution(soluce,matC,matL,taille);
+	//afficher_matrice_claire(soluce);
 	printf("\n");
 } //*/
