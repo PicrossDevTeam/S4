@@ -1,13 +1,29 @@
+/**
+ * \file Case.c
+ * \brief ReprÃ©sentation des cases.
+ * \author Taous.M
+ * \version 0.1
+ * \date 3 avril 2018
+ *
+ */
 #include<stdio.h>
 #include<stdlib.h>
-#include"case.h"
 #include<stdbool.h>
+/**
+* \def N
+* \brief la taille de la matrice.
+*/
 #define N 5
 
+/**
+ * \fn void  init_case(int matr[N][N])
+ * \brief Fonction d'initialisation des cases.
+ *
+ * \param la matrice qui reprÃ©sente la grille.
+ */
 
 
-
-void  init_case(int matr[N][N]){/*initialiser toutes les cases à 0 */
+void  init_case(int matr[N][N]){/*initialiser toutes les cases Ã  0 */
 
 int i,j;
 
@@ -20,8 +36,13 @@ int i,j;
 				}
 	
 }
-
 /*********************************************************************************************/
+/**
+ * \fn verif_matrice(int matr[N][N] )
+ * \brief Fonction qui affiche les cases.
+ *
+ * \param la matrice qui reprÃ©sente la grille.
+ */
 
 void  verif_matrice(int matr[N][N] ){/*verification du contenu de la matrice */
 
@@ -37,9 +58,15 @@ int i,j;
 		printf("\n");
 	}
 }
+/*********************************************************************************************/
+/**
+ * \fn changerEtat(int c)
+ * \brief Fonction qui permet de changer l'etat de la case .
+ *
+ * \param la valeur qui represente la case.
+ */
 
-
-int changerEtat(int c){/*changer l'etat de la case  de blanche representé par un '0' à noire representé par un '1' et de noire à blanche ou croix représenté par un '2' */
+int changerEtat(int c){/*changer l'etat de la case  de blanche representÃ© par un '0' Ã  noire representÃ© par un '1' et de noire Ã  blanche ou croix reprÃ©sentÃ© par un '2' */
 
 
 	if(c==0)
@@ -54,7 +81,12 @@ int changerEtat(int c){/*changer l'etat de la case  de blanche representé par u
 }
 
 /*********************************************************************************************/
-
+/**
+ * \fn max_h_Case(int a)
+ * \brief Fonction qui verifie la limite des cases de la grille .
+ *
+ * \param la taille de la grille.
+ */
 int max_h_Case(int a){/*limite cases horizontales*/
 
   if(a%2==1){
@@ -64,6 +96,13 @@ int max_h_Case(int a){/*limite cases horizontales*/
 return a;
 
  }
+ /**
+ * \fn max_v_Case(int b)
+ * \brief Fonction qui verifie la limite des cases de la grille .
+ *
+ * \param la taille de la grille.
+ */
+ 
 int max_v_Case(int b){/*limite cases verticales*/
 
   if(b%2==1){
@@ -76,7 +115,12 @@ return b;
  }
 
 /*********************************************************************************************/
-
+/**
+* \fn verifier_Case_Noire_Ligne( int matr[N][N], int ligne, int valeur)
+ * \brief Fonction qui verifie que les cases noire correspondent au nombre horisentals de la matrice periphÃ©rique .
+ *
+ * \param la matrice qui represente la grille , les lignes de la grille, les valeurs de la matrice periphÃ©rique.
+ */
 
 _Bool verifier_Case_Noire_Ligne( int matr[N][N], int ligne, int valeur){/*verifier si les cases noire correspondent au nombres horizontals*/
 
@@ -91,12 +135,12 @@ int c=0;
 			i=j+1;
 			find=true;
 			c=valeur-1;
-			if(c==0){
+			if(c==0){une seule valeur
 				comp=true;
 				}
 			else
 			{
-				while(i<i+c && i<=N-1 && find==true)
+				while(i<i+c && i<N-1 && find==true) 
 				{
 					if(matr[ligne][i]==1){
 						i++;}
@@ -109,16 +153,19 @@ int c=0;
 						c=0;}
 			 }
 		}
-		else
-		{
-			c=0;}
+		
 	j++;
 	}
 return comp;
 }
 
 /*********************************************************************************************/
-
+/**
+* \fn verifier_Case_Noire_Col( int matr[N][N], int col, int valeur)
+ * \brief Fonction qui verifie que les cases noire correspondent au nombre verticals de la matrice periphÃ©rique .
+ *
+ * \param la matrice qui represente la grille , les colonnes de la grille, les valeurs de la matrice periphÃ©rique.
+ */
 _Bool verifier_Case_Noire_Col( int matr[N][N], int col, int valeur){/*verifier si les cases noire correspondent au nombres verticals*/
 
 int i,j=0,c=0;
@@ -150,9 +197,7 @@ _Bool comp=false,find= false;
 						c=0;}
 			 }
 		}
-		else
-		{
-			c=0;}
+		
 	j++;
 	}
 return comp;
@@ -160,7 +205,12 @@ return comp;
 
 
 /*********************************************************************************************/
-
+/**
+* \fn verifierGrille(int matd[N][N] , int matf[N][N])
+ * \brief Fonction qui verifie si les cases la grille du joueur est correcte .
+ *
+ * \param la matrice qui represente la grille qu'il faut avoir, la matrice qui represente la grille du joueur.
+ */
 
 
 int verifierGrille(int matd[N][N] , int matf[N][N]){/*verifier si la grille du joueur est correcte*/
@@ -181,6 +231,12 @@ int comp = 0;
 
 }
 /*********************************************************************************************/
+ 
+/**
+ * \fn int main (void)
+ * \brief EntrÃ©e du programme.
+ *
+ */
 int main()
 
 {
