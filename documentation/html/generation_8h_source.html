@@ -1,0 +1,125 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+<meta name="generator" content="Doxygen 1.8.8"/>
+<title>PROJET PICROSS:  Fichier source de generation.h</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/search.js"></script>
+<script type="text/javascript">
+  $(document).ready(function() { searchBox.OnSelectItem(0); });
+</script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td style="padding-left: 0.5em;">
+   <div id="projectname">PROJET PICROSS
+   </div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Généré par Doxygen 1.8.8 -->
+<script type="text/javascript">
+var searchBox = new SearchBox("searchBox", "search",false,'Recherche');
+</script>
+  <div id="navrow1" class="tabs">
+    <ul class="tablist">
+      <li><a href="index.html"><span>Page&#160;principale</span></a></li>
+      <li><a href="pages.html"><span>Pages&#160;associées</span></a></li>
+      <li><a href="annotated.html"><span>Classes</span></a></li>
+      <li class="current"><a href="files.html"><span>Fichiers</span></a></li>
+      <li>
+        <div id="MSearchBox" class="MSearchBoxInactive">
+        <span class="left">
+          <img id="MSearchSelect" src="search/mag_sel.png"
+               onmouseover="return searchBox.OnSearchSelectShow()"
+               onmouseout="return searchBox.OnSearchSelectHide()"
+               alt=""/>
+          <input type="text" id="MSearchField" value="Recherche" accesskey="S"
+               onfocus="searchBox.OnSearchFieldFocus(true)" 
+               onblur="searchBox.OnSearchFieldFocus(false)" 
+               onkeyup="searchBox.OnSearchFieldChange(event)"/>
+          </span><span class="right">
+            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><img id="MSearchCloseImg" border="0" src="search/close.png" alt=""/></a>
+          </span>
+        </div>
+      </li>
+    </ul>
+  </div>
+  <div id="navrow2" class="tabs2">
+    <ul class="tablist">
+      <li><a href="files.html"><span>Liste&#160;des&#160;fichiers</span></a></li>
+      <li><a href="globals.html"><span>Membres&#160;de&#160;fichier</span></a></li>
+    </ul>
+  </div>
+</div><!-- top -->
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>Tout</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Fichiers</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Fonctions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Pages</a></div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+<div class="header">
+  <div class="headertitle">
+<div class="title">generation.h</div>  </div>
+</div><!--header-->
+<div class="contents">
+<div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="preprocessor">#ifndef __GENERATION_H__</span></div>
+<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="preprocessor">#define __GENERATION_H__</span></div>
+<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;</div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="preprocessor">#define N 25</span></div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;</div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="comment">// Fonctions basiques</span></div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="keywordtype">void</span> <a class="code" href="generation_8c.html#ab2b6856c86730ac614fd0578750fcc56">init_matrice</a>(<span class="keywordtype">int</span> mat[N][N]);</div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="keywordtype">void</span> <a class="code" href="generation_8c.html#a7e5741984227568d6673547379170eaf">afficher_matrice</a>(<span class="keywordtype">int</span> mat[N][N], <span class="keywordtype">int</span> niveau, <span class="keywordtype">int</span> taille_max, <span class="keywordtype">char</span> cle);</div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="keywordtype">int</span> <a class="code" href="generation_8c.html#a09b1103f4fabcbb720d21039b247c534">lecture_fic</a>(<span class="keywordtype">char</span> *nom_fic, <span class="keywordtype">int</span> puzzle, <span class="keywordtype">int</span> C[N][N], <span class="keywordtype">int</span> L[N][N], <span class="keywordtype">int</span> solveur);</div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="keywordtype">void</span> <a class="code" href="generation_8c.html#ae6e1bc7dd2ef2ffbd41b12c549ecb5ac">gen_peripheriques</a>(<span class="keywordtype">int</span> S[N][N], <span class="keywordtype">int</span> C[N][N], <span class="keywordtype">int</span> L[N][N], <span class="keywordtype">int</span> taille_max);</div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;</div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="comment">// Sous-fonctions du solveur</span></div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;<span class="keywordtype">int</span> <a class="code" href="generation_8c.html#a7434f3ce262fae716119736b914f244f">init_compteur_groupes</a>(<span class="keywordtype">int</span> S[N][N], <span class="keywordtype">int</span> nombres[N], <span class="keywordtype">int</span> rangee, <span class="keywordtype">char</span> type_rangee);</div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;<span class="keywordtype">void</span> <a class="code" href="generation_8c.html#a2bbf30f7c3bae82eebb0a23b11e8a26b">verif_adequation_globale</a>(<span class="keywordtype">int</span> soluce[N][N], <span class="keywordtype">int</span> C[N][N], <span class="keywordtype">int</span> L[N][N], <span class="keywordtype">int</span> respect_C[N], <span class="keywordtype">int</span> respect_L[N]);</div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;<span class="keywordtype">int</span> <a class="code" href="generation_8c.html#a598c8580eddc01743c3d146157842232">adequation_rangee_et_nombres</a>(<span class="keywordtype">int</span> S[N][N], <span class="keywordtype">int</span> periph[N][N], <span class="keywordtype">int</span> nb_groupes_defaut, <span class="keywordtype">int</span> rangee, <span class="keywordtype">char</span> type_rangee);</div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;<span class="keywordtype">void</span> <a class="code" href="generation_8c.html#a2255a5f398e1a373aa825dd97e539084">init_compteurs_periph</a>(<span class="keywordtype">int</span> periph_C[N][N], <span class="keywordtype">int</span> cpt_C[N], <span class="keywordtype">int</span> periph_L[N][N], <span class="keywordtype">int</span> cpt_L[N]);</div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;</div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;<span class="comment">// Fonction principale du solveur</span></div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;<span class="keywordtype">void</span> <a class="code" href="generation_8c.html#a7f10b5c7e502fefd028a9a5f992130f2">gen_solution</a>(<span class="keywordtype">int</span> S[N][N], <span class="keywordtype">int</span> C[N][N], <span class="keywordtype">int</span> L[N][N], <span class="keywordtype">int</span> largeur);</div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;</div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="ttc" id="generation_8c_html_a7434f3ce262fae716119736b914f244f"><div class="ttname"><a href="generation_8c.html#a7434f3ce262fae716119736b914f244f">init_compteur_groupes</a></div><div class="ttdeci">int init_compteur_groupes(int S[N][N], int nombres[N], int rangee, char type_rangee)</div><div class="ttdoc">Initialise une liste d&#39;entiers avec, pour chaque entier, le nombre de cases pleines d&#39;un groupe analy...</div><div class="ttdef"><b>Definition:</b> generation.c:230</div></div>
+<div class="ttc" id="generation_8c_html_a2bbf30f7c3bae82eebb0a23b11e8a26b"><div class="ttname"><a href="generation_8c.html#a2bbf30f7c3bae82eebb0a23b11e8a26b">verif_adequation_globale</a></div><div class="ttdeci">void verif_adequation_globale(int soluce[N][N], int C[N][N], int L[N][N], int respect_C[N], int respect_L[N])</div><div class="ttdoc">Lorsqu&#39;une itération de la boucle principale de la fonction "gen_solution" a été effectuée, cette fonction a pour rôle de vérifier l&#39;état de toutes les rangées. </div><div class="ttdef"><b>Definition:</b> generation.c:270</div></div>
+<div class="ttc" id="generation_8c_html_a598c8580eddc01743c3d146157842232"><div class="ttname"><a href="generation_8c.html#a598c8580eddc01743c3d146157842232">adequation_rangee_et_nombres</a></div><div class="ttdeci">int adequation_rangee_et_nombres(int S[N][N], int periph[N][N], int nb_groupes_defaut, int rangee, char type_rangee)</div><div class="ttdoc">Vérifie dans la matrice solution, pour une matrice périphérique, un compteur d&#39;indice et une rangée p...</div><div class="ttdef"><b>Definition:</b> generation.c:297</div></div>
+<div class="ttc" id="generation_8c_html_a7f10b5c7e502fefd028a9a5f992130f2"><div class="ttname"><a href="generation_8c.html#a7f10b5c7e502fefd028a9a5f992130f2">gen_solution</a></div><div class="ttdeci">void gen_solution(int S[N][N], int C[N][N], int L[N][N], int largeur)</div><div class="ttdoc">Initialise la matrice solution grâce aux données des matrices périphériques. </div><div class="ttdef"><b>Definition:</b> generation.c:361</div></div>
+<div class="ttc" id="generation_8c_html_ae6e1bc7dd2ef2ffbd41b12c549ecb5ac"><div class="ttname"><a href="generation_8c.html#ae6e1bc7dd2ef2ffbd41b12c549ecb5ac">gen_peripheriques</a></div><div class="ttdeci">void gen_peripheriques(int S[N][N], int C[N][N], int L[N][N], int taille_max)</div><div class="ttdoc">Lit la matrice solution et génère les nombres correspondant aux groupes de cases pleines de chaque ra...</div><div class="ttdef"><b>Definition:</b> generation.c:184</div></div>
+<div class="ttc" id="generation_8c_html_a2255a5f398e1a373aa825dd97e539084"><div class="ttname"><a href="generation_8c.html#a2255a5f398e1a373aa825dd97e539084">init_compteurs_periph</a></div><div class="ttdeci">void init_compteurs_periph(int periph_C[N][N], int cpt_C[N], int periph_L[N][N], int cpt_L[N])</div><div class="ttdoc">Initialise les compteurs des matrices périphériques. </div><div class="ttdef"><b>Definition:</b> generation.c:334</div></div>
+<div class="ttc" id="generation_8c_html_ab2b6856c86730ac614fd0578750fcc56"><div class="ttname"><a href="generation_8c.html#ab2b6856c86730ac614fd0578750fcc56">init_matrice</a></div><div class="ttdeci">void init_matrice(int mat[N][N])</div><div class="ttdoc">Initialise une matrice avec des 0. </div><div class="ttdef"><b>Definition:</b> generation.c:19</div></div>
+<div class="ttc" id="generation_8c_html_a09b1103f4fabcbb720d21039b247c534"><div class="ttname"><a href="generation_8c.html#a09b1103f4fabcbb720d21039b247c534">lecture_fic</a></div><div class="ttdeci">int lecture_fic(char *nom_fic, int puzzle, int C[N][N], int L[N][N], int solveur)</div><div class="ttdoc">Lit un fichier avec un format spécifique et renseigne les nombres contenus dans les matrices périphér...</div><div class="ttdef"><b>Definition:</b> generation.c:118</div></div>
+<div class="ttc" id="generation_8c_html_a7e5741984227568d6673547379170eaf"><div class="ttname"><a href="generation_8c.html#a7e5741984227568d6673547379170eaf">afficher_matrice</a></div><div class="ttdeci">void afficher_matrice(int mat[N][N], int niveau, int taille_max, char cle)</div><div class="ttdoc">Affiche une matrice reçue en paramètre selon un modèle prédéfini. </div><div class="ttdef"><b>Definition:</b> generation.c:38</div></div>
+</div><!-- fragment --></div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+Généré le Mercredi 4 Avril 2018 15:14:21 pour PROJET PICROSS par &#160;<a href="http://www.doxygen.org/index.html">
+<img class="footer" src="doxygen.png" alt="doxygen"/>
+</a> 1.8.8
+</small></address>
+</body>
+</html>

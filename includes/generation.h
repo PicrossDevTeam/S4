@@ -5,11 +5,11 @@
 * \def N
 * \brief Nombre de lignes de la matrice test
 */
-#define N 5
+#define N 25
 
 // Fonctions basiques
 void init_matrice(int mat[N][N]);
-void afficher_matrice(int mat[N][N], int taille_max, char cle);
+void afficher_matrice(int mat[N][N], int niveau, int taille_max, char cle);
 int lecture_fic(char *nom_fic, int niveau, int C[N][N], int L[N][N], int solveur);
 void gen_peripheriques(int S[N][N], int C[N][N], int L[N][N], int taille_max);
 

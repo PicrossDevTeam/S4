@@ -1,11 +1,13 @@
 \select@language {french}
-\contentsline {section}{I. \hskip 1em\relax Introduction}{2}{section*.2}
-\contentsline {section}{II. \hskip 1em\relax Organisation du travail}{2}{section*.3}
-\contentsline {section}{\numberline {A}Fonctions principales}{2}{section.1}
-\contentsline {subsection}{\numberline {A.1}Sous-fonctions}{2}{subsection.1.1}
-\contentsline {section}{\numberline {B}Outils de partage}{2}{section.2}
-\contentsline {section}{III. \hskip 1em\relax Analyse et conception}{2}{section*.4}
-\contentsline {section}{IV. \hskip 1em\relax Codage, m\IeC {\'e}thode et outils}{2}{section*.5}
-\contentsline {section}{A \hspace *{0.15cm} SDL}{2}{section*.6}
-\contentsline {section}{B \hspace *{0.15cm} Programmation modulaire}{2}{section*.7}
-\contentsline {section}{V. \hskip 1em\relax R\IeC {\'e}sultats et conclusion}{2}{section*.8}
+\contentsline {section}{I. \hskip 1em\relax Introduction}{3}{section*.3}
+\contentsline {section}{II. \hskip 1em\relax Organisation du travail}{4}{section*.4}
+\contentsline {section}{\numberline {A}Fonctions principales}{4}{section.1}
+\contentsline {section}{\numberline {B}Outils de partage}{5}{section.2}
+\contentsline {section}{III. \hskip 1em\relax Analyse et conception}{6}{section*.5}
+\contentsline {section}{A \hspace *{0.15cm} R\IeC {\`e}gles d\IeC {\'e}taill\IeC {\'e}es du Picross}{6}{section*.6}
+\contentsline {section}{IV. \hskip 1em\relax Codage, m\IeC {\'e}thode et outils}{8}{section*.7}
+\contentsline {section}{A \hspace *{0.15cm} SDL}{8}{section*.8}
+\contentsline {section}{B \hspace *{0.15cm} Programmation modulaire}{9}{section*.9}
+\contentsline {subsection}{\numberline {B.1}G\IeC {\'e}n\IeC {\'e}ration de matrices}{9}{subsection.2.1}
+\contentsline {subsection}{\numberline {B.2}Modification des donn\IeC {\'e}es lors d'une partie}{9}{subsection.2.2}
+\contentsline {section}{V. \hskip 1em\relax R\IeC {\'e}sultats et conclusion}{10}{section*.10}

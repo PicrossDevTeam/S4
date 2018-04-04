@@ -1,10 +1,12 @@
-\BOOKMARK [1][-]{section*.2}{I. \040Introduction}{}% 1
-\BOOKMARK [1][-]{section*.3}{II. \040Organisation du travail}{}% 2
+\BOOKMARK [1][-]{section*.3}{I. \040Introduction}{}% 1
+\BOOKMARK [1][-]{section*.4}{II. \040Organisation du travail}{}% 2
 \BOOKMARK [1][-]{section.1}{Fonctions principales}{}% 3
-\BOOKMARK [2][-]{subsection.1.1}{Sous-fonctions}{section.1}% 4
-\BOOKMARK [1][-]{section.2}{Outils de partage}{}% 5
-\BOOKMARK [1][-]{section*.4}{III. \040Analyse et conception}{}% 6
-\BOOKMARK [1][-]{section*.5}{IV. \040Codage, m\351thode et outils}{}% 7
-\BOOKMARK [1][-]{section*.6}{A \040 SDL}{}% 8
-\BOOKMARK [1][-]{section*.7}{B \040 Programmation modulaire}{}% 9
-\BOOKMARK [1][-]{section*.8}{V. \040R\351sultats et conclusion}{}% 10
+\BOOKMARK [1][-]{section.2}{Outils de partage}{}% 4
+\BOOKMARK [1][-]{section*.5}{III. \040Analyse et conception}{}% 5
+\BOOKMARK [1][-]{section*.6}{A \040 R\350gles d\351taill\351es du Picross}{}% 6
+\BOOKMARK [1][-]{section*.7}{IV. \040Codage, m\351thode et outils}{}% 7
+\BOOKMARK [1][-]{section*.8}{A \040 SDL}{}% 8
+\BOOKMARK [1][-]{section*.9}{B \040 Programmation modulaire}{}% 9
+\BOOKMARK [2][-]{subsection.2.1}{G\351n\351ration de matrices}{section*.9}% 10
+\BOOKMARK [2][-]{subsection.2.2}{Modification des donn\351es lors d'une partie}{section*.9}% 11
+\BOOKMARK [1][-]{section*.10}{V. \040R\351sultats et conclusion}{}% 12
