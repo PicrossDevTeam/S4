@@ -2,8 +2,8 @@
 * \file generation.c
 * \author KAJAK Rémi
 * \version 1.2
-* \date 02/04/2018
-* \brief Fichier ayant servi à l'élaboration de la fonction de lecture du fichier texte qui contient les nombres générateurs de la matrice principale et la fonction de génération de la matrice solution.
+* \date 04/04/2018
+* \brief Fichier ayant servi à l'élaboration des différentes fonctions de génération des trois matrices principales. Les fonctions ne possédant pas leur documentation Doxygen sont uniquement dédiées aux tests unitaires de ce fichier.
 */
 #include <stdio.h>
 #include <stdlib.h>
@@ -27,21 +27,27 @@ void init_matrice(int mat[N][N]) { // Fonction test pour ce fichier
 }
 
 /**
-* \fn afficher_matrice(int mat[N][N], char cle)
+* \fn afficher_matrice(int mat[N][N], int niveau, int taille_max, char cle)
 * \brief Affiche une matrice reçue en paramètre selon un modèle prédéfini.
 * \param mat Une matrice de taille fixe
+* \param niveau Un chiffre indiquant la taille de la longueur des matrices
 * \param taille_max La taille maximum relevée pour les matrices périphériques
 * \param cle Un caractère qui définit le mode d'affichage : "C" pour afficher horizontalement les nombres de la matrice périphérique des colonnes, "L" pour afficher verticalement les nombres de la matrice périphérique des lignes et "S" pour afficher une grille complète
 * \return Ne retourne aucun résultat
 */
-void afficher_matrice(int mat[N][N], int taille_max, char cle) {
-	int i, j, k = 0, mat_inversee[N][N];
+void afficher_matrice(int mat[N][N], int niveau, int taille_max, char cle) {
+	int i, j, k = 0, longueur, mat_inversee[N][N];
+	
+	if(niveau == 1) longueur = 3;
+	else if(niveau == 2) longueur = 4;
+	else if(niveau == 3) longueur = 5;
+	else if(niveau == 4) longueur = 10;
 	
 	printf("\n");
 	if(cle == 'C') {
 		printf("Matrice périphérique des colonnes :\n\n");
 		for(i = taille_max-1; i >= 0; i--) {
-			for(j = 0; j < taille_max; j++) {
+			for(j = 0; j < longueur; j++) {
 				if(i == 0) printf("%i ",mat[i][j]);
 				else {
 					if(mat[i][j] > 0) printf("%i ",mat[i][j]);
@@ -56,8 +62,8 @@ void afficher_matrice(int mat[N][N], int taille_max, char cle) {
 		init_matrice(mat_inversee);
 		
 		// On attribue les nombres dans une seconde matrice pour éviter une lecture erronée à l'affichage (nombres inversés)
-		for(i = 0; i < N; i++) {
-			for(j = N-1; j >= 0; j--) {
+		for(i = 0; i < longueur; i++) {
+			for(j = longueur-1; j >= 0; j--) {
 				if(mat[i][j] > 0) {
 					mat_inversee[i][k] = mat[i][j];
 					k++;
@@ -67,7 +73,7 @@ void afficher_matrice(int mat[N][N], int taille_max, char cle) {
 		}
 		printf("Matrice périphérique des lignes :\n\n");
 		
-		for(i = 0; i < taille_max; i++) {
+		for(i = 0; i < longueur; i++) {
 			for(j = taille_max-1; j >= 0; j--) {
 				if(j == 0) printf("%i ",mat_inversee[i][j]);
 				else {
@@ -80,8 +86,8 @@ void afficher_matrice(int mat[N][N], int taille_max, char cle) {
 	}
 	else {
 		printf("Matrice solution :\n\n");
-		for(i = 0; i < taille_max; i++) {
-			for(j = 0; j < taille_max; j++) printf("%i ",mat[i][j]);
+		for(i = 0; i < longueur; i++) {
+			for(j = 0; j < longueur; j++) printf("%i ",mat[i][j]);
 			printf("\n");
 		}
 	}
@@ -90,54 +96,53 @@ void afficher_matrice(int mat[N][N], int taille_max, char cle) {
 void afficher_matrice_claire(int mat[N][N]) { // Fonction test pour ce fichier
 	int i, j;
 	
-	printf("\nMatrice solution éclaircie :\n\n");
+	printf("\nMatrice éclaircie :\n\n");
 	for(i = 0; i < N; i++) {
 		for(j = 0; j < N; j++) {
-			if(mat[i][j]%2 == 0) printf("%i ",0);
-			else printf("%i ",1);
+			printf("%i ",mat[i][j]);
 		}
 		printf("\n");
 	}
 }
 
 /**
-* \fn lecture_fic(char *nom, int niveau, int C[N][N], int L[N][N])
+* \fn lecture_fic(char *nom, int puzzle, int C[N][N], int L[N][N], int solveur)
 * \brief Lit un fichier avec un format spécifique et renseigne les nombres contenus dans les matrices périphériques. Elle renvoie la largeur maximum d'une rangée pour améliorer les affichages et les traitements des matrices.
 * \param nom Nom du fichier texte à analyser
-* \param niveau Nombre du puzzle à trouver dans le fichier
+* \param puzzle Numéro du puzzle à trouver dans le fichier
 * \param C La matrice périphérique des colonnes
 * \param L La matrice périphérique des lignes
 * \param solveur Booléen qui indique si la lecture du fichier concerne le solveur ou pas
 * \return Retourne la largeur maximum d'une matrice
 */
-int lecture_fic(char *nom_fic, int niveau, int C[N][N], int L[N][N], int solveur) {
+int lecture_fic(char *nom_fic, int puzzle, int C[N][N], int L[N][N], int solveur) {
 	FILE * fic_gen;
-	char cle[5] = "PCLFD", carac;
-	int colonne = 0, ligne = 0, largeur_max = 0, num_puz, nb_case, i;
+	char *cle = "PCLFD", carac;
+	int rangee = 0, curseur = 0, largeur_max = 0, num_puz, nb_case, i;
 
 	fic_gen = fopen(nom_fic,"r");
 	fscanf(fic_gen,"%c %i",&carac,&num_puz);
 
 	while(!feof(fic_gen)) { // Tant que la fin du fichier n'a pas été atteinte
-		if(carac == cle[0] && num_puz == niveau) { // Si on trouve le bon niveau de puzzle
+		if(carac == cle[0] && num_puz == puzzle) { // Si on trouve le bon niveau de puzzle
 			if(solveur == 1) {
 				for(i = 1; i <= 2; i++) { // Lecture successive des clés
-					colonne = 0;
-					ligne = 0;
+					rangee = 0;
+					curseur = 0;
 					
 					while(carac != cle[i]) fscanf(fic_gen,"%c",&carac); // Tant que l'on n'a pas trouvé la clé de départ (ici, "C")
 
 					while(carac != cle[i+1]) { // Tant que l'on n'a pas trouvé la clé de fin
 						if(carac == ' ' || carac == '\n') {
 							fscanf(fic_gen,"%i",&nb_case);
-							if(cle[i] == 'C') C[colonne][ligne] = nb_case;
-							else if(cle[i] == 'L') L[ligne][colonne] = nb_case;
-							colonne++;
-							if(colonne > largeur_max) largeur_max = colonne;
+							if(cle[i] == 'C') C[rangee][curseur] = nb_case;
+							else if(cle[i] == 'L') L[curseur][rangee] = nb_case;
+							rangee++;
+							if(rangee > largeur_max) largeur_max = rangee;
 						}
 						else if(carac == '+') {
-							ligne++;
-							colonne = 0;
+							curseur++;
+							rangee = 0;
 						}
 						fscanf(fic_gen,"%c",&carac);
 					}
@@ -149,13 +154,13 @@ int lecture_fic(char *nom_fic, int niveau, int C[N][N], int L[N][N], int solveur
 				while(carac != cle[3]) { // Tant que l'on n'a pas trouvé la clé de fin
 					if(carac == ' ' || carac == '\n') {
 						fscanf(fic_gen,"%i",&nb_case);
-						C[ligne][colonne] = nb_case;
-						colonne++;
-						if(colonne > largeur_max) largeur_max = colonne;
+						C[curseur][rangee] = nb_case;
+						rangee++;
+						if(rangee > largeur_max) largeur_max = rangee;
 					}
 					else if(carac == '+') {
-						ligne++;
-						colonne = 0;
+						curseur++;
+						rangee = 0;
 					}
 					fscanf(fic_gen,"%c",&carac);
 				}
@@ -167,27 +172,47 @@ int lecture_fic(char *nom_fic, int niveau, int C[N][N], int L[N][N], int solveur
 	return largeur_max;
 }
 
+/**
+* \fn gen_peripheriques(int S[N][N], int C[N][N], int L[N][N], int taille_max)
+* \brief Lit la matrice solution et génère les nombres correspondant aux groupes de cases pleines de chaque rangée dans les bonnes matrices périphériques.
+* \param S La matrice solution
+* \param C La matrice périphérique des colonnes
+* \param L La matrice périphérique des lignes
+* \param taille_max La taille maximum de la largeur des matrices périphériques ; elle permet de limiter les traitements sur la matrice solution de taille N*N
+* \return Ne retourne aucune valeur
+*/
 void gen_peripheriques(int S[N][N], int C[N][N], int L[N][N], int taille_max) {
-	int i, j, nb_groupes, taille_groupe;
-	
-	// Remplissage de la matrice périphérique des colonnes
+	int i, j, nb_groupes_colonne, nb_groupes_ligne, taille_groupe_colonne, taille_groupe_ligne;
 	
 	
-	// Remplissage de la matrice périphérique des lignes
 	for(i = 0; i < taille_max; i++) {
-		nb_groupes = 0;
-		taille_groupe = 0;
+		nb_groupes_colonne = 0;
+		nb_groupes_ligne = 0;
+		taille_groupe_colonne = 0;
+		taille_groupe_ligne = 0;
 		
 		for(j = 0; j < taille_max; j++) {
-			if(S[i][j]%2 == 1) {
-				taille_groupe++;
+			// Remplissage de la matrice périphérique des colonnes
+			if(S[j][i]%2 == 1) {
+				taille_groupe_colonne++;
 				
-				if(j == taille_max-1) L[i][nb_groupes] = taille_groupe;
+				if(j == taille_max-1) C[nb_groupes_colonne][i] = taille_groupe_colonne;
+			}
+			else if(S[j][i]%2 == 0 && S[j-1][i]%2 == 1) {
+				C[nb_groupes_colonne][i] = taille_groupe_colonne;
+				taille_groupe_colonne = 0;
+				nb_groupes_colonne++;
+			}
+			// Remplissage de la matrice périphérique des lignes
+			if(S[i][j]%2 == 1) {
+				taille_groupe_ligne++;
+				
+				if(j == taille_max-1) L[i][nb_groupes_ligne] = taille_groupe_ligne;
 			}
 			else if(S[i][j]%2 == 0 && S[i][j-1]%2 == 1) {
-				L[i][nb_groupes] = taille_groupe;
-				taille_groupe = 0;
-				nb_groupes++;
+				L[i][nb_groupes_ligne] = taille_groupe_ligne;
+				taille_groupe_ligne = 0;
+				nb_groupes_ligne++;
 			}
 		}
 	}
@@ -235,7 +260,7 @@ int init_compteur_groupes(int S[N][N], int nombres[N], int rangee, char type_ran
 /**
 * \fn verif_adequation_globale(int soluce[N][N], int C[N][N], int L[N][N], int respect_C[N], int respect_L[N])
 * \brief Lorsqu'une itération de la boucle principale de la fonction "gen_solution" a été effectuée, cette fonction a pour rôle de vérifier l'état de toutes les rangées. Elle remplie les tableaux "respect_" avec un indicateur numérique : 0 pour une rangée qui ne respecte pas ses règles, 1 pour un résultat positif. 
-* \param solune La matrice solution
+* \param soluce La matrice solution
 * \param C La matrice périphérique des colonnes
 * \param L La matrice périphérique des lignes
 * \param respect_C Le tableau qui va contenir les résultats du test pour les colonnes des matrices soluce et C
@@ -309,7 +334,7 @@ int adequation_rangee_et_nombres(int S[N][N], int periph[N][N], int nb_groupes_d
 void init_compteurs_periph(int periph_C[N][N], int cpt_C[N], int periph_L[N][N], int cpt_L[N]) {
 	int i, j;
 	
-	// Initialisation des colonnes des listes
+	// Initialisation des listes
 	for(i = 0; i < N; i++) {
 		cpt_C[i] = 0;
 		cpt_L[i] = 0;
@@ -325,7 +350,7 @@ void init_compteurs_periph(int periph_C[N][N], int cpt_C[N], int periph_L[N][N],
 }
 
 /**
-* \fn gen_solution(int S[N][N], int C[N][N], int L[N][N])
+* \fn gen_solution(int S[N][N], int C[N][N], int L[N][N], int largeur)
 * \brief Initialise la matrice solution grâce aux données des matrices périphériques. Pour gérer le remplissage progressif et les cas d'erreur, un système de numérotation des cases a été mis en place : 0 => case vide non-testée, 1 => case cochée, 2 => case vide déjà testée, 3 => case cochée validée.
 * \param S La matrice solution qui va contenir le motif du puzzle
 * \param C La matrice périphérique des colonnes (situé en haut de la grille du Picross)
@@ -344,7 +369,7 @@ void gen_solution(int S[N][N], int C[N][N], int L[N][N], int largeur) {
 	i = 0;
 	j = 0;
 	
-	afficher_matrice(C,largeur,'C');
+	afficher_matrice(C,3,largeur,'C');
 	
 	// Ensuite, on boucle la matrice jusqu'à ce que la solution soit correctement générée
 	while(respect_regles != 1) {
@@ -393,7 +418,7 @@ void gen_solution(int S[N][N], int C[N][N], int L[N][N], int largeur) {
 				i = 0;
 				j = 0;
 			}
-			afficher_matrice(S,largeur,'S');
+			afficher_matrice(S,3,largeur,'S');
 			printf("\n\n");
 		}
 		else { // Puis on passe au remplissage des colonnes
@@ -435,7 +460,7 @@ void gen_solution(int S[N][N], int C[N][N], int L[N][N], int largeur) {
 				i = 0;
 				j = 0;
 			}
-			afficher_matrice(S,largeur,'S');
+			afficher_matrice(S,3,largeur,'S');
 			printf("\n\n");
 		}
 		if(lecture_grille == 1) respect_regles = 1;
@@ -459,8 +484,8 @@ int main() {
 	init_matrice(matL);
 	taille = lecture_fic(saisie,4,matC,matL,1);
 	
-	afficher_matrice(matC,taille,'C');
-	afficher_matrice(matL,taille,'L');
+	afficher_matrice(matC,1,taille,'C');
+	afficher_matrice(matL,1,taille,'L');
 	
 	//gen_solution(soluce,matC,matL,taille);
 	//afficher_matrice_claire(soluce);

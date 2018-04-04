@@ -18,11 +18,12 @@ int main() {
 	init_matrice(colonnes);
 	init_matrice(lignes);
 	
-	taille = lecture_fic(nom_fic1,1,test,NULL,0);
+	taille = lecture_fic(nom_fic1,2,test,NULL,0);
 	gen_peripheriques(test,colonnes,lignes,taille);
 	
-	afficher_matrice(test,taille,'T');
-	afficher_matrice(colonnes,taille,'C');
-	afficher_matrice(lignes,taille,'L');
-	printf("\n");
+	afficher_matrice(test,1,taille,'T');
+	afficher_matrice(colonnes,1,taille,'C');
+	afficher_matrice(lignes,1,taille,'L');
+	
+	printf("\nTaille maximum de la largeur : %i\n",taille);
 }
