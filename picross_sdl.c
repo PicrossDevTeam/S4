@@ -4,13 +4,33 @@
 #include <stdlib.h>
 #include <math.h>
 
-int N = 25;
-int dim_case = 50;
+int dim_case = 30;
 
 /* Redimensionne la fenêtre en plein écran */
 //SDL_SetWindowFullscreen(window, SDL_WINDOW_FULLSCREEN_DESKTOP);
 /* Redimensionne la fenêtre en fenêtrée plein écran */
 //SDL_SetWindowFullscreen(window, 0);
+
+/****************************************** Autres fct ******************************************/
+
+int mat[5][5];
+
+void mat_solu(int nb_case, int dim_mat){
+	int i;
+	int j;
+
+	for(i=0;i<dim_mat;i++){
+		for(j=0;j<dim_mat;j++){
+			mat[i][j]=1;
+		}
+	}
+}
+
+int return_val(int i, int j){
+	return mat[i][j];
+}
+
+/************************************************************************************************/
 
 int set_WindowColor(SDL_Renderer * renderer, SDL_Color color){
 	/* Choix de la couleur de travail pour le render */
@@ -38,30 +58,70 @@ void apply_surface( int x, int y, SDL_Surface* source, SDL_Surface* destination 
 	SDL_BlitSurface( source, NULL, destination, &offset ); 
 }
 
-void matrice_5(SDL_Renderer * renderer, SDL_Rect rect[N]){
+void mat_ori(TTF_Font * font, SDL_Renderer * renderer, SDL_Surface * message, int dim_mat, int nb_case, SDL_Rect rect[nb_case]){
 	int i;
 	int j;
 	int n_rect=0;
+	char text[128];
 
-	for(i=0; n_rect<N; i++){
-		for(j=0; j<5; j++){
-			rect[n_rect].x = 110+i*dim_case;
-			rect[n_rect].y = 110+j*dim_case;
+	/* Taille police */
+	int texW = 0;
+	int texH = 0;
+
+	/* Permet de dire si le programme s'est bien ou mal déroulé */
+	int statut = EXIT_FAILURE;
+
+	/* Couleur */
+	SDL_Color white = {255, 255, 255, 255};
+	SDL_Color black = {0, 0, 0, 255};
+
+	for(i=0; n_rect<nb_case; i++){
+		for(j=0; j<dim_mat; j++){
+			
+			rect[n_rect].x = (dim_case*2+(15*dim_mat/2))+i*dim_case;
+			rect[n_rect].y = (dim_case*2+(15*dim_mat/2))+j*dim_case;
 			rect[n_rect].w = dim_case;
 			rect[n_rect].h = dim_case;
+			
+			sprintf(text, "%i", mat[i][j]);
+			printf("%s", text);
+			message = TTF_RenderText_Blended(font, text, black);
+			
+			if(message == NULL){
+			fprintf(stderr, "Erreur TTF_RenderText_Solid : %s\n", TTF_GetError());
+			return;
+			}
+
+			SDL_Texture * texture = SDL_CreateTextureFromSurface(renderer, message);
+			SDL_QueryTexture(texture, NULL, NULL, &texW, &texH);
+			SDL_Rect dstrect = {rect[n_rect].x+10, rect[n_rect].y+5, texW, texH};
+			SDL_RenderCopy(renderer, texture, NULL, &dstrect);
+
 			n_rect++;
 		}
 	}
 }
 
-void peri_h(SDL_Renderer * renderer, SDL_Rect rect[N]){
+void peri_h(SDL_Renderer * renderer, int dim_mat, int nb_case, SDL_Rect rect[nb_case]){
 	int i;
 	int j;
 	int n_rect=0;
 
-	for(i=0; i<sqrt(25); i++){
-		for(j=0; j<5/2; j++){
-			rect[n_rect].x = 110+i*dim_case;
+	if(dim_mat == 3){
+		for(i=0; i<dim_mat; i++){
+			for(j=0; j<2; j++){
+				rect[n_rect].x = (dim_case*2+(15*dim_mat/2))+i*dim_case;
+				rect[n_rect].y = j*dim_case;
+				rect[n_rect].w = dim_case;
+				rect[n_rect].h = dim_case;
+				n_rect++;
+			}
+		}
+	}
+
+	for(i=0; i<dim_mat; i++){
+		for(j=0; j<dim_mat/2; j++){
+			rect[n_rect].x = (dim_case*2+(15*dim_mat/2))+i*dim_case;
 			rect[n_rect].y = j*dim_case;
 			rect[n_rect].w = dim_case;
 			rect[n_rect].h = dim_case;
@@ -70,24 +130,44 @@ void peri_h(SDL_Renderer * renderer, SDL_Rect rect[N]){
 	}
 }
 
-void peri_v(SDL_Renderer * renderer, SDL_Rect rect[N]){
+void peri_v(SDL_Renderer * renderer, int dim_mat, int nb_case, SDL_Rect rect[nb_case]){
 	int i;
 	int j;
 	int n_rect=0;
 
-	for(i=0; i<5/2; i++){
-		for(j=0; j<sqrt(25); j++){
-			rect[n_rect].x = i*dim_case;
-			rect[n_rect].y = 110+j*dim_case;
-			rect[n_rect].w = dim_case;
-			rect[n_rect].h = dim_case;
-			n_rect++;
+	if(dim_mat == 3){
+		for(i=0; i<2; i++){
+			for(j=0; j<dim_mat; j++){
+				rect[n_rect].x = i*dim_case;
+				rect[n_rect].y = (dim_case*2+(15*dim_mat/2))+j*dim_case;
+				rect[n_rect].w = dim_case;
+				rect[n_rect].h = dim_case;
+				n_rect++;
+			}
 		}
-	}
+	} else
+		for(i=0; i<dim_mat/2; i++){
+			for(j=0; j<dim_mat; j++){
+				rect[n_rect].x = i*dim_case;
+				rect[n_rect].y = (dim_case*2+(15*dim_mat/2))+j*dim_case;
+				rect[n_rect].w = dim_case;
+				rect[n_rect].h = dim_case;
+				n_rect++;
+			}
+		}
 }
 
-int main(int argc, char *argv[])
-{
+int main(int argc, char *argv[]){
+	int nb_case;
+	int dim_mat;
+
+	printf("Entrez la dimension d'une matrice carée : ");
+	scanf("%i", &dim_mat);
+
+	nb_case=dim_mat*dim_mat;
+
+	/* Création d'une matrice solution */
+	mat_solu(nb_case, dim_mat);
 
 	/* Initialisation de la fenêtre et du render SDL */ 
 	SDL_Window * window = NULL;
@@ -106,7 +186,7 @@ int main(int argc, char *argv[])
 	TTF_Font * font;
 
 	/* Les rectangles pour l'affichage de la grille */
-	SDL_Rect rect[N];
+	SDL_Rect rect[nb_case];
 
 	/* Prendre en compte une position */
 	int texW = 0;
@@ -129,52 +209,63 @@ int main(int argc, char *argv[])
 	}
 
 	/* Création de la fenêtre SDL redimensionnable et du render */
-	if(0 != SDL_CreateWindowAndRenderer(360, 360, SDL_WINDOW_SHOWN, &window, &renderer)){
-		fprintf(stderr, "Erreur SDL_CreateWindowAndRenderer : %s\n", SDL_GetError());
-		goto Quit;
+
+	if(dim_mat == 6){
+		if(0 != SDL_CreateWindowAndRenderer(285, 285, SDL_WINDOW_SHOWN, &window, &renderer)){
+			fprintf(stderr, "Erreur SDL_CreateWindowAndRenderer : %s\n", SDL_GetError());
+			goto Quit;
+		}
+	}
+
+	if(dim_mat == 5){
+		if(0 != SDL_CreateWindowAndRenderer(247, 247, SDL_WINDOW_SHOWN, &window, &renderer)){
+			fprintf(stderr, "Erreur SDL_CreateWindowAndRenderer : %s\n", SDL_GetError());
+			goto Quit;
+		}
+	}
+
+	if(dim_mat == 4){
+		if(0 != SDL_CreateWindowAndRenderer(210, 210, SDL_WINDOW_SHOWN, &window, &renderer)){
+			fprintf(stderr, "Erreur SDL_CreateWindowAndRenderer : %s\n", SDL_GetError());
+			goto Quit;
+		}
+	}
+
+	if(dim_mat == 3){
+		if(0 != SDL_CreateWindowAndRenderer(172, 172, SDL_WINDOW_SHOWN, &window, &renderer)){
+			fprintf(stderr, "Erreur SDL_CreateWindowAndRenderer : %s\n", SDL_GetError());
+			goto Quit;
+		}
 	}
 
 	/* Change le fond en blanc */
 	if(0 != set_WindowColor(renderer, white))
 		goto Quit;
 
-	SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
-	matrice_5(renderer, rect);
+	/* Ecriture dans la fenêtre */
 
-	/* Dessine tous les rectangles d'un coup */
-	SDL_RenderDrawRects(renderer, rect, N);
-
-	peri_h(renderer, rect);
-	SDL_RenderDrawRects(renderer, rect, N);
-	peri_v(renderer, rect);
-	SDL_RenderDrawRects(renderer, rect, N);
-
-
- 	/* Ecriture dans la fenêtre */
-
-	font = TTF_OpenFont("arial.ttf", 12);
+	font = TTF_OpenFont("arial.ttf", 18);
 
 	if(font == NULL){
 		fprintf(stderr, "Erreur TTF_OpenFont : %s\n", TTF_GetError());
 		goto Quit;
 	}
 
-	message = TTF_RenderText_Blended(font, "Test", black);
+	SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
+	mat_ori(font, renderer, message, dim_mat, nb_case, rect);
 
-	if(message == NULL){
-		fprintf(stderr, "Erreur TTF_RenderText_Solid : %s\n", TTF_GetError());
-		goto Quit;
-	}
+	/* Dessine tous les rectangles d'un coup */
+	SDL_RenderDrawRects(renderer, rect, nb_case);
 
-	SDL_Texture * texture = SDL_CreateTextureFromSurface(renderer, message);
-	SDL_QueryTexture(texture, NULL, NULL, &texW, &texH);
-	SDL_Rect dstrect = {0, 0, texW, texH};
-	SDL_RenderCopy(renderer, texture, NULL, &dstrect);
+	peri_h(renderer, dim_mat, nb_case, rect);
+	SDL_RenderDrawRects(renderer, rect, nb_case);
+	peri_v(renderer, dim_mat, nb_case, rect);
+	SDL_RenderDrawRects(renderer, rect, nb_case);
 
 	/* Rafraichit l'affichage de la fenêtre */
 	SDL_RenderPresent(renderer);
 
-	SDL_Delay(4000);
+	SDL_Delay(5000);
 
 	/* Les initialisitions se sont bien déroulées donc le programme se déroulera bien */
 	statut = EXIT_SUCCESS;
@@ -191,8 +282,8 @@ Quit:
 
 	if(NULL != font)
 		TTF_CloseFont(font);
-	if(NULL != texture)
-		SDL_DestroyTexture(texture);
+	//if(NULL != texture)
+		//SDL_DestroyTexture(texture);
 	if(NULL != message)
 		SDL_FreeSurface(message);
 
