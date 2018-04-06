@@ -1,0 +1,14 @@
+CC = gcc
+FLAGS = -g -Wall
+CASE = Case
+EXEC = test_case
+
+${EXEC}: ${CASE}.o
+	${CC} $< -o $@ 
+
+${CASE}.o: ${CASE}.c ${CASE}.h
+	${CC} -c $^ ${FLAGS}
+
+clean:
+	rm -i *.o
+	rm -i *.*~

@@ -6,15 +6,10 @@
  * \date 3 avril 2018
  *
  */
-#include<stdio.h>
-#include<stdlib.h>
-#include<stdbool.h>
-#include"Case.h"
-/**
-* \def N
-* \brief la taille de la matrice.
-*/
-#define N 
+#include <stdio.h>
+#include <stdlib.h>
+#include <stdbool.h>
+#include "Case.h"
 
 /**
  * \fn void  init_case(t_couleurs matr[N][N])
@@ -22,20 +17,19 @@
  *
  * \param la matrice qui reprÃ©sente la grille.
  */
+t_couleurs* init_case() {/* initialiser toutes les cases comme Blanche */
+	t_couleurs* mat = malloc(N * N * sizeof(t_couleurs));
+	int i,j;
 
-
-void  init_case(t_couleurs matr[N][N]){/*initialiser toutes les cases Ã  0 */
-
-int i,j;
-
-	for(i=0 ; i<= N ; i++)
+	for(i=0 ; i< N ; i++) {
 	
-		for(j=0 ; j<= N ; j++){
+		for(j=0 ; j< N ; j++) {
 		
-			matr[i][j] = 0;
+			mat[N*i+j] = Blanche;
 			
-				}
-	
+		}
+	}
+	return mat;
 }
 /*********************************************************************************************/
 /**
@@ -45,17 +39,17 @@ int i,j;
  * \param la matrice qui reprÃ©sente la grille.
  */
 
-void  verif_matrice(t_couleurs matr[N][N] ){/*verification du contenu de la matrice */
-
-int i,j;
-
-	for(i=0 ; i<= N ; i++){
+void verif_matrice(t_couleurs *mat){/*verification du contenu de la matrice */
 	
-		for(j=0 ; j<= N ; j++){
+	int i,j;
+
+	for(i=0 ; i< N ; i++){
+	
+		for(j=0 ; j< N ; j++){
 		
-			printf("|%i|", matr[i][j]);
+			printf("|%d|", mat[N*i+j]);
 						
-				}
+		}
 		printf("\n");
 	}
 }
@@ -67,23 +61,17 @@ int i,j;
  * \param la matrice ui represente la grille.
  */
 
-int changerEtat(t_couleurs matr[N][N], int x, int y){/*changer l'etat de la case  de blanche representÃ© par un '0' Ã  noire representÃ© par un '1' et de noire Ã  blanche ou croix reprÃ©sentÃ© par un '2' */
-
-
-	if(matr[x][y]==0)
-		matr[x][y]= 1;
-	else if(matr[x][y]==1)
-		matr[x][y] = 2;
+int changerEtat(t_couleurs* mat, int x, int y){/*changer l'etat de la case  de blanche representÃ© par un '0' Ã  noire representÃ© par un '1' et de noire Ã  blanche ou croix reprÃ©sentÃ© par un '2' */
+	if(mat[N*x+y] == Blanche)
+		mat[N*x+y] = Noire;
+	else if(mat[N*x+y] == Noire)
+		mat[N*x+y] = Croix;
 	else
-		matr[x][y] = 0;
-	
-	
-		
+		mat[N*x+y] = Blanche;
 }
 
-int saisir_coord(t_couleurs matr[N][N], int niveau){
-	int i = 0, j =0,  taille = 0;
-	
+int saisir_coord(t_couleurs* mat, int niveau){
+	int x = 0, y = 0, taille = 0;
 	
 	if(niveau == 1)
 		taille =3;
@@ -94,18 +82,19 @@ int saisir_coord(t_couleurs matr[N][N], int niveau){
 	else if(niveau == 4)
 		taille =10;
 
-	while((i < 1 || i > taille) && (j < 1 || j > taille)) {
+	while((x < 1 || x > taille) && (y < 1 || y > taille)) {
+		printf("\nEntrez les coordonnées de l'abscisse et de l'ordonnée de la case à cocher (comprises entre 1 et %i) : ",taille);
+		scanf("%i %i",&x,&y);
 		
-		printf("i=");
-		scanf("%i", &i);
-		printf("j=");
-		scanf("%i", &j);
+		if(x < 1 || x > taille)
+			printf("\nERREUR : La coordonnée x n'est pas comprise entre les nombres indiqués !");
+		if(y < 1 || y > taille)
+			printf("\nERREUR : La coordonnée y n'est pas comprise entre les nombres indiqués !");
 		
-		if(i==-1 && j==-1) 
+		if(x == -1 && y == -1) 
 			return 1;
-
  	}
-	changerEtat(matr,i-1,j-1);
+	changerEtat(mat,x-1,y-1);
 	return 0;
 
 }
@@ -117,32 +106,30 @@ int saisir_coord(t_couleurs matr[N][N], int niveau){
  *
  * \param la taille de la grille.
  */
-int max_h_Case(int a){/*limite cases horizontales*/
+ /*limite cases horizontales*/
+/*int max_h_Case(int a){
+	if(a%2==1) {
+		a=a-1;
+		a++;
+	}
 
-  if(a%2==1){
-    a=a-1;
-    a++;}
-
-return a;
-
- }
+	return a;
+}
  /**
  * \fn max_v_Case(int b)
  * \brief Fonction qui verifie la limite des cases de la grille .
  *
  * \param la taille de la grille.
  */
- 
-int max_v_Case(int b){/*limite cases verticales*/
+ /*limite cases verticales*/
+/*int max_v_Case(int b) {
+	if(b%2==1) {
+		b=b-1;
+		b++;
+	}
 
-  if(b%2==1){
-     b=b-1;
-     b++;}
-
-return b;
-
-
- }
+	return b;
+} //*/
 
 /*********************************************************************************************/
 /**
@@ -152,11 +139,10 @@ return b;
  * \param la matrice qui represente la grille , les lignes de la grille, les valeurs de la matrice periphÃ©rique.
  */
 
-_Bool verifier_Case_Noire_Ligne( t_couleurs matr[N][N], int ligne, int valeur){/*verifier si les cases noire correspondent au nombres horizontals*/
-
-int i,j=0; 
-_Bool comp=false,find=false;   ///find : trouver une case noire/ comp : trouver toute les cases
-int c=0;    //compteur qui correspond au nombre de case a trouvé
+//_Bool verifier_Case_Noire_Ligne( t_couleurs matr[N][N], int ligne, int valeur){/*verifier si les cases noire correspondent au nombres horizontals*/
+	/*int i,j=0; 
+	_Bool comp=false,find=false;   ///find : trouver une case noire/ comp : trouver toute les cases
+	int c=0;    //compteur qui correspond au nombre de case a trouvé
 
 	while(j<N-1 && comp==false)       // parcourir toute la ligne et on a pas encore trouvé toute les cases
 	{
@@ -172,7 +158,7 @@ int c=0;    //compteur qui correspond au nombre de case a trouvé
 			{
 				while(i<i+c && i<N-1 && find==true)     	/*trois condition : 1ere parcourir le reste des cases a verifier/2eme
 															on verifie qu'on a pas atteint la fin de la ligne/3eme on s'arrete quand on trouve une case noiree*/ 
-				{
+				/*{
 					if(matr[ligne][i]==1){                //on a trouvé la deuxieme case noire
 						i++;}                             //on passe a la case à coté
 					else{
@@ -185,10 +171,10 @@ int c=0;    //compteur qui correspond au nombre de case a trouvé
 			 }
 		}
 		
-	j++;
+		j++;
 	}
-return comp;
-}
+	return comp;
+} //*/
 /*********************************************************************************************/
 /**
 * \fn verifier_Case_Noire_Col( t_couleurs matr[N][N], int col, int valeur)
@@ -196,10 +182,10 @@ return comp;
  *
  * \param la matrice qui represente la grille , les colonnes de la grille, les valeurs de la matrice periphÃ©rique.
  */
-_Bool verifier_Case_Noire_Col( t_couleurs matr[N][N], int col, int valeur){/*verifier si les cases noire correspondent au nombres verticals*/
-
-int i,j=0,c=0;
-_Bool comp=false,find= false;
+//_Bool verifier_Case_Noire_Col( t_couleurs matr[N][N], int col, int valeur){/*verifier si les cases noire correspondent au nombres verticals*/
+/*
+	int i,j=0,c=0;
+	_Bool comp=false,find= false;
 
 
 	while(j<N-1 && comp==false)
@@ -230,8 +216,8 @@ _Bool comp=false,find= false;
 		
 	j++;
 	}
-return comp;
-}
+	return comp;
+} //*/
 
 
 /*********************************************************************************************/
@@ -241,11 +227,9 @@ return comp;
  *
  * \param la matrice qui represente la grille qu'il faut avoir, la matrice qui represente la grille du joueur.
  */
-
-
-int verifierGrille(int matd[N][N] , int matf[N][N]){/*verifier si la grille du joueur est correcte*/
-int i,j;
-int comp = 0;
+int verifierGrille(int matd[N][N] , int matf[N][N]) {/*verifier si la grille du joueur est correcte*/
+	int i,j;
+	int comp = 0;
 
 	for(i=0; i<=N; i++ )
 	{
@@ -255,10 +239,8 @@ int comp = 0;
 				comp++;
 
 		}
-}
- 			return comp;
-
-
+	}
+ 	return comp;
 }
 /*********************************************************************************************/
  
@@ -267,36 +249,19 @@ int comp = 0;
  * \brief EntrÃ©e du programme.
  *
  */
-/*int main()
+int main() {
+	t_couleurs* U;
+	int etat_saisie;
 
-{
+	U = init_case();
+	verif_matrice(U);
+	printf("---------------\n");
 
-int U[5][5], c;
-_Bool b=false;
+	etat_saisie = saisir_coord(U,1);
+	verif_matrice(U);
+	printf("---------------\n");
 
-
-
-init_case(U);
-verif_matrice(U);
-printf("---------------\n");
-
-
-c = saisir_coord(U,2);
-verif_matrice(U);
-printf("\n c = %i\n\n",c);
-
- int k= max_h_Case(5);
-    	printf("%d\n",k);
-    int V= max_v_Case(5);
-   	 printf("%d\n",V);
-
-//verification d'une ligne
-
-b=verifier_Case_Noire_Ligne(U,2,1);
-	if(b==true){
-		printf("Bravooo");}
-	else{
-		printf("Reessayer");}
-
- return 0;
-}*/
+	free(U);
+	
+	return 0;
+}
