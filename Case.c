@@ -153,32 +153,32 @@ return b;
 
 _Bool verifier_Case_Noire_Ligne( int matr[N][N], int ligne, int valeur){/*verifier si les cases noire correspondent au nombres horizontals*/
 
-int i,j=0;
-_Bool comp=false,find=false;
-int c=0;
+int i,j=0; /* compteur*/
+_Bool comp=false,find=false; /*find veut dire  trouver une case noire/ comp veut dire trouver toute les cases*/
+int c=0; /*compteur qui correspond au nombre de case a trouvé*/
 
-	while(j<N-1 && comp==false)
+	while(j<N-1 && comp==false)  /* parcourir toute la ligne et on a pas encore trouvé toute les cases*/
 	{
-		if(matr[ligne][j]==1)
+		if(matr[ligne][j]==1)  /* si on a trouvé la premiére case noire*/
 		{
-			i=j+1;
-			find=true;
-			c=valeur-1;
-			if(c==0){une seule valeur
+			i=j+1;   /*on verifi la deuxiéme case*/
+			find=true;  /*on a trouvé la premiére case*/
+			c=valeur-1;  /*parcourir les cases restantes*/
+			if(c==0){ /* si il est demandé de trouver qu'une seule valeur*/
 				comp=true;
 				}
 			else
 			{
-				while(i<i+c && i<N-1 && find==true) 
+				while(i<i+c && i<N-1 && find==true) /*trois condition : 1ere parcourir le reste des cases a verifier/2eme on verifie q'on a pas atteint la fin de la ligne/3eme on s'arrete quand on trouve une case noire*/ 
 				{
-					if(matr[ligne][i]==1){
-						i++;}
+					if(matr[ligne][i]==1){/*on a trouvé la deuxieme case noire*/
+						i++;}  /*on passe a la case à coté*/
 					else{
-						find=false;}
+						find=false;}/* si la deuxiéme n'est pas noire on sort de la boucle*/
 				}
 					if(find==true){
 						comp=true;}
-					else{
+					else{ /* remetre le compteur à 0 pour la prochaine recherche*/
 						c=0;}
 			 }
 		}
@@ -187,7 +187,6 @@ int c=0;
 	}
 return comp;
 }
-
 /*********************************************************************************************/
 /**
 * \fn verifier_Case_Noire_Col( int matr[N][N], int col, int valeur)
