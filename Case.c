@@ -9,21 +9,22 @@
 #include<stdio.h>
 #include<stdlib.h>
 #include<stdbool.h>
+#include"Case.h"
 /**
 * \def N
 * \brief la taille de la matrice.
 */
-#define N 5
+#define N 
 
 /**
- * \fn void  init_case(int matr[N][N])
+ * \fn void  init_case(t_couleurs matr[N][N])
  * \brief Fonction d'initialisation des cases.
  *
  * \param la matrice qui reprÃ©sente la grille.
  */
 
 
-void  init_case(int matr[N][N]){/*initialiser toutes les cases Ã  0 */
+void  init_case(t_couleurs matr[N][N]){/*initialiser toutes les cases Ã  0 */
 
 int i,j;
 
@@ -38,13 +39,13 @@ int i,j;
 }
 /*********************************************************************************************/
 /**
- * \fn verif_matrice(int matr[N][N] )
+ * \fn verif_matrice(t_couleurs matr[N][N] )
  * \brief Fonction qui affiche les cases.
  *
  * \param la matrice qui reprÃ©sente la grille.
  */
 
-void  verif_matrice(int matr[N][N] ){/*verification du contenu de la matrice */
+void  verif_matrice(t_couleurs matr[N][N] ){/*verification du contenu de la matrice */
 
 int i,j;
 
@@ -60,13 +61,13 @@ int i,j;
 }
 /*********************************************************************************************/
 /**
- * \fn changerEtat(int matr[N][N], int x, int y)
+ * \fn changerEtat(t_couleurs matr[N][N], int x, int y)
  * \brief Fonction qui permet de changer l'etat de la case .
  *
  * \param la matrice ui represente la grille.
  */
 
-int changerEtat(int matr[N][N], int x, int y){/*changer l'etat de la case  de blanche representÃ© par un '0' Ã  noire representÃ© par un '1' et de noire Ã  blanche ou croix reprÃ©sentÃ© par un '2' */
+int changerEtat(t_couleurs matr[N][N], int x, int y){/*changer l'etat de la case  de blanche representÃ© par un '0' Ã  noire representÃ© par un '1' et de noire Ã  blanche ou croix reprÃ©sentÃ© par un '2' */
 
 
 	if(matr[x][y]==0)
@@ -80,7 +81,7 @@ int changerEtat(int matr[N][N], int x, int y){/*changer l'etat de la case  de bl
 		
 }
 
-int saisir_coord(int matr[N][N], int niveau){
+int saisir_coord(t_couleurs matr[N][N], int niveau){
 	int i = 0, j =0,  taille = 0;
 	
 	
@@ -145,40 +146,41 @@ return b;
 
 /*********************************************************************************************/
 /**
-* \fn verifier_Case_Noire_Ligne( int matr[N][N], int ligne, int valeur)
+* \fn verifier_Case_Noire_Ligne( t_couleurs matr[N][N], int ligne, int valeur)
  * \brief Fonction qui verifie que les cases noire correspondent au nombre horisentals de la matrice periphÃ©rique .
  *
  * \param la matrice qui represente la grille , les lignes de la grille, les valeurs de la matrice periphÃ©rique.
  */
 
-_Bool verifier_Case_Noire_Ligne( int matr[N][N], int ligne, int valeur){/*verifier si les cases noire correspondent au nombres horizontals*/
+_Bool verifier_Case_Noire_Ligne( t_couleurs matr[N][N], int ligne, int valeur){/*verifier si les cases noire correspondent au nombres horizontals*/
 
-int i,j=0; /* compteur*/
-_Bool comp=false,find=false; /*find veut dire  trouver une case noire/ comp veut dire trouver toute les cases*/
-int c=0; /*compteur qui correspond au nombre de case a trouvé*/
+int i,j=0; 
+_Bool comp=false,find=false;   ///find : trouver une case noire/ comp : trouver toute les cases
+int c=0;    //compteur qui correspond au nombre de case a trouvé
 
-	while(j<N-1 && comp==false)  /* parcourir toute la ligne et on a pas encore trouvé toute les cases*/
+	while(j<N-1 && comp==false)       // parcourir toute la ligne et on a pas encore trouvé toute les cases
 	{
-		if(matr[ligne][j]==1)  /* si on a trouvé la premiére case noire*/
+		if(matr[ligne][j]==1)          // si on a trouvé la premiére case noire
 		{
-			i=j+1;   /*on verifi la deuxiéme case*/
-			find=true;  /*on a trouvé la premiére case*/
-			c=valeur-1;  /*parcourir les cases restantes*/
-			if(c==0){ /* si il est demandé de trouver qu'une seule valeur*/
+			i=j+1;                     //on verifi la deuxiéme case
+			find=true;                //on a trouvé la premiére case
+			c=valeur-1;              //parcourir les cases restantes
+			if(c==0){               // si il est demandé de trouver qu'une seule valeur
 				comp=true;
 				}
 			else
 			{
-				while(i<i+c && i<N-1 && find==true) /*trois condition : 1ere parcourir le reste des cases a verifier/2eme on verifie q'on a pas atteint la fin de la ligne/3eme on s'arrete quand on trouve une case noire*/ 
+				while(i<i+c && i<N-1 && find==true)     	/*trois condition : 1ere parcourir le reste des cases a verifier/2eme
+															on verifie qu'on a pas atteint la fin de la ligne/3eme on s'arrete quand on trouve une case noiree*/ 
 				{
-					if(matr[ligne][i]==1){/*on a trouvé la deuxieme case noire*/
-						i++;}  /*on passe a la case à coté*/
+					if(matr[ligne][i]==1){                //on a trouvé la deuxieme case noire
+						i++;}                             //on passe a la case à coté
 					else{
-						find=false;}/* si la deuxiéme n'est pas noire on sort de la boucle*/
+						find=false;}                    // si la deuxiéme n'est pas noire on sort de la boucle
 				}
 					if(find==true){
 						comp=true;}
-					else{ /* remetre le compteur à 0 pour la prochaine recherche*/
+					else{                     // remetre le compteur à 0 pour la prochaine recherche
 						c=0;}
 			 }
 		}
@@ -189,12 +191,12 @@ return comp;
 }
 /*********************************************************************************************/
 /**
-* \fn verifier_Case_Noire_Col( int matr[N][N], int col, int valeur)
+* \fn verifier_Case_Noire_Col( t_couleurs matr[N][N], int col, int valeur)
  * \brief Fonction qui verifie que les cases noire correspondent au nombre verticals de la matrice periphÃ©rique .
  *
  * \param la matrice qui represente la grille , les colonnes de la grille, les valeurs de la matrice periphÃ©rique.
  */
-_Bool verifier_Case_Noire_Col( int matr[N][N], int col, int valeur){/*verifier si les cases noire correspondent au nombres verticals*/
+_Bool verifier_Case_Noire_Col( t_couleurs matr[N][N], int col, int valeur){/*verifier si les cases noire correspondent au nombres verticals*/
 
 int i,j=0,c=0;
 _Bool comp=false,find= false;
@@ -265,7 +267,7 @@ int comp = 0;
  * \brief EntrÃ©e du programme.
  *
  */
-int main()
+/*int main()
 
 {
 
@@ -288,7 +290,7 @@ printf("\n c = %i\n\n",c);
     int V= max_v_Case(5);
    	 printf("%d\n",V);
 
-/*verification d'une ligne*/
+//verification d'une ligne
 
 b=verifier_Case_Noire_Ligne(U,2,1);
 	if(b==true){
@@ -297,4 +299,4 @@ b=verifier_Case_Noire_Ligne(U,2,1);
 		printf("Reessayer");}
 
  return 0;
-}
+}*/
