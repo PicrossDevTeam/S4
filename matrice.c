@@ -1,45 +1,43 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include <stdbool.h>
-#include <math.h>
 
 typedef enum couleurs {Blanche, Noire, Croix} t_couleurs;
-typedef enum difficulte {facile, normal, difficile, expert} t_difficulte;
+typedef enum difficulte {facile=3, normal=5, difficile=7, expert=10} t_difficulte;
 
-t_couleurs * init_matrice(int dim_mat, _Bool entier){
-	int i, j;
-	
-	if(entier == false) {
-		t_couleurs * mat = malloc(dim_mat*dim_mat*sizeof(t_couleurs));
+t_couleurs * init_matrice_prin(t_difficulte dim_mat){
+	t_couleurs * mat = malloc(dim_mat*dim_mat*sizeof(t_couleurs));
+	int i,j;
 
-		for(i=0 ; i < dim_mat ; i++) {
-			for(j=0 ; j < dim_mat ; j++) {
-				mat[dim_mat*i+j] = Blanche;
-			}
-		}
-	}
-	else {
-		int * mat = malloc(dim_mat*dim_mat*sizeof(int));
-
-		for(i=0 ; i < dim_mat ; i++) {
-			for(j=0 ; j < dim_mat ; j++) {
-				mat[dim_mat*i+j] = 0;
-			}
+	for(i=0 ; i < dim_mat ; i++) {
+		for(j=0 ; j < dim_mat ; j++) {
+			mat[dim_mat*i+j] = Blanche;
 		}
 	}
 	return mat;
 }
 
-void detruire_matrice_peri(int *mat) {
+int * init_matrice_peri(t_difficulte dim_mat){
+	int * mat = malloc(dim_mat*dim_mat*sizeof(int));
+	int i,j;
+
+	for(i=0 ; i < dim_mat ; i++) {
+		for(j=0 ; j < dim_mat ; j++) {
+			mat[dim_mat*i+j] = 0;
+		}
+	}
+	return mat;
+}
+
+void detruire_matrice_peri(void * mat) {
 	free(mat);
 }
 
-void detruire_matrice_prin(t_couleurs *mat){
+void detruire_matrice_prin(void * mat){
 	free(mat);
 }
 
-void affichage_jeu(int *mat_hori, int *mat_verti, t_couleurs *mat_prin, int dim_mat){
-	int i, j;
+void afficher_haut(int *mat_hori, t_difficulte dim_mat){
+	int i,j;
 
 	for(i = 0; i < dim_mat; i++) {
 		for(j = 0; j < dim_mat; j++) {
@@ -52,7 +50,11 @@ void affichage_jeu(int *mat_hori, int *mat_verti, t_couleurs *mat_prin, int dim_
 		printf("\n");
 	}
 	printf("\n");
-	
+}
+
+void afficher_bas(int *mat_verti, t_couleurs *mat_prin, t_difficulte dim_mat){
+	int i,j;
+
 	for(i = 0; i < dim_mat; i++) {
 		for(j = 0; j < dim_mat; j++) {
 			printf("%i ", mat_verti[dim_mat*i+j]);
@@ -63,4 +65,9 @@ void affichage_jeu(int *mat_hori, int *mat_verti, t_couleurs *mat_prin, int dim_
 		}
 		printf("\n");
 	}
+}
+
+void affichage_jeu(int *mat_hori, int *mat_verti, t_couleurs *mat_prin, t_difficulte dim_mat){
+	afficher_haut(mat_verti, dim_mat);
+	afficher_bas(mat_verti, mat_prin, dim_mat);
 }
