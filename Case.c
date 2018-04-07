@@ -145,19 +145,12 @@ int verifierGrille(t_couleurs *matd, t_couleurs *matf, int taille) {
 	t_couleurs *U = NULL;
 	t_difficulte niveau = facile;
 	
-	int taille = renvoyerTailleMax(niveau);
-	
-	if(taille == 0) {
-		printf("\n\nTaille nulle ! Êtes-vous certain d'avoir renseigné un niveau existant ?\n\n");
-		exit(0);
-	}
-	
-	U = init_case(taille);
-	verif_matrice(U,taille);
+	U = init_case(niveau);
+	verif_matrice(U,niveau);
 	printf("---------------\n");
 
-	int etat_saisie = saisir_coord(U,taille);
-	verif_matrice(U,taille);
+	int etat_saisie = saisir_coord(U,niveau);
+	verif_matrice(U,niveau);
 	printf("---------------\n");
 	
 	if(etat_saisie == 0) printf("Pas de vérification entre les matrices jeu et solution.\n\n");

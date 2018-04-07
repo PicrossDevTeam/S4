@@ -1,5 +1,6 @@
-PROG = terminal
+PROG = demo_terminal
 CC = gcc
+FLAGS = -g -Wall
 GEN = generation
 TERM = terminal
 

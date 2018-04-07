@@ -8,36 +8,34 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include <stdbool.h>
-#include "Case.h"
 #include "generation.h"
 
 /**
-* \fn init_matrice(int mat[N][N])
+* \fn init_matrice_periph(int taille_max)
 * \brief Initialise une matrice avec des 0.
 * \param taille_max La taille maximum de la matrice à initialiser
 * \return Une matrice de type int allouée dynamiquement
 */
-int* init_matrice(int taille_max) {
-	int i, j, *mat = malloc(sizeof(int));
+int* init_matrice_periph(t_difficulte taille_max) {
+	int i, j, *mat = malloc(taille_max * taille_max * sizeof(int));
 	
 	for(i = 0; i < taille_max; i++) {
 		for(j = 0; j < taille_max; j++) {
 			mat[taille_max*i+j] = 0;
 		}
 	}
+	return mat;
 }
 
 /**
-* \fn afficher_matrice(int *mat, int niveau, int taille, char cle)
+* \fn afficher_matrice(int *mat, t_difficulte taille, char cle)
 * \brief Affiche une matrice reçue en paramètre selon un modèle prédéfini.
 * \param mat Une matrice de taille fixe
-* \param niveau Un chiffre indiquant la taille de la longueur des matrices
-* \param taille La taille maximum relevée pour les matrices périphériques
+* \param taille La taille de la matrice indiquée par le niveau de difficulté
 * \param cle Un caractère qui définit le mode d'affichage : "C" pour afficher horizontalement les nombres de la matrice périphérique des colonnes, "L" pour afficher verticalement les nombres de la matrice périphérique des lignes et "S" pour afficher une grille complète
 * \return Ne retourne aucun résultat
 */
-void afficher_matrice(int *mat, int niveau, int taille, char cle) {
+void afficher_matrice(int *mat, t_difficulte taille, char cle) {
 	int i, j, k = 0, *mat_inversee = malloc(taille * taille * sizeof(int));
 	
 	printf("\n");
@@ -53,10 +51,9 @@ void afficher_matrice(int *mat, int niveau, int taille, char cle) {
 			}
 			printf("\n");
 		}
-		
 	}
 	else if(cle == 'L') {
-		mat_inversee = init_matrice(taille);
+		mat_inversee = init_matrice_periph(taille);
 		
 		// On attribue les nombres dans une seconde matrice pour éviter une lecture erronée à l'affichage (nombres inversés)
 		for(i = 0; i < taille; i++) {
@@ -88,35 +85,36 @@ void afficher_matrice(int *mat, int niveau, int taille, char cle) {
 			printf("\n");
 		}
 	}
+	free(mat_inversee);
 }
 
 /**
 * \fn lecture_fic_v1(char *nom, int puzzle, t_couleurs *soluce, int taille)
-* \brief Lit un fichier avec un format spécifique et remplit une matrice solution.
+* \brief Lit un fichier avec un format spécifique et remplit une matrice solution (première version du jeu).
 * \param nom_fic Nom du fichier texte à analyser
 * \param puzzle Numéro du puzzle à trouver dans le fichier
-* \param soluce La matrice solution de type_enum (version 1 du jeu)
+* \param soluce La matrice solution de type_enum
 * \param taille La taille des matrices
-* \return Retourne la largeur maximum d'une matrice
+* \return  Ne retourne aucune valeur
 */
-int lecture_fic_v1(char *nom_fic, int puzzle, t_couleurs *soluce, int taille) {
+void lecture_fic_v1(char *nom_fic, int puzzle, int taille) {
 	FILE * fic_gen;
 	char *cle = "PDF", carac;
-	int rangee, curseur, largeur_max, num_puz, nb_case;
+	int rangee = 0, curseur = 0, num_puz, nb_case;
 	
 	fic_gen = fopen(nom_fic,"r");
 	fscanf(fic_gen,"%c %i",&carac,&num_puz);
 	
 	while(!feof(fic_gen)) { // Tant que la fin du fichier n'a pas été atteinte
 		if(carac == cle[0] && num_puz == puzzle) { // Si on trouve le bon niveau de puzzle
+			printf("\nTrouvé !");
 			while(carac != cle[1]) fscanf(fic_gen,"%c",&carac); // Tant que l'on n'a pas trouvé la clé de départ (ici, "D")
 				
 			while(carac != cle[2]) { // Tant que l'on n'a pas trouvé la clé de fin
 				if(carac == ' ' || carac == '\n') {
 					fscanf(fic_gen,"%i",&nb_case);
-					if(nb_case == 1) soluce[taille*curseur+rangee] = Noire;
+					//if(nb_case == 1) soluce[taille*curseur+rangee] = Noire;
 					rangee++;
-					if(rangee > largeur_max) largeur_max = rangee;
 				}
 				else if(carac == '+') {
 					curseur++;
@@ -124,26 +122,26 @@ int lecture_fic_v1(char *nom_fic, int puzzle, t_couleurs *soluce, int taille) {
 				}
 				fscanf(fic_gen,"%c",&carac);
 			}
-		fscanf(fic_gen,"%c %i",&carac,&num_puz);
+			fscanf(fic_gen,"%c %i",&carac,&num_puz);
+		}
 	}
 	fclose(fic_gen);
-	return largeur_max;
 }
 
 /**
 * \fn lecture_fic_v2(char *nom, int puzzle, int *colonnes, int *lignes, int taille)
-* \brief Lit un fichier avec un format spécifique et renseigne les nombres contenus dans les matrices périphériques. Elle renvoie la largeur maximum d'une rangée pour améliorer les affichages et les traitements des matrices.
+* \brief Lit un fichier avec un format spécifique et renseigne les nombres contenus dans les matrices périphériques (seconde version du jeu). Elle renvoie la largeur maximum d'une rangée pour améliorer les affichages et les traitements des matrices.
 * \param nom Nom du fichier texte à analyser
 * \param puzzle Numéro du puzzle à trouver dans le fichier
 * \param colonnes La matrice périphérique des colonnes ou la matrice solution (version 1 du jeu)
 * \param lignes La matrice périphérique des lignes
 * \param taille La taille des matrices
-* \return Retourne la largeur maximum d'une matrice
+* \return Ne retourne aucune valeur
 */
-int lecture_fic_v2(char *nom_fic, int puzzle, int *colonnes, int *lignes, int taille) {
+/*void lecture_fic_v2(char *nom_fic, int puzzle, int *colonnes, int *lignes, int taille) {
 	FILE * fic_gen;
 	char *cle = "PCLF", carac;
-	int rangee, curseur, largeur_max = 0, num_puz, nb_case, i;
+	int rangee, curseur, num_puz, nb_case, i;
 
 	fic_gen = fopen(nom_fic,"r");
 	fscanf(fic_gen,"%c %i",&carac,&num_puz);
@@ -162,7 +160,6 @@ int lecture_fic_v2(char *nom_fic, int puzzle, int *colonnes, int *lignes, int ta
 						if(cle[i] == 'C') colonnes[taille*rangee+curseur] = nb_case;
 						else if(cle[i] == 'L') lignes[taille*curseur+rangee] = nb_case;
 						rangee++;
-						if(rangee > largeur_max) largeur_max = rangee;
 					}
 					else if(carac == '+') {
 						curseur++;
@@ -175,8 +172,7 @@ int lecture_fic_v2(char *nom_fic, int puzzle, int *colonnes, int *lignes, int ta
 		fscanf(fic_gen,"%c %i",&carac,&num_puz);
 	}
 	fclose(fic_gen);
-	return largeur_max;
-}
+} //*/
 
 /**
 * \fn gen_peripheriques(int *soluce, int *colonnes, int *lignes, int taille)
@@ -189,7 +185,6 @@ int lecture_fic_v2(char *nom_fic, int puzzle, int *colonnes, int *lignes, int ta
 */
 void gen_peripheriques(t_couleurs *soluce, int *colonnes, int *lignes, int taille) {
 	int i, j, nb_groupes_colonne, nb_groupes_ligne, taille_groupe_colonne, taille_groupe_ligne;
-	
 	
 	for(i = 0; i < taille; i++) {
 		nb_groupes_colonne = 0;
@@ -233,7 +228,7 @@ void gen_peripheriques(t_couleurs *soluce, int *colonnes, int *lignes, int taill
 * \param type_rangee La nature de la rangée (ligne ou colonne)
 * \return La taille finale de la liste d'entiers.
 */
-int* init_compteur_groupes(t_couleurs *soluce, int taille_mat, int rangee, char type_rangee) {
+/*int* init_compteur_groupes(t_couleurs *soluce, int taille_mat, int rangee, char type_rangee) {
 	int i, j, groupe = 0, *nombres = malloc(taille_mat * sizeof(int));
 	
 	// Avant toute opération, on initialise la liste de vérification des nombres
@@ -261,7 +256,7 @@ int* init_compteur_groupes(t_couleurs *soluce, int taille_mat, int rangee, char 
 		}
 	}
 	return nombres;
-}
+} //*/
 
 /**
 * \fn verif_adequation_globale(t_couleurs *soluce, int *colonnes, int *lignes, int *respect_colonnes, int *respect_lignes, int taille)
@@ -274,7 +269,7 @@ int* init_compteur_groupes(t_couleurs *soluce, int taille_mat, int rangee, char 
 * \param taille La taille des matrices renseignées
 * \return Ne retourne aucune variable
 */
-void verif_adequation_globale(t_couleurs *soluce, int *colonnes, int *lignes, int *respect_colonnes, int *respect_lignes, int taille) {
+/*void verif_adequation_globale(t_couleurs *soluce, int *colonnes, int *lignes, int *respect_colonnes, int *respect_lignes, int taille) {
 	int i, j;
 	
 	// On commence par vérifier l'état des lignes
@@ -289,7 +284,7 @@ void verif_adequation_globale(t_couleurs *soluce, int *colonnes, int *lignes, in
 		
 		}
 	}
-}
+} //*/
 
 /**
 * \fn adequation_rangee_et_nombres(t_couleurs *soluce, int *periph, int taille, int nb_groupes_defaut, int rangee, char type_rangee)
@@ -302,14 +297,14 @@ void verif_adequation_globale(t_couleurs *soluce, int *colonnes, int *lignes, in
 * \param type_rangee La nature de la rangée (ligne ou colonne)
 * \return Cinq valeurs possibles : 2 si un groupe possède plus de cases que prévu, 1 si des groupes supplémentaires sont détectés, 0 si les données correspondent, -1 s'il reste des groupes à créer, -2 s'il reste des cases à compléter
 */
-int adequation_rangee_et_nombres(t_couleurs *soluce, int *periph, int taille, int nb_groupes_defaut, int rangee, char type_rangee) {
+/*int adequation_rangee_et_nombres(t_couleurs *soluce, int *periph, int taille, int nb_groupes_defaut, int rangee, char type_rangee) {
 	int i, j, k, taille_groupe[nb_groupes_defaut], *nb_groupes = NULL;
 	
 	nb_groupes = init_compteur_groupes(soluce,taille_groupe,rangee,type_rangee);
 	
-	/*printf("\nNombre de groupes par défaut : %i, rangée %c vérifiée : %i",nb_groupes_defaut,type_rangee,rangee);
+	printf("\nNombre de groupes par défaut : %i, rangée %c vérifiée : %i",nb_groupes_defaut,type_rangee,rangee);
 	printf("\nNombre de groupes identifiés dans la rangée : %i",nb_groupes);
-	for(k = 0; k < nb_groupes; k++) printf("\nNombre de cases pour le groupe n°%i : %i",k+1,taille_groupe[k]); //*/
+	for(k = 0; k < nb_groupes; k++) printf("\nNombre de cases pour le groupe n°%i : %i",k+1,taille_groupe[k]);
 	k = 0;
 	
 	while(k < nb_groupes_defaut) {
@@ -328,7 +323,7 @@ int adequation_rangee_et_nombres(t_couleurs *soluce, int *periph, int taille, in
 		k++;
 	}
 	return 0; // La rangée analysée correspond aux attentes de la rangée de la matrice périphérique
-}
+} //*/
 
 /**
 * \fn init_compteurs_periph(int *periph, int *cpt, int taille)
@@ -338,7 +333,7 @@ int adequation_rangee_et_nombres(t_couleurs *soluce, int *periph, int taille, in
 * \param taille La taille de la matrice périphérique renseignée
 * \return Retourne une liste d'entiers allouée dynamiquement
 */
-int* init_compteurs_periph(int *periph, int taille) {
+/*int* init_compteurs_periph(int *periph, int taille) {
 	int i, j, *liste_cpt = malloc(taille * sizeof(int));
 	
 	// Initialisation de la liste
@@ -349,7 +344,7 @@ int* init_compteurs_periph(int *periph, int taille) {
 		for(j = 0; j < taille; j++) if(periph[taille*j+i] > 0) liste_cpt[taille*i] = liste_cpt[taille*i] + 1;
 	}
 	return liste_cpt;
-}
+} //*/
 
 /**
 * \fn gen_solution(t_couleurs *soluce, int *colonnes, int *lignes, int taille)
@@ -360,7 +355,7 @@ int* init_compteurs_periph(int *periph, int taille) {
 * \param taille La taille maximum des rangées pour les matrices périphériques
 * \return Ne retourne aucun résultat
 */
-void gen_solution(t_couleurs *soluce, int *colonnes, int *lignes, int taille) {
+/*void gen_solution(t_couleurs *soluce, int *colonnes, int *lignes, int taille) {
 	int *nombres_colonnes = NULL, *nombres_lignes = NULL, *completion_colonnes = NULL, *completion_lignes = NULL; // Listes
 	int i, j, k, l, decalage, verif, lecture_grille = 0, respect_regles = 0, tour_ligne = 1;
 	
@@ -402,7 +397,7 @@ void gen_solution(t_couleurs *soluce, int *colonnes, int *lignes, int taille) {
 			
 			if(lecture_grille == 0) {
 				if(lignes[taille*i+i] > 0 && lignes[taille*i+i] < taille) {
-					verif = adequation_rangee_et_nombres(soluce,colonnes,nombres_colonnes[taille*i],j,'C');
+					verif = adequation_rangee_et_nombres(soluce,colonnes,taille,nombres_colonnes[taille*i],j,'C');
 					printf("\nVérification : %i ",verif);
 			
 					if(verif == 0) { // Si la complétion correspond aux rangées lues
@@ -445,7 +440,7 @@ void gen_solution(t_couleurs *soluce, int *colonnes, int *lignes, int taille) {
 			else for(l = 0; l < taille; l++) soluce[taille*i+l] = 2;
 			
 			if(lignes[taille*j+j] > 0 && lignes[taille*j+j] < taille) {
-				verif = adequation_rangee_et_nombres(soluce,lignes,nombres_lignes[taille*j],i,'L');
+				verif = adequation_rangee_et_nombres(soluce,lignes,taille,nombres_lignes[taille*j],i,'L');
 				printf("\nVérification : %i ",verif);
 			
 				if(verif == 0) { // Si la complétion correspond aux rangées lues
@@ -468,33 +463,38 @@ void gen_solution(t_couleurs *soluce, int *colonnes, int *lignes, int taille) {
 		}
 		if(lecture_grille == 1) respect_regles = 1;
 	}
-}
+} //*/
 
-// Main test pour ce fichier
-/*
-* Cas n°1 : Succès avec une seule itération de gen_solution
-* Cas n°2 : Succès avec une seule itération de gen_solution - À tester avec deux itérations (seconde étape de la génération)
-* Cas n°3 : Échec - Erreur de segmentation avec une seule itération de gen_solution
-* Cas n°4 : Échec avec une seule itération de gen_solution
-* Cas n°5 : Testé rapidement - aucune analyse effectuée entre la génération et le résultat attendu (échec certain avec une seule itération)
+
+/* Test des puzzles de "nombres_puzzle.txt" avec les fonctions du solveur
+* Puzzle n°1 : Succès avec une seule itération de gen_solution
+* Puzzle n°2 : Succès avec une seule itération de gen_solution - À tester avec deux itérations (seconde étape de la génération)
+* Puzzle n°3 : Échec - Erreur de segmentation avec une seule itération de gen_solution
+* Puzzle n°4 : Échec avec une seule itération de gen_solution
+* Puzzle n°5 : Testé rapidement - aucune analyse effectuée entre la génération et le résultat attendu (échec certain avec une seule itération)
 */
 int main() {
-	char *saisie = "nombres_puzzle.txt";
-	int *matColonnes, *matLignes;
-	t_couleurs *soluce;
+	char *saisie = "puzzle_binaires.txt";
+	//int *matColonnes = NULL, *matLignes = NULL;
+	t_couleurs *soluce = NULL;
 	t_difficulte niveau = facile;
 	
 	printf("Niveau : %i\n",niveau);
+	soluce = init_case(niveau);
+	//matColonnes = init_matrice_periph(niveau);
 	
-	//init_case(soluce);
-	//matColonnes = init_matrice(niveau);
+	verif_matrice(soluce,niveau);
+	//afficher_matrice(matColonnes,niveau,'C');
 	
-	//taille = lecture_fic(saisie,4,matC,matL,1);
+	lecture_fic_v1(saisie,2,niveau);
 	
-	//afficher_matrice(matC,1,taille,'C');
-	//afficher_matrice(matL,1,taille,'L');
+	free(soluce);
+	soluce = NULL;
 	
-	//gen_solution(soluce,matC,matL,taille);
-	//afficher_matrice_claire(soluce);
+	/*free(matColonnes);
+	matColonnes = NULL;
+	free(matLignes);
+	matLignes = NULL; //*/
+	
 	printf("\n");
 } //*/
