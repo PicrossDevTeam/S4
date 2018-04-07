@@ -7,9 +7,7 @@ TERM = terminal
 
 ${PROG}: ${CASE}.o ${GEN}.o
 	${CC} $^ -o $@
-${CASE}: ${CASE}.c ${CASE}.h
-	${CC} -c ${FLAGS} $^
-${GEN}.o: ${GEN}.c ${GEN}.h
+${GEN}.o: ${GEN}.c ${GEN}.h ${CASE}.c ${CASE}.h
 	${CC} -c ${FLAGS} $^
 clean:
 	rm *.o

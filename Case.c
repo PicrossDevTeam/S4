@@ -141,7 +141,7 @@ int verifierGrille(t_couleurs *matd, t_couleurs *matf, int taille) {
  * \brief Entrée du programme.
  *
  */
-int main() {
+/*int main() {
 	t_couleurs *U = NULL;
 	t_difficulte niveau = facile;
 	
@@ -161,9 +161,9 @@ int main() {
 	printf("---------------\n");
 	
 	if(etat_saisie == 0) printf("Pas de vérification entre les matrices jeu et solution.\n\n");
-	else printf("Vérification enclenchée !\n\n"); //*/
+	else printf("Vérification enclenchée !\n\n");
 
 	free(U);
 	U = NULL;
 	return 0;
-}
+} //*/
