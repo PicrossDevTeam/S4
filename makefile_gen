@@ -1,0 +1,16 @@
+PROG = demo_generation
+CC = gcc
+FLAGS = -g -Wall
+CASE = Case
+GEN = generation
+TERM = terminal
+
+${PROG}: ${CASE}.o ${GEN}.o
+	${CC} $^ -o $@
+${CASE}: ${CASE}.c ${CASE}.h
+	${CC} -c ${FLAGS} $^
+${GEN}.o: ${GEN}.c ${GEN}.h
+	${CC} -c ${FLAGS} $^
+clean:
+	rm *.o
+	rm *.*~

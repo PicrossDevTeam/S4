@@ -111,7 +111,7 @@ int saisir_coord(t_couleurs *mat, int taille) {
 
 /*********************************************************************************************/
 /**
-* \fn verifierGrille(int matd[N][N], int matf[N][N])
+* \fn verifierGrille(t_couleurs *matd, t_couleurs *matf, int taille)
  * \brief Fonction qui vérifie si les cases la grille du joueur est correcte.
  *
  * \param matd La matrice de type enum qui représente la grille qu'il faut avoir
@@ -133,28 +133,6 @@ int verifierGrille(t_couleurs *matd, t_couleurs *matf, int taille) {
  	return erreurs;
 }
 
-/*********************************************************************************************/
-/**
-* \fn renvoyerTailleMax(int niveau)
- * \brief Fonction qui retourne la taille maximum des matrices à générer
- *
- * \param niveau Le niveau de difficulté
- *
- * \return La taille correspondant au niveau de difficulté
- */
-int renvoyerTailleMax(t_difficulte niveau) {
-	if(niveau == facile)
-		return 3;
-	else if(niveau == normal)
-		return 4;
-	else if(niveau == difficile)
-		return 5;
-	else if(niveau == expert)
-		return 10;
-	return 0;
-}
-
-
 
 /*********************************************************************************************/
  
@@ -164,7 +142,7 @@ int renvoyerTailleMax(t_difficulte niveau) {
  *
  */
 int main() {
-	t_couleurs *U;
+	t_couleurs *U = NULL;
 	t_difficulte niveau = facile;
 	
 	int taille = renvoyerTailleMax(niveau);

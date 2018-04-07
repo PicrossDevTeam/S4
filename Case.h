@@ -10,7 +10,7 @@ typedef enum couleurs {Blanche, Noire, Croix} t_couleurs;
  * \brief la couleur des cases.
  *
  */
-typedef enum difficulte {facile, normal, difficile, expert} t_difficulte;
+typedef enum difficulte {facile = 3, normal, difficile, expert = 10} t_difficulte;
 
 t_couleurs* init_case(int taille_max);
 void verif_matrice(t_couleurs *mat, int taille_max);
