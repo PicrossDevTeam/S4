@@ -8,9 +8,9 @@ TERM = terminal
 ${PROG}: ${CASE}.o ${GEN}.o
 	${CC} $^ -o $@
 ${CASE}.o: ${CASE}.c ${CASE}.h
-	${CC} -c ${FLAGS} $^
+	${CC} -c $^ ${FLAGS}
 ${GEN}.o: ${GEN}.c ${GEN}.h
-	${CC} -c ${FLAGS} $^
+	${CC} -c $^ ${FLAGS}
 clean:
 	rm *.o
 	rm *.*~

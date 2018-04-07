@@ -2,10 +2,9 @@
 
 // Fonctions basiques
 int* init_matrice_periph(t_difficulte taille_max);
-void lecture_fic_v1(char *nom_fic, int puzzle, int taille);
-//void lecture_fic_v1(char *nom_fic, int puzzle, t_couleurs **soluce, int taille);
 void afficher_matrice(int *mat, t_difficulte taille, char cle);
-void gen_peripheriques(t_couleurs *soluce, int *colonnes, int *lignes, int taille);
+void lecture_fic_v1(char *nom_fic, int puzzle, t_couleurs *soluce, t_difficulte taille);
+void gen_peripheriques(t_couleurs *soluce, int *colonnes, int *lignes, t_difficulte taille);
 
 // Sous-fonctions du solveur
 void lecture_fic_v2(char *nom_fic, int puzzle, int *colonnes, int *lignes, int taille);

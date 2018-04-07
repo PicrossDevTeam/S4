@@ -32,15 +32,15 @@ int* init_matrice_periph(t_difficulte taille_max) {
 * \brief Affiche une matrice reçue en paramètre selon un modèle prédéfini.
 * \param mat Une matrice de taille fixe
 * \param taille La taille de la matrice indiquée par le niveau de difficulté
-* \param cle Un caractère qui définit le mode d'affichage : "C" pour afficher horizontalement les nombres de la matrice périphérique des colonnes, "L" pour afficher verticalement les nombres de la matrice périphérique des lignes et "S" pour afficher une grille complète
+* \param cle Un caractère qui définit le mode d'affichage : "C" pour afficher horizontalement les nombres de la matrice périphérique des colonnes et "L" pour afficher verticalement les nombres de la matrice périphérique des lignes
 * \return Ne retourne aucun résultat
 */
 void afficher_matrice(int *mat, t_difficulte taille, char cle) {
-	int i, j, k = 0, *mat_inversee = malloc(taille * taille * sizeof(int));
+	int i, j, k = 0, *mat_inversee = NULL;
 	
 	printf("\n");
 	if(cle == 'C') {
-		printf("Matrice périphérique des colonnes :\n\n");
+		printf("Matrice périphérique des colonnes :\n");
 		for(i = taille-1; i >= 0; i--) {
 			for(j = 0; j < taille; j++) {
 				if(i == 0) printf("%i ",mat[taille*i+j]);
@@ -65,7 +65,7 @@ void afficher_matrice(int *mat, t_difficulte taille, char cle) {
 			}
 			k = 0;
 		}
-		printf("Matrice périphérique des lignes :\n\n");
+		printf("Matrice périphérique des lignes :\n");
 		
 		for(i = 0; i < taille; i++) {
 			for(j = taille-1; j >= 0; j--) {
@@ -77,28 +77,22 @@ void afficher_matrice(int *mat, t_difficulte taille, char cle) {
 			}
 			printf("\n");
 		}
+		free(mat_inversee);
 	}
-	else {
-		printf("Matrice solution :\n\n");
-		for(i = 0; i < taille; i++) {
-			for(j = 0; j < taille; j++) printf("%i ",mat[taille*i+j]);
-			printf("\n");
-		}
-	}
-	free(mat_inversee);
+	printf("\n");
 }
 
 /**
-* \fn lecture_fic_v1(char *nom, int puzzle, t_couleurs *soluce, int taille)
+* \fn lecture_fic_v1(char *nom, int puzzle, t_couleurs *soluce, t_difficulte taille)
 * \brief Lit un fichier avec un format spécifique et remplit une matrice solution (première version du jeu).
 * \param nom_fic Nom du fichier texte à analyser
 * \param puzzle Numéro du puzzle à trouver dans le fichier
 * \param soluce La matrice solution de type_enum
-* \param taille La taille des matrices
-* \return  Ne retourne aucune valeur
+* \param taille La taille de la matrice reinseignée
+* \return Ne retourne aucune valeur
 */
-void lecture_fic_v1(char *nom_fic, int puzzle, int taille) {
-	FILE * fic_gen;
+void lecture_fic_v1(char *nom_fic, int puzzle, t_couleurs *soluce, t_difficulte taille) {
+	FILE *fic_gen;
 	char *cle = "PDF", carac;
 	int rangee = 0, curseur = 0, num_puz, nb_case;
 	
@@ -107,13 +101,12 @@ void lecture_fic_v1(char *nom_fic, int puzzle, int taille) {
 	
 	while(!feof(fic_gen)) { // Tant que la fin du fichier n'a pas été atteinte
 		if(carac == cle[0] && num_puz == puzzle) { // Si on trouve le bon niveau de puzzle
-			printf("\nTrouvé !");
 			while(carac != cle[1]) fscanf(fic_gen,"%c",&carac); // Tant que l'on n'a pas trouvé la clé de départ (ici, "D")
 				
 			while(carac != cle[2]) { // Tant que l'on n'a pas trouvé la clé de fin
 				if(carac == ' ' || carac == '\n') {
 					fscanf(fic_gen,"%i",&nb_case);
-					//if(nb_case == 1) soluce[taille*curseur+rangee] = Noire;
+					if(nb_case == 1) soluce[taille*curseur+rangee] = Noire;
 					rangee++;
 				}
 				else if(carac == '+') {
@@ -122,10 +115,10 @@ void lecture_fic_v1(char *nom_fic, int puzzle, int taille) {
 				}
 				fscanf(fic_gen,"%c",&carac);
 			}
-			fscanf(fic_gen,"%c %i",&carac,&num_puz);
 		}
+		fscanf(fic_gen,"%c %i",&carac,&num_puz);
 	}
-	fclose(fic_gen);
+	fclose(fic_gen); 
 }
 
 /**
@@ -183,7 +176,7 @@ void lecture_fic_v1(char *nom_fic, int puzzle, int taille) {
 * \param taille La taille maximum de la largeur des matrices périphériques ; elle permet de limiter les traitements sur la matrice solution de taille N*N
 * \return Ne retourne aucune valeur
 */
-void gen_peripheriques(t_couleurs *soluce, int *colonnes, int *lignes, int taille) {
+void gen_peripheriques(t_couleurs *soluce, int *colonnes, int *lignes, t_difficulte taille) {
 	int i, j, nb_groupes_colonne, nb_groupes_ligne, taille_groupe_colonne, taille_groupe_ligne;
 	
 	for(i = 0; i < taille; i++) {
@@ -473,28 +466,31 @@ void gen_peripheriques(t_couleurs *soluce, int *colonnes, int *lignes, int taill
 * Puzzle n°4 : Échec avec une seule itération de gen_solution
 * Puzzle n°5 : Testé rapidement - aucune analyse effectuée entre la génération et le résultat attendu (échec certain avec une seule itération)
 */
-int main() {
-	char *saisie = "puzzle_binaires.txt";
-	//int *matColonnes = NULL, *matLignes = NULL;
+/*int main() {
+	char *saisie = "puzzles_binaires.txt";
+	int *matColonnes = NULL, *matLignes = NULL;
 	t_couleurs *soluce = NULL;
 	t_difficulte niveau = facile;
 	
-	printf("Niveau : %i\n",niveau);
 	soluce = init_case(niveau);
-	//matColonnes = init_matrice_periph(niveau);
+	matColonnes = init_matrice_periph(niveau);
+	matLignes = init_matrice_periph(niveau);
 	
+	lecture_fic_v1(saisie,2,soluce,niveau);
+	printf("\nMatrice solution :\n");
 	verif_matrice(soluce,niveau);
-	//afficher_matrice(matColonnes,niveau,'C');
 	
-	lecture_fic_v1(saisie,2,niveau);
+	gen_peripheriques(soluce,matColonnes,matLignes,niveau);
+	afficher_matrice(matColonnes,niveau,'C');
+	afficher_matrice(matLignes,niveau,'L');
 	
 	free(soluce);
 	soluce = NULL;
-	
-	/*free(matColonnes);
+	free(matColonnes);
 	matColonnes = NULL;
 	free(matLignes);
 	matLignes = NULL; //*/
 	
 	printf("\n");
+	return 0;
 } //*/
