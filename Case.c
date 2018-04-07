@@ -43,7 +43,6 @@ t_couleurs* init_case(int taille_max) {
  *
  * \return Ne retourne aucune valeur
  */
-
 void verif_matrice(t_couleurs *mat, int taille_max) {
 	int i,j;
 
@@ -62,19 +61,32 @@ void verif_matrice(t_couleurs *mat, int taille_max) {
  * \fn changerEtat(t_couleurs* mat, int x, int y)
  * \brief Fonction qui permet de changer l'état de la case.
  *
- * \param mat La matrice qui représente la grille.
+ * \param mat La matrice qui représente la grille
+ * \param taille La taille de la matrice renseignée
  * \param x Une coordonnée renseignant l'abscisse d'une matrice
  * \param y Une coordonnée renseignant l'ordonnée d'une matrice
+ *
+ * \return Ne retourne aucune valeur
  */
-void changerEtat(t_couleurs *mat, int taille_max, int x, int y) {
-	if(mat[taille_max*x+y] == Blanche)
-		mat[taille_max*x+y] = Noire;
-	else if(mat[taille_max*x+y] == Noire)
-		mat[taille_max*x+y] = Croix;
+void changerEtat(t_couleurs *mat, int taille, int x, int y) {
+	if(mat[taille*x+y] == Blanche)
+		mat[taille*x+y] = Noire;
+	else if(mat[taille*x+y] == Noire)
+		mat[taille*x+y] = Croix;
 	else
-		mat[taille_max*x+y] = Blanche;
+		mat[taille*x+y] = Blanche;
 }
 
+/*********************************************************************************************/
+/**
+ * \fn saisir_coord(t_couleurs *mat, int taille)
+ * \brief Fonction qui permet à l'utilisateur d'entrer des coordonnées
+ *
+ * \param mat La matrice qui représente la grille
+ * \param taille La taille de la matrice
+ *
+ * \return Retourne l'état de la sélection, si le joueur souhaite soumettre sa grille à la vérification ou pas
+ */
 int saisir_coord(t_couleurs *mat, int taille) {
 	int x = 0, y = 0;
 
@@ -106,7 +118,7 @@ int saisir_coord(t_couleurs *mat, int taille) {
  * \param matf La matrice de type enum qui représente la grille du joueur
  * \param taille La taille de la matrice
  *
- * \return Le nombre différences relevé
+ * \return Le nombre de différences relevé entre les deux matrices
  */
 int verifierGrille(t_couleurs *matd, t_couleurs *matf, int taille) {
 	int i, j, erreurs = 0;
