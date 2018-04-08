@@ -35,11 +35,11 @@ int * init_matrice_peri(t_difficulte dim_mat){
 	return mat;
 }
 
-void detruire_matrice_peri(void * mat) {
+void detruire_matrice_peri(int * mat) {
 	free(mat);
 }
 
-void detruire_matrice_prin(void * mat){
+void detruire_matrice_prin(t_couleurs * mat){
 	free(mat);
 }
 
@@ -52,7 +52,8 @@ void afficher_haut(int *mat_hori, t_difficulte dim_mat){
 		}
 		printf(" ");
 		for(j = 0; j < dim_mat; j++){
-			printf("%i ",mat_hori[dim_mat*i+j]);
+			if(mat_hori[dim_mat*i+j]!=0)
+				printf("%i ",mat_hori[dim_mat*i+j]);
 		}
 		printf("\n");
 	}
@@ -60,12 +61,23 @@ void afficher_haut(int *mat_hori, t_difficulte dim_mat){
 }
 
 void afficher_bas(int *mat_verti, t_couleurs *mat_prin, t_difficulte dim_mat){
-	int i,j;
+	int i,j,k;
+	int espace=dim_mat;
 
 	for(i = 0; i < dim_mat; i++) {
 		for(j = 0; j < dim_mat; j++) {
-			printf("%i ", mat_verti[dim_mat*i+j]);
+			if(mat_verti[dim_mat*i+j]!=0){
+				printf("%i ", mat_verti[dim_mat*i+j]);
+				espace--;
+			}
+			else
+				espace++;
 		}
+
+		for(k=0; k<espace; k++)
+			printf(" ");
+		espace=dim_mat;
+
 		printf(" ");
 		for(j = 0; j < dim_mat; j++){
 			printf("%i ", mat_prin[dim_mat*i+j]);
@@ -75,7 +87,7 @@ void afficher_bas(int *mat_verti, t_couleurs *mat_prin, t_difficulte dim_mat){
 }
 
 void affichage_jeu(int *mat_hori, int *mat_verti, t_couleurs *mat_prin, t_difficulte dim_mat){
-	afficher_haut(mat_verti, dim_mat);
+	afficher_haut(mat_hori, dim_mat);
 	afficher_bas(mat_verti, mat_prin, dim_mat);
 }
 
@@ -112,14 +124,86 @@ int saisir_coord(t_couleurs *mat_prin, t_difficulte dim_mat) {
 
 /* -------------------------------------- */
 
+void lecture_fic_v1(char *nom_fic, int puzzle, t_couleurs *soluce, t_difficulte taille) {
+	FILE *fic_gen;
+	char *cle = "PDF", carac;
+	int rangee = 0, curseur = 0, num_puz, nb_case;
+	
+	fic_gen = fopen(nom_fic,"r");
+	fscanf(fic_gen,"%c %i",&carac,&num_puz);
+	
+	while(!feof(fic_gen)) { // Tant que la fin du fichier n'a pas été atteinte
+		if(carac == cle[0] && num_puz == puzzle) { // Si on trouve le bon niveau de puzzle
+			while(carac != cle[1]) fscanf(fic_gen,"%c",&carac); // Tant que l'on n'a pas trouvé la clé de départ (ici, "D")
+				
+			while(carac != cle[2]) { // Tant que l'on n'a pas trouvé la clé de fin
+				if(carac == ' ' || carac == '\n') {
+					fscanf(fic_gen,"%i",&nb_case);
+					if(nb_case == 1) soluce[taille*curseur+rangee] = Noire;
+					rangee++;
+				}
+				else if(carac == '+') {
+					curseur++;
+					rangee = 0;
+				}
+				fscanf(fic_gen,"%c",&carac);
+			}
+		}
+		fscanf(fic_gen,"%c %i",&carac,&num_puz);
+	}
+	fclose(fic_gen); 
+}
+
+void gen_peripheriques(t_couleurs *soluce, int *colonnes, int *lignes, t_difficulte taille) {
+	int i, j, nb_groupes_colonne, nb_groupes_ligne, taille_groupe_colonne, taille_groupe_ligne;
+	
+	for(i = 0; i < taille; i++) {
+		nb_groupes_colonne = 0;
+		nb_groupes_ligne = 0;
+		taille_groupe_colonne = 0;
+		taille_groupe_ligne = 0;
+		
+		for(j = 0; j < taille; j++) {
+			// Remplissage de la matrice périphérique des colonnes
+			if(soluce[taille*j+i]%2 == 1) {
+				taille_groupe_colonne++;
+				
+				if(j == taille-1) colonnes[taille*nb_groupes_colonne+i] = taille_groupe_colonne;
+			}
+			else if(soluce[taille*j+i]%2 == 0 && soluce[taille*(j-1)+i]%2 == 1) {
+				colonnes[taille*nb_groupes_colonne+i] = taille_groupe_colonne;
+				taille_groupe_colonne = 0;
+				nb_groupes_colonne++;
+			}
+			// Remplissage de la matrice périphérique des lignes
+			if(soluce[taille*i+j]%2 == 1) {
+				taille_groupe_ligne++;
+				
+				if(j == taille-1) lignes[taille*i+nb_groupes_ligne] = taille_groupe_ligne;
+			}
+			else if(soluce[taille*i+j]%2 == 0 && soluce[taille*i+j-1]%2 == 1) {
+				lignes[taille*i+nb_groupes_ligne] = taille_groupe_ligne;
+				taille_groupe_ligne = 0;
+				nb_groupes_ligne++;
+			}
+		}
+	}
+}
+
+/* -------------------------------------- */
+
 int main(void){
-	t_difficulte dim_mat=difficile;
+	t_difficulte dim_mat=facile;
 	t_couleurs * mat_prin = init_matrice_prin(dim_mat);
+	t_couleurs * mat_soluce = init_matrice_prin(dim_mat);
 	int quit;
 
-	int * mat_verti =  init_matrice_peri(dim_mat);
-	int * mat_hori =  init_matrice_peri(dim_mat);
-	
+	int * mat_verti = init_matrice_peri(dim_mat);
+	int * mat_hori = init_matrice_peri(dim_mat);
+
+	lecture_fic_v1("puzzles_binaires.txt", 2, mat_soluce, dim_mat);
+	gen_peripheriques(mat_soluce, mat_hori, mat_verti, dim_mat);
+
 	do{
 		affichage_jeu(mat_hori, mat_verti, mat_prin, dim_mat);
 		quit=saisir_coord(mat_prin, dim_mat);
