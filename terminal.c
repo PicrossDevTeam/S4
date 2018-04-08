@@ -8,8 +8,10 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+/* matrice.c */
+
 typedef enum couleurs {Blanche, Noire, Croix} t_couleurs;
-typedef enum difficulte {facile=3, normal=5, difficile=7, expert=10} t_difficulte;
+typedef enum difficulte {facile=3, normal=4, difficile=5} t_difficulte;
 
 t_couleurs * init_matrice_prin(t_difficulte dim_mat){
 	t_couleurs * mat = malloc(dim_mat*dim_mat*sizeof(t_couleurs));
@@ -93,6 +95,8 @@ void affichage_jeu(int *mat_hori, int *mat_verti, t_couleurs *mat_prin, t_diffic
 
 /* -------------------------------------- */
 
+/* Case.c */
+
 void changerEtat(t_couleurs *mat_prin, t_difficulte dim_mat, int x, int y) {
 	if(mat_prin[dim_mat*x+y] == Blanche)
 		mat_prin[dim_mat*x+y] = Noire;
@@ -123,6 +127,8 @@ int saisir_coord(t_couleurs *mat_prin, t_difficulte dim_mat) {
 }
 
 /* -------------------------------------- */
+
+/* generation.c */
 
 void lecture_fic_v1(char *nom_fic, int puzzle, t_couleurs *soluce, t_difficulte taille) {
 	FILE *fic_gen;
@@ -170,10 +176,12 @@ void gen_peripheriques(t_couleurs *soluce, int *colonnes, int *lignes, t_difficu
 				
 				if(j == taille-1) colonnes[taille*nb_groupes_colonne+i] = taille_groupe_colonne;
 			}
-			else if(soluce[taille*j+i]%2 == 0 && soluce[taille*(j-1)+i]%2 == 1) {
-				colonnes[taille*nb_groupes_colonne+i] = taille_groupe_colonne;
-				taille_groupe_colonne = 0;
-				nb_groupes_colonne++;
+			else {
+				if(j > 0 && soluce[taille*(j-1)+i]%2 == 1) {
+					colonnes[taille*nb_groupes_colonne+i] = taille_groupe_colonne;
+					taille_groupe_colonne = 0;
+					nb_groupes_colonne++;
+				}
 			}
 			// Remplissage de la matrice périphérique des lignes
 			if(soluce[taille*i+j]%2 == 1) {
@@ -181,16 +189,29 @@ void gen_peripheriques(t_couleurs *soluce, int *colonnes, int *lignes, t_difficu
 				
 				if(j == taille-1) lignes[taille*i+nb_groupes_ligne] = taille_groupe_ligne;
 			}
-			else if(soluce[taille*i+j]%2 == 0 && soluce[taille*i+j-1]%2 == 1) {
-				lignes[taille*i+nb_groupes_ligne] = taille_groupe_ligne;
-				taille_groupe_ligne = 0;
-				nb_groupes_ligne++;
-			}
+			else {
+				if(j > 0 && soluce[taille*i+j-1]%2 == 1) {
+					lignes[taille*i+nb_groupes_ligne] = taille_groupe_ligne;
+					taille_groupe_ligne = 0;
+					nb_groupes_ligne++;
+				}
+			} //*/
 		}
 	}
 }
 
+t_difficulte dimension_matrice(int puzzle){
+	if(puzzle==1 || puzzle==2)
+		return facile;
+	else if(puzzle==3 || puzzle==4)
+		return normal;
+	else
+		return difficile;
+}
+
 /* -------------------------------------- */
+
+/* validation.c */
 
 int verif_soluce(t_couleurs *mat_prin, t_couleurs *mat_soluce, int dim_mat){
 	int i,j;
@@ -210,19 +231,26 @@ int verif_soluce(t_couleurs *mat_prin, t_couleurs *mat_soluce, int dim_mat){
 /* -------------------------------------- */
 
 int main(void){
-	t_difficulte dim_mat=facile;
-	t_couleurs * mat_prin = init_matrice_prin(dim_mat);
-	t_couleurs * mat_soluce = init_matrice_prin(dim_mat);
-	int num_puzzle=2;
-	int quit;
-	int mat_ok=1;
-	int choix=0;
-	int jeu_gagne=1;
+	t_difficulte dim_mat;
+	t_couleurs * mat_prin;
+	t_couleurs * mat_soluce;
+	int num_puzzle=4; /* puzzle de départ */
+	int valid; /* le joueur entre -1 */
+	int mat_ok=1; /* cas où le joueur n'a pas bon mais veut continuer */
+	int choix=0; /* continuer ou arrêter */
+	int jeu_gagne=1; /* Le joueur a gagné le jeu ou non */
 
-	int * mat_verti = init_matrice_peri(dim_mat);
-	int * mat_hori = init_matrice_peri(dim_mat);
+	int * mat_verti;
+	int * mat_hori;
 
 	while(num_puzzle<7 && choix==0){
+		dim_mat=dimension_matrice(num_puzzle);
+
+		mat_prin = init_matrice_prin(dim_mat);
+		mat_soluce = init_matrice_prin(dim_mat);
+		mat_verti = init_matrice_peri(dim_mat);
+		mat_hori = init_matrice_peri(dim_mat);
+
 		lecture_fic_v1("puzzles_binaires.txt", num_puzzle, mat_soluce, dim_mat);
 		gen_peripheriques(mat_soluce, mat_hori, mat_verti, dim_mat);
 
@@ -230,8 +258,8 @@ int main(void){
 			mat_ok=0;
 			do{
 				affichage_jeu(mat_hori, mat_verti, mat_prin, dim_mat);
-				quit=saisir_coord(mat_prin, dim_mat);
-			} while(quit!=1);
+				valid=saisir_coord(mat_prin, dim_mat);
+			} while(valid!=1);
 
 			do{
 				if(verif_soluce(mat_prin, mat_soluce, dim_mat)==1){
@@ -254,6 +282,7 @@ int main(void){
 		detruire_matrice_prin(mat_prin);
 		detruire_matrice_peri(mat_verti);
 		detruire_matrice_peri(mat_hori);
+		detruire_matrice_prin(mat_soluce);
 	}
 	if(jeu_gagne==0){
 		printf("Félicitation, vous avez réussi le jeu du Picross, à une prochaine fois !\n");
