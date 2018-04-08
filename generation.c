@@ -494,10 +494,10 @@ void gen_solution(t_couleurs *soluce, int *colonnes, int *lignes, t_difficulte t
 * Puzzle n°4 : Échec avec une seule itération de gen_solution
 * Puzzle n°5 : Testé rapidement - aucune analyse effectuée entre la génération et le résultat attendu (échec certain avec une seule itération)
 */
-int main() {
+/*int main() {
 	int *matColonnes = NULL, *matLignes = NULL, saisie;
 	t_couleurs *soluce = NULL;
-	t_difficulte niveau;
+	t_difficulte niveau; //*/
 	
 	// Génération version n°1
 	/*char *fic1 = "puzzles_binaires.txt";
@@ -528,7 +528,7 @@ int main() {
 	afficher_matrice(matLignes,niveau,'L'); //*/
 	
 	// Génération version n°2
-	char *fic2 = "nombres_puzzle.txt";
+	/*char *fic2 = "nombres_puzzle.txt";
 	printf("Quelle puzzle souhaitez-vous générer ? Entrez un chiffre compris entre 1 et 5 : ");
 	do {
 		scanf("%i",&saisie);
@@ -555,7 +555,7 @@ int main() {
 	verif_matrice(soluce,niveau); //*/
 	
 	// Libération de la mémoire allouée aux matrices
-	free(soluce);
+	/*free(soluce);
 	soluce = NULL;
 	free(matColonnes);
 	matColonnes = NULL;
