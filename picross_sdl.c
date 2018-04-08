@@ -84,7 +84,6 @@ void mat_ori(TTF_Font * font, SDL_Renderer * renderer, SDL_Surface * message, in
 			rect[n_rect].h = dim_case;
 			
 			sprintf(text, "%i", mat[i][j]);
-			printf("%s", text);
 			message = TTF_RenderText_Blended(font, text, black);
 			
 			if(message == NULL){
@@ -161,7 +160,7 @@ int main(int argc, char *argv[]){
 	int nb_case;
 	int dim_mat;
 
-	printf("Entrez la dimension d'une matrice carée : ");
+	printf("Entrez la dimension d'une matrice carée (entre 3 et 5 car la dimension des niveaux sera comprise entre ces valeurs): ");
 	scanf("%i", &dim_mat);
 
 	nb_case=dim_mat*dim_mat;
