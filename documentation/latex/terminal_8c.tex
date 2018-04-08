@@ -3,7 +3,7 @@
 }
 
 
-Fichier permettant de jouer une partie de Picross à partir d'un terminal de commande.  
+Fichier permettant la génération d'une partie de Picross à partir d'un terminal de commande.  
 
 
 {\ttfamily \#include $<$stdio.\+h$>$}\\*
@@ -34,10 +34,6 @@ Graphe des dépendances par inclusion de terminal.\+c\+:\nopagebreak
 {\bfseries Blanche}, 
 \\*
 {\bfseries Noire}, 
-{\bfseries Croix}, 
-{\bfseries Blanche}, 
-{\bfseries Noire}, 
-\\*
 {\bfseries Croix}
  \}}\label{terminal_8c_ae8772b89c073fcb61b7a2482b1192b3e}
 
@@ -49,41 +45,28 @@ Graphe des dépendances par inclusion de terminal.\+c\+:\nopagebreak
 {\bfseries expert} = 10, 
 \\*
 {\bfseries facile} =3, 
-{\bfseries normal} =5, 
-{\bfseries difficile} =7, 
-{\bfseries expert} =10, 
-\\*
-{\bfseries facile} =3, 
-{\bfseries normal} =5, 
-{\bfseries difficile} =7, 
-{\bfseries expert} =10
+{\bfseries normal} =4, 
+{\bfseries difficile} =5
  \}}\label{terminal_8c_a35aa2d55b501700469097f04b7962297}
 
 \end{DoxyCompactItemize}
 \subsection*{Fonctions}
 \begin{DoxyCompactItemize}
 \item 
-\hypertarget{terminal_8c_ac848923fd27c9cbcb10c985e1b11d1a9}{t\+\_\+couleurs $\ast$ {\bfseries init\+\_\+matrice\+\_\+prin} (t\+\_\+difficulte dim\+\_\+mat)}\label{terminal_8c_ac848923fd27c9cbcb10c985e1b11d1a9}
-
-\item 
-\hypertarget{terminal_8c_a8422b2d48cb1567687a27006431cde21}{int $\ast$ {\bfseries init\+\_\+matrice\+\_\+peri} (t\+\_\+difficulte dim\+\_\+mat)}\label{terminal_8c_a8422b2d48cb1567687a27006431cde21}
-
-\item 
-\hypertarget{terminal_8c_a9a72073891fc1ec027db352bc45f1628}{void {\bfseries detruire\+\_\+matrice\+\_\+peri} (int $\ast$mat)}\label{terminal_8c_a9a72073891fc1ec027db352bc45f1628}
-
-\item 
-\hypertarget{terminal_8c_a7b957b79fcc220384d87524b4b85c435}{void {\bfseries detruire\+\_\+matrice\+\_\+prin} (t\+\_\+couleurs $\ast$mat)}\label{terminal_8c_a7b957b79fcc220384d87524b4b85c435}
-
-\item 
-\hypertarget{terminal_8c_a49722fa6c282bc49add2ceeb59f88104}{void {\bfseries afficher\+\_\+haut} (int $\ast$mat\+\_\+hori, t\+\_\+difficulte dim\+\_\+mat)}\label{terminal_8c_a49722fa6c282bc49add2ceeb59f88104}
-
-\item 
-\hypertarget{terminal_8c_aa3e98d3cfbf4db36ba1afb4a1bf5a30c}{void {\bfseries afficher\+\_\+bas} (int $\ast$mat\+\_\+verti, t\+\_\+couleurs $\ast$mat\+\_\+prin, t\+\_\+difficulte dim\+\_\+mat)}\label{terminal_8c_aa3e98d3cfbf4db36ba1afb4a1bf5a30c}
-
-\item 
-\hypertarget{terminal_8c_ab1e6ec88ae60e83eab1cc131a79ad000}{void {\bfseries affichage\+\_\+jeu} (int $\ast$mat\+\_\+hori, int $\ast$mat\+\_\+verti, t\+\_\+couleurs $\ast$mat\+\_\+prin, t\+\_\+difficulte dim\+\_\+mat)}\label{terminal_8c_ab1e6ec88ae60e83eab1cc131a79ad000}
-
-\item 
+t\+\_\+couleurs $\ast$ \hyperlink{terminal_8c_ac848923fd27c9cbcb10c985e1b11d1a9}{init\+\_\+matrice\+\_\+prin} (t\+\_\+difficulte dim\+\_\+mat)
+\begin{DoxyCompactList}\small\item\em Fonction d'initialisation d'une matrice de type \char`\"{}t\+\_\+couleurs$\ast$\char`\"{} (enum). \end{DoxyCompactList}\item 
+int $\ast$ \hyperlink{terminal_8c_a8422b2d48cb1567687a27006431cde21}{init\+\_\+matrice\+\_\+peri} (t\+\_\+difficulte dim\+\_\+mat)
+\begin{DoxyCompactList}\small\item\em Fonction d'initialisation d'une matrice de type \char`\"{}int$\ast$\char`\"{}. \end{DoxyCompactList}\item 
+void \hyperlink{terminal_8c_a9a72073891fc1ec027db352bc45f1628}{detruire\+\_\+matrice\+\_\+peri} (int $\ast$mat)
+\begin{DoxyCompactList}\small\item\em Fonction de destruction d'une matrice de type \char`\"{}int$\ast$\char`\"{}. \end{DoxyCompactList}\item 
+void \hyperlink{terminal_8c_a7b957b79fcc220384d87524b4b85c435}{detruire\+\_\+matrice\+\_\+prin} (t\+\_\+couleurs $\ast$mat)
+\begin{DoxyCompactList}\small\item\em Fonction de destruction d'une matrice de type \char`\"{}t\+\_\+couleurs$\ast$\char`\"{}. \end{DoxyCompactList}\item 
+void \hyperlink{terminal_8c_a49722fa6c282bc49add2ceeb59f88104}{afficher\+\_\+haut} (int $\ast$mat\+\_\+hori, t\+\_\+difficulte dim\+\_\+mat)
+\begin{DoxyCompactList}\small\item\em Fonction d'affichage d'une matrice vide et de la matrice horizontale l'une à côté de l'autre. \end{DoxyCompactList}\item 
+void \hyperlink{terminal_8c_aa3e98d3cfbf4db36ba1afb4a1bf5a30c}{afficher\+\_\+bas} (int $\ast$mat\+\_\+verti, t\+\_\+couleurs $\ast$mat\+\_\+prin, t\+\_\+difficulte dim\+\_\+mat)
+\begin{DoxyCompactList}\small\item\em Fonction d'affichage de la matrice verticale et de la matrice principale l'une à côté de l'autre. \end{DoxyCompactList}\item 
+void \hyperlink{terminal_8c_ab1e6ec88ae60e83eab1cc131a79ad000}{affichage\+\_\+jeu} (int $\ast$mat\+\_\+hori, int $\ast$mat\+\_\+verti, t\+\_\+couleurs $\ast$mat\+\_\+prin, t\+\_\+difficulte dim\+\_\+mat)
+\begin{DoxyCompactList}\small\item\em Fonction qui rassemble l'affichage des matrices du haut et celles du bas pour afficher le jeu. \end{DoxyCompactList}\item 
 void \hyperlink{terminal_8c_a7731ac5d32100449a8e2480d599a70cb}{changer\+Etat} (t\+\_\+couleurs $\ast$mat\+\_\+prin, t\+\_\+difficulte dim\+\_\+mat, int x, int y)
 \begin{DoxyCompactList}\small\item\em Fonction qui permet de changer l'état de la case. \end{DoxyCompactList}\item 
 int \hyperlink{terminal_8c_aaf69df6150ddf60905ed92f6b47447aa}{saisir\+\_\+coord} (t\+\_\+couleurs $\ast$mat\+\_\+prin, t\+\_\+difficulte dim\+\_\+mat)
@@ -92,6 +75,8 @@ void \hyperlink{terminal_8c_a3e9c8b3fe82c9af0c1dea882df430528}{lecture\+\_\+fic\
 \begin{DoxyCompactList}\small\item\em Lit un fichier avec un format spécifique et remplit une matrice solution (première version du jeu). \end{DoxyCompactList}\item 
 void \hyperlink{terminal_8c_a1126745af00395f3f057e7f1c51b0164}{gen\+\_\+peripheriques} (t\+\_\+couleurs $\ast$soluce, int $\ast$colonnes, int $\ast$lignes, t\+\_\+difficulte taille)
 \begin{DoxyCompactList}\small\item\em Lit la matrice solution et génère les nombres correspondant aux groupes de cases pleines de chaque rangée dans les bonnes matrices périphériques. \end{DoxyCompactList}\item 
+t\+\_\+difficulte \hyperlink{terminal_8c_a3c0e0ccaafe0d5640a98630706c689aa}{dimension\+\_\+matrice} (int puzzle)
+\begin{DoxyCompactList}\small\item\em Fonction qui vérifie si les cases de la grille du joueur est correcte par rapport à la grille solution. \end{DoxyCompactList}\item 
 \hypertarget{terminal_8c_a8a74374a913d4fb5d06612ed4992170a}{int {\bfseries verif\+\_\+soluce} (t\+\_\+couleurs $\ast$mat\+\_\+prin, t\+\_\+couleurs $\ast$mat\+\_\+soluce, int dim\+\_\+mat)}\label{terminal_8c_a8a74374a913d4fb5d06612ed4992170a}
 
 \item 
@@ -101,7 +86,9 @@ void \hyperlink{terminal_8c_a1126745af00395f3f057e7f1c51b0164}{gen\+\_\+peripher
 
 
 \subsection{Description détaillée}
-Fichier permettant de jouer une partie de Picross à partir d'un terminal de commande. 
+Fichier permettant la génération d'une partie de Picross à partir d'un terminal de commande. 
+
+Fichier permettant de jouer une partie de Picross à partir d'un terminal de commande.
 
 \begin{DoxyAuthor}{Auteur}
 K\+A\+J\+A\+K Rémi 
@@ -115,6 +102,72 @@ K\+A\+J\+A\+K Rémi
 
 
 \subsection{Documentation des fonctions}
+\hypertarget{terminal_8c_ab1e6ec88ae60e83eab1cc131a79ad000}{\index{terminal.\+c@{terminal.\+c}!affichage\+\_\+jeu@{affichage\+\_\+jeu}}
+\index{affichage\+\_\+jeu@{affichage\+\_\+jeu}!terminal.\+c@{terminal.\+c}}
+\subsubsection[{affichage\+\_\+jeu}]{\setlength{\rightskip}{0pt plus 5cm}void affichage\+\_\+jeu (
+\begin{DoxyParamCaption}
+\item[{int $\ast$}]{mat\+\_\+hori, }
+\item[{int $\ast$}]{mat\+\_\+verti, }
+\item[{t\+\_\+couleurs $\ast$}]{mat\+\_\+prin, }
+\item[{t\+\_\+difficulte}]{dim\+\_\+mat}
+\end{DoxyParamCaption}
+)}}\label{terminal_8c_ab1e6ec88ae60e83eab1cc131a79ad000}
+
+
+Fonction qui rassemble l'affichage des matrices du haut et celles du bas pour afficher le jeu. 
+
+
+\begin{DoxyParams}{Paramètres}
+{\em mat\+\_\+hori} & La matrice périphérique horizontale.\\
+\hline
+{\em mat\+\_\+verti} & La matrice périphérique verticale.\\
+\hline
+{\em mat\+\_\+prin} & La matrice principale.\\
+\hline
+{\em dim\+\_\+mat} & La taille maximale que la matrice devra posséder. \\
+\hline
+\end{DoxyParams}
+\hypertarget{terminal_8c_aa3e98d3cfbf4db36ba1afb4a1bf5a30c}{\index{terminal.\+c@{terminal.\+c}!afficher\+\_\+bas@{afficher\+\_\+bas}}
+\index{afficher\+\_\+bas@{afficher\+\_\+bas}!terminal.\+c@{terminal.\+c}}
+\subsubsection[{afficher\+\_\+bas}]{\setlength{\rightskip}{0pt plus 5cm}void afficher\+\_\+bas (
+\begin{DoxyParamCaption}
+\item[{int $\ast$}]{mat\+\_\+verti, }
+\item[{t\+\_\+couleurs $\ast$}]{mat\+\_\+prin, }
+\item[{t\+\_\+difficulte}]{dim\+\_\+mat}
+\end{DoxyParamCaption}
+)}}\label{terminal_8c_aa3e98d3cfbf4db36ba1afb4a1bf5a30c}
+
+
+Fonction d'affichage de la matrice verticale et de la matrice principale l'une à côté de l'autre. 
+
+
+\begin{DoxyParams}{Paramètres}
+{\em mat\+\_\+verti} & La matrice périphérique verticale.\\
+\hline
+{\em mat\+\_\+prin} & La matrice principale.\\
+\hline
+{\em dim\+\_\+mat} & La taille maximale que la matrice devra posséder. \\
+\hline
+\end{DoxyParams}
+\hypertarget{terminal_8c_a49722fa6c282bc49add2ceeb59f88104}{\index{terminal.\+c@{terminal.\+c}!afficher\+\_\+haut@{afficher\+\_\+haut}}
+\index{afficher\+\_\+haut@{afficher\+\_\+haut}!terminal.\+c@{terminal.\+c}}
+\subsubsection[{afficher\+\_\+haut}]{\setlength{\rightskip}{0pt plus 5cm}void afficher\+\_\+haut (
+\begin{DoxyParamCaption}
+\item[{int $\ast$}]{mat\+\_\+hori, }
+\item[{t\+\_\+difficulte}]{dim\+\_\+mat}
+\end{DoxyParamCaption}
+)}}\label{terminal_8c_a49722fa6c282bc49add2ceeb59f88104}
+
+
+Fonction d'affichage d'une matrice vide et de la matrice horizontale l'une à côté de l'autre. 
+
+
+\begin{DoxyParams}{Paramètres}
+{\em mat\+\_\+hori} & La matrice périphérique horizontale.\\
+\hline
+{\em dim\+\_\+mat} & La taille maximale que la matrice devra posséder. \\
+\hline
+\end{DoxyParams}
 \hypertarget{terminal_8c_a7731ac5d32100449a8e2480d599a70cb}{\index{terminal.\+c@{terminal.\+c}!changer\+Etat@{changer\+Etat}}
 \index{changer\+Etat@{changer\+Etat}!terminal.\+c@{terminal.\+c}}
 \subsubsection[{changer\+Etat}]{\setlength{\rightskip}{0pt plus 5cm}void changer\+Etat (
@@ -143,6 +196,57 @@ Fonction qui permet de changer l'état de la case.
 \begin{DoxyReturn}{Renvoie}
 Ne retourne aucune valeur 
 \end{DoxyReturn}
+\hypertarget{terminal_8c_a9a72073891fc1ec027db352bc45f1628}{\index{terminal.\+c@{terminal.\+c}!detruire\+\_\+matrice\+\_\+peri@{detruire\+\_\+matrice\+\_\+peri}}
+\index{detruire\+\_\+matrice\+\_\+peri@{detruire\+\_\+matrice\+\_\+peri}!terminal.\+c@{terminal.\+c}}
+\subsubsection[{detruire\+\_\+matrice\+\_\+peri}]{\setlength{\rightskip}{0pt plus 5cm}void detruire\+\_\+matrice\+\_\+peri (
+\begin{DoxyParamCaption}
+\item[{int $\ast$}]{mat}
+\end{DoxyParamCaption}
+)}}\label{terminal_8c_a9a72073891fc1ec027db352bc45f1628}
+
+
+Fonction de destruction d'une matrice de type \char`\"{}int$\ast$\char`\"{}. 
+
+
+\begin{DoxyParams}{Paramètres}
+{\em mat} & La matrice à détruire. \\
+\hline
+\end{DoxyParams}
+\hypertarget{terminal_8c_a7b957b79fcc220384d87524b4b85c435}{\index{terminal.\+c@{terminal.\+c}!detruire\+\_\+matrice\+\_\+prin@{detruire\+\_\+matrice\+\_\+prin}}
+\index{detruire\+\_\+matrice\+\_\+prin@{detruire\+\_\+matrice\+\_\+prin}!terminal.\+c@{terminal.\+c}}
+\subsubsection[{detruire\+\_\+matrice\+\_\+prin}]{\setlength{\rightskip}{0pt plus 5cm}void detruire\+\_\+matrice\+\_\+prin (
+\begin{DoxyParamCaption}
+\item[{t\+\_\+couleurs $\ast$}]{mat}
+\end{DoxyParamCaption}
+)}}\label{terminal_8c_a7b957b79fcc220384d87524b4b85c435}
+
+
+Fonction de destruction d'une matrice de type \char`\"{}t\+\_\+couleurs$\ast$\char`\"{}. 
+
+
+\begin{DoxyParams}{Paramètres}
+{\em mat} & La matrice à détruire. \\
+\hline
+\end{DoxyParams}
+\hypertarget{terminal_8c_a3c0e0ccaafe0d5640a98630706c689aa}{\index{terminal.\+c@{terminal.\+c}!dimension\+\_\+matrice@{dimension\+\_\+matrice}}
+\index{dimension\+\_\+matrice@{dimension\+\_\+matrice}!terminal.\+c@{terminal.\+c}}
+\subsubsection[{dimension\+\_\+matrice}]{\setlength{\rightskip}{0pt plus 5cm}dimension\+\_\+matrice (
+\begin{DoxyParamCaption}
+\item[{int}]{puzzle}
+\end{DoxyParamCaption}
+)}}\label{terminal_8c_a3c0e0ccaafe0d5640a98630706c689aa}
+
+
+Fonction qui vérifie si les cases de la grille du joueur est correcte par rapport à la grille solution. 
+
+
+\begin{DoxyParams}{Paramètres}
+{\em puzzle} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Renvoie}
+La difficulté correspondant au numéro du puzzle 
+\end{DoxyReturn}
 \hypertarget{terminal_8c_a1126745af00395f3f057e7f1c51b0164}{\index{terminal.\+c@{terminal.\+c}!gen\+\_\+peripheriques@{gen\+\_\+peripheriques}}
 \index{gen\+\_\+peripheriques@{gen\+\_\+peripheriques}!terminal.\+c@{terminal.\+c}}
 \subsubsection[{gen\+\_\+peripheriques}]{\setlength{\rightskip}{0pt plus 5cm}void gen\+\_\+peripheriques (
@@ -170,6 +274,44 @@ Lit la matrice solution et génère les nombres correspondant aux groupes de cas
 \end{DoxyParams}
 \begin{DoxyReturn}{Renvoie}
 Ne retourne aucun résultat 
+\end{DoxyReturn}
+\hypertarget{terminal_8c_a8422b2d48cb1567687a27006431cde21}{\index{terminal.\+c@{terminal.\+c}!init\+\_\+matrice\+\_\+peri@{init\+\_\+matrice\+\_\+peri}}
+\index{init\+\_\+matrice\+\_\+peri@{init\+\_\+matrice\+\_\+peri}!terminal.\+c@{terminal.\+c}}
+\subsubsection[{init\+\_\+matrice\+\_\+peri}]{\setlength{\rightskip}{0pt plus 5cm}int$\ast$ init\+\_\+matrice\+\_\+peri (
+\begin{DoxyParamCaption}
+\item[{t\+\_\+difficulte}]{dim\+\_\+mat}
+\end{DoxyParamCaption}
+)}}\label{terminal_8c_a8422b2d48cb1567687a27006431cde21}
+
+
+Fonction d'initialisation d'une matrice de type \char`\"{}int$\ast$\char`\"{}. 
+
+
+\begin{DoxyParams}{Paramètres}
+{\em dim\+\_\+mat} & La taille maximale que la matrice devra posséder.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Renvoie}
+La matrice allouée dynamiquement. 
+\end{DoxyReturn}
+\hypertarget{terminal_8c_ac848923fd27c9cbcb10c985e1b11d1a9}{\index{terminal.\+c@{terminal.\+c}!init\+\_\+matrice\+\_\+prin@{init\+\_\+matrice\+\_\+prin}}
+\index{init\+\_\+matrice\+\_\+prin@{init\+\_\+matrice\+\_\+prin}!terminal.\+c@{terminal.\+c}}
+\subsubsection[{init\+\_\+matrice\+\_\+prin}]{\setlength{\rightskip}{0pt plus 5cm}t\+\_\+couleurs$\ast$ init\+\_\+matrice\+\_\+prin (
+\begin{DoxyParamCaption}
+\item[{t\+\_\+difficulte}]{dim\+\_\+mat}
+\end{DoxyParamCaption}
+)}}\label{terminal_8c_ac848923fd27c9cbcb10c985e1b11d1a9}
+
+
+Fonction d'initialisation d'une matrice de type \char`\"{}t\+\_\+couleurs$\ast$\char`\"{} (enum). 
+
+
+\begin{DoxyParams}{Paramètres}
+{\em dim\+\_\+mat} & La taille maximale que la matrice devra posséder.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Renvoie}
+La matrice allouée dynamiquement. 
 \end{DoxyReturn}
 \hypertarget{terminal_8c_a3e9c8b3fe82c9af0c1dea882df430528}{\index{terminal.\+c@{terminal.\+c}!lecture\+\_\+fic\+\_\+v1@{lecture\+\_\+fic\+\_\+v1}}
 \index{lecture\+\_\+fic\+\_\+v1@{lecture\+\_\+fic\+\_\+v1}!terminal.\+c@{terminal.\+c}}

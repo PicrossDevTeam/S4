@@ -1,0 +1,188 @@
+\hypertarget{matrice_8c}{\section{Référence du fichier matrice.\+c}
+\label{matrice_8c}\index{matrice.\+c@{matrice.\+c}}
+}
+
+
+Fichier contenant la création, la destruction et l'affichage des matrices.  
+
+
+{\ttfamily \#include $<$stdio.\+h$>$}\\*
+{\ttfamily \#include $<$stdlib.\+h$>$}\\*
+{\ttfamily \#include \char`\"{}matrice.\+h\char`\"{}}\\*
+Graphe des dépendances par inclusion de matrice.\+c\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=274pt]{matrice_8c__incl}
+\end{center}
+\end{figure}
+\subsection*{Fonctions}
+\begin{DoxyCompactItemize}
+\item 
+t\+\_\+couleurs $\ast$ \hyperlink{matrice_8c_a58d949c677c6ddbed7e397ce065d06cd}{init\+\_\+matrice\+\_\+prin} (t\+\_\+difficulte dim\+\_\+mat)
+\begin{DoxyCompactList}\small\item\em Fonction d'initialisation d'une matrice de type \char`\"{}t\+\_\+couleurs$\ast$\char`\"{} (enum). \end{DoxyCompactList}\item 
+int $\ast$ \hyperlink{matrice_8c_aa3dc8d3fbf4aa172dcfb19be776d6459}{init\+\_\+matrice\+\_\+peri} (t\+\_\+difficulte dim\+\_\+mat)
+\begin{DoxyCompactList}\small\item\em Fonction d'initialisation d'une matrice de type \char`\"{}int$\ast$\char`\"{}. \end{DoxyCompactList}\item 
+void \hyperlink{matrice_8c_adfba8a13ee1218590ce26c9ca44bb0a2}{detruire\+\_\+matrice\+\_\+peri} (int $\ast$mat)
+\begin{DoxyCompactList}\small\item\em Fonction de destruction d'une matrice de type \char`\"{}int$\ast$\char`\"{}. \end{DoxyCompactList}\item 
+void \hyperlink{matrice_8c_ac0e0fb6c4fc6035501119721091550fd}{detruire\+\_\+matrice\+\_\+prin} (t\+\_\+couleurs $\ast$mat)
+\begin{DoxyCompactList}\small\item\em Fonction de destruction d'une matrice de type \char`\"{}t\+\_\+couleurs$\ast$\char`\"{}. \end{DoxyCompactList}\item 
+void \hyperlink{matrice_8c_a546df7c8d29deabee0653322e58a0c8a}{afficher\+\_\+haut} (int $\ast$mat\+\_\+hori, t\+\_\+difficulte dim\+\_\+mat)
+\begin{DoxyCompactList}\small\item\em Fonction d'affichage d'une matrice vide et de la matrice horizontale l'une à côté de l'autre. \end{DoxyCompactList}\item 
+void \hyperlink{matrice_8c_a0e6324f4ff2bfec230be001d9f0a20df}{afficher\+\_\+bas} (int $\ast$mat\+\_\+verti, t\+\_\+couleurs $\ast$mat\+\_\+prin, t\+\_\+difficulte dim\+\_\+mat)
+\begin{DoxyCompactList}\small\item\em Fonction d'affichage de la matrice verticale et de la matrice principale l'une à côté de l'autre. \end{DoxyCompactList}\item 
+void \hyperlink{matrice_8c_a1ecd9cddc3ff9710dc42562c2f57f9ae}{affichage\+\_\+jeu} (int $\ast$mat\+\_\+hori, int $\ast$mat\+\_\+verti, t\+\_\+couleurs $\ast$mat\+\_\+prin, t\+\_\+difficulte dim\+\_\+mat)
+\begin{DoxyCompactList}\small\item\em Fonction qui rassemble l'affichage des matrices du haut et celles du bas pour afficher le jeu. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Description détaillée}
+Fichier contenant la création, la destruction et l'affichage des matrices. 
+
+\begin{DoxyAuthor}{Auteur}
+N\+O\+U\+V\+E\+L\+I\+E\+R\+E Benjamin 
+\end{DoxyAuthor}
+\begin{DoxyVersion}{Version}
+1.\+0 
+\end{DoxyVersion}
+\begin{DoxyDate}{Date}
+08/04/2018 
+\end{DoxyDate}
+
+
+\subsection{Documentation des fonctions}
+\hypertarget{matrice_8c_a1ecd9cddc3ff9710dc42562c2f57f9ae}{\index{matrice.\+c@{matrice.\+c}!affichage\+\_\+jeu@{affichage\+\_\+jeu}}
+\index{affichage\+\_\+jeu@{affichage\+\_\+jeu}!matrice.\+c@{matrice.\+c}}
+\subsubsection[{affichage\+\_\+jeu}]{\setlength{\rightskip}{0pt plus 5cm}affichage\+\_\+jeu (
+\begin{DoxyParamCaption}
+\item[{int $\ast$}]{mat\+\_\+hori, }
+\item[{int $\ast$}]{mat\+\_\+verti, }
+\item[{t\+\_\+couleurs $\ast$}]{mat\+\_\+prin, }
+\item[{t\+\_\+difficulte}]{dim\+\_\+mat}
+\end{DoxyParamCaption}
+)}}\label{matrice_8c_a1ecd9cddc3ff9710dc42562c2f57f9ae}
+
+
+Fonction qui rassemble l'affichage des matrices du haut et celles du bas pour afficher le jeu. 
+
+
+\begin{DoxyParams}{Paramètres}
+{\em mat\+\_\+hori} & La matrice périphérique horizontale.\\
+\hline
+{\em mat\+\_\+verti} & La matrice périphérique verticale.\\
+\hline
+{\em mat\+\_\+prin} & La matrice principale.\\
+\hline
+{\em dim\+\_\+mat} & La taille maximale que la matrice devra posséder. \\
+\hline
+\end{DoxyParams}
+\hypertarget{matrice_8c_a0e6324f4ff2bfec230be001d9f0a20df}{\index{matrice.\+c@{matrice.\+c}!afficher\+\_\+bas@{afficher\+\_\+bas}}
+\index{afficher\+\_\+bas@{afficher\+\_\+bas}!matrice.\+c@{matrice.\+c}}
+\subsubsection[{afficher\+\_\+bas}]{\setlength{\rightskip}{0pt plus 5cm}afficher\+\_\+bas (
+\begin{DoxyParamCaption}
+\item[{int $\ast$}]{mat\+\_\+verti, }
+\item[{t\+\_\+couleurs $\ast$}]{mat\+\_\+prin, }
+\item[{t\+\_\+difficulte}]{dim\+\_\+mat}
+\end{DoxyParamCaption}
+)}}\label{matrice_8c_a0e6324f4ff2bfec230be001d9f0a20df}
+
+
+Fonction d'affichage de la matrice verticale et de la matrice principale l'une à côté de l'autre. 
+
+
+\begin{DoxyParams}{Paramètres}
+{\em mat\+\_\+verti} & La matrice périphérique verticale.\\
+\hline
+{\em mat\+\_\+prin} & La matrice principale.\\
+\hline
+{\em dim\+\_\+mat} & La taille maximale que la matrice devra posséder. \\
+\hline
+\end{DoxyParams}
+\hypertarget{matrice_8c_a546df7c8d29deabee0653322e58a0c8a}{\index{matrice.\+c@{matrice.\+c}!afficher\+\_\+haut@{afficher\+\_\+haut}}
+\index{afficher\+\_\+haut@{afficher\+\_\+haut}!matrice.\+c@{matrice.\+c}}
+\subsubsection[{afficher\+\_\+haut}]{\setlength{\rightskip}{0pt plus 5cm}afficher\+\_\+haut (
+\begin{DoxyParamCaption}
+\item[{int $\ast$}]{mat\+\_\+hori, }
+\item[{t\+\_\+difficulte}]{dim\+\_\+mat}
+\end{DoxyParamCaption}
+)}}\label{matrice_8c_a546df7c8d29deabee0653322e58a0c8a}
+
+
+Fonction d'affichage d'une matrice vide et de la matrice horizontale l'une à côté de l'autre. 
+
+
+\begin{DoxyParams}{Paramètres}
+{\em mat\+\_\+hori} & La matrice périphérique horizontale.\\
+\hline
+{\em dim\+\_\+mat} & La taille maximale que la matrice devra posséder. \\
+\hline
+\end{DoxyParams}
+\hypertarget{matrice_8c_adfba8a13ee1218590ce26c9ca44bb0a2}{\index{matrice.\+c@{matrice.\+c}!detruire\+\_\+matrice\+\_\+peri@{detruire\+\_\+matrice\+\_\+peri}}
+\index{detruire\+\_\+matrice\+\_\+peri@{detruire\+\_\+matrice\+\_\+peri}!matrice.\+c@{matrice.\+c}}
+\subsubsection[{detruire\+\_\+matrice\+\_\+peri}]{\setlength{\rightskip}{0pt plus 5cm}detruire\+\_\+matrice\+\_\+peri (
+\begin{DoxyParamCaption}
+\item[{int $\ast$}]{mat}
+\end{DoxyParamCaption}
+)}}\label{matrice_8c_adfba8a13ee1218590ce26c9ca44bb0a2}
+
+
+Fonction de destruction d'une matrice de type \char`\"{}int$\ast$\char`\"{}. 
+
+
+\begin{DoxyParams}{Paramètres}
+{\em mat} & La matrice à détruire. \\
+\hline
+\end{DoxyParams}
+\hypertarget{matrice_8c_ac0e0fb6c4fc6035501119721091550fd}{\index{matrice.\+c@{matrice.\+c}!detruire\+\_\+matrice\+\_\+prin@{detruire\+\_\+matrice\+\_\+prin}}
+\index{detruire\+\_\+matrice\+\_\+prin@{detruire\+\_\+matrice\+\_\+prin}!matrice.\+c@{matrice.\+c}}
+\subsubsection[{detruire\+\_\+matrice\+\_\+prin}]{\setlength{\rightskip}{0pt plus 5cm}detruire\+\_\+matrice\+\_\+prin (
+\begin{DoxyParamCaption}
+\item[{t\+\_\+couleurs $\ast$}]{mat}
+\end{DoxyParamCaption}
+)}}\label{matrice_8c_ac0e0fb6c4fc6035501119721091550fd}
+
+
+Fonction de destruction d'une matrice de type \char`\"{}t\+\_\+couleurs$\ast$\char`\"{}. 
+
+
+\begin{DoxyParams}{Paramètres}
+{\em mat} & La matrice à détruire. \\
+\hline
+\end{DoxyParams}
+\hypertarget{matrice_8c_aa3dc8d3fbf4aa172dcfb19be776d6459}{\index{matrice.\+c@{matrice.\+c}!init\+\_\+matrice\+\_\+peri@{init\+\_\+matrice\+\_\+peri}}
+\index{init\+\_\+matrice\+\_\+peri@{init\+\_\+matrice\+\_\+peri}!matrice.\+c@{matrice.\+c}}
+\subsubsection[{init\+\_\+matrice\+\_\+peri}]{\setlength{\rightskip}{0pt plus 5cm}init\+\_\+matrice\+\_\+peri (
+\begin{DoxyParamCaption}
+\item[{t\+\_\+difficulte}]{dim\+\_\+mat}
+\end{DoxyParamCaption}
+)}}\label{matrice_8c_aa3dc8d3fbf4aa172dcfb19be776d6459}
+
+
+Fonction d'initialisation d'une matrice de type \char`\"{}int$\ast$\char`\"{}. 
+
+
+\begin{DoxyParams}{Paramètres}
+{\em dim\+\_\+mat} & La taille maximale que la matrice devra posséder.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Renvoie}
+La matrice allouée dynamiquement. 
+\end{DoxyReturn}
+\hypertarget{matrice_8c_a58d949c677c6ddbed7e397ce065d06cd}{\index{matrice.\+c@{matrice.\+c}!init\+\_\+matrice\+\_\+prin@{init\+\_\+matrice\+\_\+prin}}
+\index{init\+\_\+matrice\+\_\+prin@{init\+\_\+matrice\+\_\+prin}!matrice.\+c@{matrice.\+c}}
+\subsubsection[{init\+\_\+matrice\+\_\+prin}]{\setlength{\rightskip}{0pt plus 5cm}init\+\_\+matrice\+\_\+prin (
+\begin{DoxyParamCaption}
+\item[{t\+\_\+difficulte}]{dim\+\_\+mat}
+\end{DoxyParamCaption}
+)}}\label{matrice_8c_a58d949c677c6ddbed7e397ce065d06cd}
+
+
+Fonction d'initialisation d'une matrice de type \char`\"{}t\+\_\+couleurs$\ast$\char`\"{} (enum). 
+
+
+\begin{DoxyParams}{Paramètres}
+{\em dim\+\_\+mat} & La taille maximale que la matrice devra posséder.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Renvoie}
+La matrice allouée dynamiquement. 
+\end{DoxyReturn}

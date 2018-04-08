@@ -1,0 +1,5 @@
+<map id="matrice.c" name="matrice.c">
+<area shape="rect" id="node4" href="$matrice_8h.html" title="Fichier contenant les définitions de &quot;matrice.c&quot;. " alt="" coords="179,80,255,107"/>
+<area shape="rect" id="node5" href="$generation_8h.html" title="Fichier contenant les définitions des fonctions de &quot;generation.c&quot;. Fait appel à &quot;Case.h&quot; pour obtenir les définitions et les structures de &quot;Case.c&quot;. " alt="" coords="171,155,264,181"/>
+<area shape="rect" id="node6" href="$Case_8h.html" title="Contient les définitions des structures enum et des fonctions de &quot;Case.c&quot;. " alt="" coords="185,229,249,256"/>
+</map>

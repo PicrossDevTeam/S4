@@ -1,0 +1,112 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+<meta name="generator" content="Doxygen 1.8.8"/>
+<title>PROJET PICROSS:  Fichier source de matrice.h</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/search.js"></script>
+<script type="text/javascript">
+  $(document).ready(function() { searchBox.OnSelectItem(0); });
+</script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td style="padding-left: 0.5em;">
+   <div id="projectname">PROJET PICROSS
+   </div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Généré par Doxygen 1.8.8 -->
+<script type="text/javascript">
+var searchBox = new SearchBox("searchBox", "search",false,'Recherche');
+</script>
+  <div id="navrow1" class="tabs">
+    <ul class="tablist">
+      <li><a href="index.html"><span>Page&#160;principale</span></a></li>
+      <li><a href="pages.html"><span>Pages&#160;associées</span></a></li>
+      <li class="current"><a href="files.html"><span>Fichiers</span></a></li>
+      <li>
+        <div id="MSearchBox" class="MSearchBoxInactive">
+        <span class="left">
+          <img id="MSearchSelect" src="search/mag_sel.png"
+               onmouseover="return searchBox.OnSearchSelectShow()"
+               onmouseout="return searchBox.OnSearchSelectHide()"
+               alt=""/>
+          <input type="text" id="MSearchField" value="Recherche" accesskey="S"
+               onfocus="searchBox.OnSearchFieldFocus(true)" 
+               onblur="searchBox.OnSearchFieldFocus(false)" 
+               onkeyup="searchBox.OnSearchFieldChange(event)"/>
+          </span><span class="right">
+            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><img id="MSearchCloseImg" border="0" src="search/close.png" alt=""/></a>
+          </span>
+        </div>
+      </li>
+    </ul>
+  </div>
+  <div id="navrow2" class="tabs2">
+    <ul class="tablist">
+      <li><a href="files.html"><span>Liste&#160;des&#160;fichiers</span></a></li>
+      <li><a href="globals.html"><span>Membres&#160;de&#160;fichier</span></a></li>
+    </ul>
+  </div>
+</div><!-- top -->
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>Tout</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Fichiers</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Fonctions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Pages</a></div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+<div class="header">
+  <div class="headertitle">
+<div class="title">matrice.h</div>  </div>
+</div><!--header-->
+<div class="contents">
+<a href="matrice_8h.html">Aller à la documentation de ce fichier.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;</div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="generation_8h.html">generation.h</a>&quot;</span></div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;</div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;t_couleurs * <a class="code" href="matrice_8h.html#a6a8e13e0b321aa20b1e1f0ecbd3d91fc">init_matrice_prin</a>(t_difficulte);</div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="keywordtype">int</span> * <a class="code" href="matrice_8h.html#aa27e7a08c2f8ac6193fccfd766e115b0">init_matrice_peri</a>(t_difficulte);</div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="keywordtype">void</span> <a class="code" href="matrice_8h.html#a4223d7d7252b06b5a6f4dc631fb8b7fc">detruire_matrice_peri</a>(<span class="keywordtype">int</span> *);</div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="keywordtype">void</span> <a class="code" href="matrice_8h.html#aadb7bd93ba539174472f28e36df7a29c">detruire_matrice_prin</a>(t_couleurs *);</div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="keywordtype">void</span> <a class="code" href="matrice_8h.html#a4d1aeabce37d88632a6bbde3486f1ce2">afficher_haut</a>(<span class="keywordtype">int</span> *, t_difficulte);</div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="keywordtype">void</span> <a class="code" href="matrice_8h.html#a1b5efd11a159750b32f5d5f84f475d2e">afficher_bas</a>(<span class="keywordtype">int</span> *, t_couleurs *, t_difficulte);</div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="keywordtype">void</span> <a class="code" href="matrice_8h.html#a8d2960d64bfde2143a95ebe85b1fcfb9">affichage_jeu</a>(<span class="keywordtype">int</span> *, <span class="keywordtype">int</span> *, t_couleurs *, t_difficulte);</div>
+<div class="ttc" id="matrice_8h_html_a1b5efd11a159750b32f5d5f84f475d2e"><div class="ttname"><a href="matrice_8h.html#a1b5efd11a159750b32f5d5f84f475d2e">afficher_bas</a></div><div class="ttdeci">void afficher_bas(int *, t_couleurs *, t_difficulte)</div><div class="ttdoc">Fonction d&#39;affichage de la matrice verticale et de la matrice principale l&#39;une à côté de l&#39;autre...</div><div class="ttdef"><b>Definition:</b> matrice.c:116</div></div>
+<div class="ttc" id="matrice_8h_html_a8d2960d64bfde2143a95ebe85b1fcfb9"><div class="ttname"><a href="matrice_8h.html#a8d2960d64bfde2143a95ebe85b1fcfb9">affichage_jeu</a></div><div class="ttdeci">void affichage_jeu(int *, int *, t_couleurs *, t_difficulte)</div><div class="ttdoc">Fonction qui rassemble l&#39;affichage des matrices du haut et celles du bas pour afficher le jeu...</div><div class="ttdef"><b>Definition:</b> matrice.c:155</div></div>
+<div class="ttc" id="matrice_8h_html_aadb7bd93ba539174472f28e36df7a29c"><div class="ttname"><a href="matrice_8h.html#aadb7bd93ba539174472f28e36df7a29c">detruire_matrice_prin</a></div><div class="ttdeci">void detruire_matrice_prin(t_couleurs *)</div><div class="ttdoc">Fonction de destruction d&#39;une matrice de type "t_couleurs*". </div><div class="ttdef"><b>Definition:</b> matrice.c:73</div></div>
+<div class="ttc" id="generation_8h_html"><div class="ttname"><a href="generation_8h.html">generation.h</a></div><div class="ttdoc">Fichier contenant les définitions des fonctions de "generation.c". Fait appel à "Case.h" pour obtenir les définitions et les structures de "Case.c". </div></div>
+<div class="ttc" id="matrice_8h_html_aa27e7a08c2f8ac6193fccfd766e115b0"><div class="ttname"><a href="matrice_8h.html#aa27e7a08c2f8ac6193fccfd766e115b0">init_matrice_peri</a></div><div class="ttdeci">int * init_matrice_peri(t_difficulte)</div><div class="ttdoc">Fonction d&#39;initialisation d&#39;une matrice de type "int*". </div><div class="ttdef"><b>Definition:</b> matrice.c:43</div></div>
+<div class="ttc" id="matrice_8h_html_a4d1aeabce37d88632a6bbde3486f1ce2"><div class="ttname"><a href="matrice_8h.html#a4d1aeabce37d88632a6bbde3486f1ce2">afficher_haut</a></div><div class="ttdeci">void afficher_haut(int *, t_difficulte)</div><div class="ttdoc">Fonction d&#39;affichage d&#39;une matrice vide et de la matrice horizontale l&#39;une à côté de l&#39;autre...</div><div class="ttdef"><b>Definition:</b> matrice.c:86</div></div>
+<div class="ttc" id="matrice_8h_html_a4223d7d7252b06b5a6f4dc631fb8b7fc"><div class="ttname"><a href="matrice_8h.html#a4223d7d7252b06b5a6f4dc631fb8b7fc">detruire_matrice_peri</a></div><div class="ttdeci">void detruire_matrice_peri(int *)</div><div class="ttdoc">Fonction de destruction d&#39;une matrice de type "int*". </div><div class="ttdef"><b>Definition:</b> matrice.c:62</div></div>
+<div class="ttc" id="matrice_8h_html_a6a8e13e0b321aa20b1e1f0ecbd3d91fc"><div class="ttname"><a href="matrice_8h.html#a6a8e13e0b321aa20b1e1f0ecbd3d91fc">init_matrice_prin</a></div><div class="ttdeci">t_couleurs * init_matrice_prin(t_difficulte)</div><div class="ttdoc">Fonction d&#39;initialisation d&#39;une matrice de type "t_couleurs*" (enum). </div><div class="ttdef"><b>Definition:</b> matrice.c:22</div></div>
+</div><!-- fragment --></div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+Généré le Dimanche 8 Avril 2018 23:14:15 pour PROJET PICROSS par &#160;<a href="http://www.doxygen.org/index.html">
+<img class="footer" src="doxygen.png" alt="doxygen"/>
+</a> 1.8.8
+</small></address>
+</body>
+</html>

@@ -88,7 +88,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Recherche');
 </div><!--header-->
 <div class="contents">
 
-<p>Fichier permettant de jouer une partie de Picross à partir d'un terminal de commande.  
+<p>Fichier permettant la génération d'une partie de Picross à partir d'un terminal de commande.  
 <a href="#details">Plus de détails...</a></p>
 <div class="textblock"><code>#include &lt;stdio.h&gt;</code><br />
 <code>#include &lt;stdlib.h&gt;</code><br />
@@ -116,11 +116,7 @@ typedef enum difficulte&#160;</td><td class="memItemRight" valign="bottom"><b>t_
 <b>Blanche</b>, 
 <br />
 &#160;&#160;<b>Noire</b>, 
-<b>Croix</b>, 
-<b>Blanche</b>, 
-<b>Noire</b>, 
-<br />
-&#160;&#160;<b>Croix</b>
+<b>Croix</b>
 <br />
  }</td></tr>
 <tr class="separator:ae8772b89c073fcb61b7a2482b1192b3e"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -131,40 +127,34 @@ typedef enum difficulte&#160;</td><td class="memItemRight" valign="bottom"><b>t_
 <b>expert</b> = 10, 
 <br />
 &#160;&#160;<b>facile</b> =3, 
-<b>normal</b> =5, 
-<b>difficile</b> =7, 
-<b>expert</b> =10, 
-<br />
-&#160;&#160;<b>facile</b> =3, 
-<b>normal</b> =5, 
-<b>difficile</b> =7, 
-<b>expert</b> =10
+<b>normal</b> =4, 
+<b>difficile</b> =5
 <br />
  }</td></tr>
 <tr class="separator:a35aa2d55b501700469097f04b7962297"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Fonctions</h2></td></tr>
-<tr class="memitem:ac848923fd27c9cbcb10c985e1b11d1a9"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ac848923fd27c9cbcb10c985e1b11d1a9"></a>
-t_couleurs *&#160;</td><td class="memItemRight" valign="bottom"><b>init_matrice_prin</b> (t_difficulte dim_mat)</td></tr>
+<tr class="memitem:ac848923fd27c9cbcb10c985e1b11d1a9"><td class="memItemLeft" align="right" valign="top">t_couleurs *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="terminal_8c.html#ac848923fd27c9cbcb10c985e1b11d1a9">init_matrice_prin</a> (t_difficulte dim_mat)</td></tr>
+<tr class="memdesc:ac848923fd27c9cbcb10c985e1b11d1a9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Fonction d'initialisation d'une matrice de type "t_couleurs*" (enum).  <a href="#ac848923fd27c9cbcb10c985e1b11d1a9">Plus de détails...</a><br /></td></tr>
 <tr class="separator:ac848923fd27c9cbcb10c985e1b11d1a9"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a8422b2d48cb1567687a27006431cde21"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a8422b2d48cb1567687a27006431cde21"></a>
-int *&#160;</td><td class="memItemRight" valign="bottom"><b>init_matrice_peri</b> (t_difficulte dim_mat)</td></tr>
+<tr class="memitem:a8422b2d48cb1567687a27006431cde21"><td class="memItemLeft" align="right" valign="top">int *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="terminal_8c.html#a8422b2d48cb1567687a27006431cde21">init_matrice_peri</a> (t_difficulte dim_mat)</td></tr>
+<tr class="memdesc:a8422b2d48cb1567687a27006431cde21"><td class="mdescLeft">&#160;</td><td class="mdescRight">Fonction d'initialisation d'une matrice de type "int*".  <a href="#a8422b2d48cb1567687a27006431cde21">Plus de détails...</a><br /></td></tr>
 <tr class="separator:a8422b2d48cb1567687a27006431cde21"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9a72073891fc1ec027db352bc45f1628"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a9a72073891fc1ec027db352bc45f1628"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>detruire_matrice_peri</b> (int *mat)</td></tr>
+<tr class="memitem:a9a72073891fc1ec027db352bc45f1628"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="terminal_8c.html#a9a72073891fc1ec027db352bc45f1628">detruire_matrice_peri</a> (int *mat)</td></tr>
+<tr class="memdesc:a9a72073891fc1ec027db352bc45f1628"><td class="mdescLeft">&#160;</td><td class="mdescRight">Fonction de destruction d'une matrice de type "int*".  <a href="#a9a72073891fc1ec027db352bc45f1628">Plus de détails...</a><br /></td></tr>
 <tr class="separator:a9a72073891fc1ec027db352bc45f1628"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7b957b79fcc220384d87524b4b85c435"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a7b957b79fcc220384d87524b4b85c435"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>detruire_matrice_prin</b> (t_couleurs *mat)</td></tr>
+<tr class="memitem:a7b957b79fcc220384d87524b4b85c435"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="terminal_8c.html#a7b957b79fcc220384d87524b4b85c435">detruire_matrice_prin</a> (t_couleurs *mat)</td></tr>
+<tr class="memdesc:a7b957b79fcc220384d87524b4b85c435"><td class="mdescLeft">&#160;</td><td class="mdescRight">Fonction de destruction d'une matrice de type "t_couleurs*".  <a href="#a7b957b79fcc220384d87524b4b85c435">Plus de détails...</a><br /></td></tr>
 <tr class="separator:a7b957b79fcc220384d87524b4b85c435"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a49722fa6c282bc49add2ceeb59f88104"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a49722fa6c282bc49add2ceeb59f88104"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>afficher_haut</b> (int *mat_hori, t_difficulte dim_mat)</td></tr>
+<tr class="memitem:a49722fa6c282bc49add2ceeb59f88104"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="terminal_8c.html#a49722fa6c282bc49add2ceeb59f88104">afficher_haut</a> (int *mat_hori, t_difficulte dim_mat)</td></tr>
+<tr class="memdesc:a49722fa6c282bc49add2ceeb59f88104"><td class="mdescLeft">&#160;</td><td class="mdescRight">Fonction d'affichage d'une matrice vide et de la matrice horizontale l'une à côté de l'autre.  <a href="#a49722fa6c282bc49add2ceeb59f88104">Plus de détails...</a><br /></td></tr>
 <tr class="separator:a49722fa6c282bc49add2ceeb59f88104"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa3e98d3cfbf4db36ba1afb4a1bf5a30c"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aa3e98d3cfbf4db36ba1afb4a1bf5a30c"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>afficher_bas</b> (int *mat_verti, t_couleurs *mat_prin, t_difficulte dim_mat)</td></tr>
+<tr class="memitem:aa3e98d3cfbf4db36ba1afb4a1bf5a30c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="terminal_8c.html#aa3e98d3cfbf4db36ba1afb4a1bf5a30c">afficher_bas</a> (int *mat_verti, t_couleurs *mat_prin, t_difficulte dim_mat)</td></tr>
+<tr class="memdesc:aa3e98d3cfbf4db36ba1afb4a1bf5a30c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Fonction d'affichage de la matrice verticale et de la matrice principale l'une à côté de l'autre.  <a href="#aa3e98d3cfbf4db36ba1afb4a1bf5a30c">Plus de détails...</a><br /></td></tr>
 <tr class="separator:aa3e98d3cfbf4db36ba1afb4a1bf5a30c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab1e6ec88ae60e83eab1cc131a79ad000"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ab1e6ec88ae60e83eab1cc131a79ad000"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>affichage_jeu</b> (int *mat_hori, int *mat_verti, t_couleurs *mat_prin, t_difficulte dim_mat)</td></tr>
+<tr class="memitem:ab1e6ec88ae60e83eab1cc131a79ad000"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="terminal_8c.html#ab1e6ec88ae60e83eab1cc131a79ad000">affichage_jeu</a> (int *mat_hori, int *mat_verti, t_couleurs *mat_prin, t_difficulte dim_mat)</td></tr>
+<tr class="memdesc:ab1e6ec88ae60e83eab1cc131a79ad000"><td class="mdescLeft">&#160;</td><td class="mdescRight">Fonction qui rassemble l'affichage des matrices du haut et celles du bas pour afficher le jeu.  <a href="#ab1e6ec88ae60e83eab1cc131a79ad000">Plus de détails...</a><br /></td></tr>
 <tr class="separator:ab1e6ec88ae60e83eab1cc131a79ad000"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7731ac5d32100449a8e2480d599a70cb"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="terminal_8c.html#a7731ac5d32100449a8e2480d599a70cb">changerEtat</a> (t_couleurs *mat_prin, t_difficulte dim_mat, int x, int y)</td></tr>
 <tr class="memdesc:a7731ac5d32100449a8e2480d599a70cb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Fonction qui permet de changer l'état de la case.  <a href="#a7731ac5d32100449a8e2480d599a70cb">Plus de détails...</a><br /></td></tr>
@@ -178,6 +168,9 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>affichage_jeu</b> (in
 <tr class="memitem:a1126745af00395f3f057e7f1c51b0164"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="terminal_8c.html#a1126745af00395f3f057e7f1c51b0164">gen_peripheriques</a> (t_couleurs *soluce, int *colonnes, int *lignes, t_difficulte taille)</td></tr>
 <tr class="memdesc:a1126745af00395f3f057e7f1c51b0164"><td class="mdescLeft">&#160;</td><td class="mdescRight">Lit la matrice solution et génère les nombres correspondant aux groupes de cases pleines de chaque rangée dans les bonnes matrices périphériques.  <a href="#a1126745af00395f3f057e7f1c51b0164">Plus de détails...</a><br /></td></tr>
 <tr class="separator:a1126745af00395f3f057e7f1c51b0164"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3c0e0ccaafe0d5640a98630706c689aa"><td class="memItemLeft" align="right" valign="top">t_difficulte&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="terminal_8c.html#a3c0e0ccaafe0d5640a98630706c689aa">dimension_matrice</a> (int puzzle)</td></tr>
+<tr class="memdesc:a3c0e0ccaafe0d5640a98630706c689aa"><td class="mdescLeft">&#160;</td><td class="mdescRight">Fonction qui vérifie si les cases de la grille du joueur est correcte par rapport à la grille solution.  <a href="#a3c0e0ccaafe0d5640a98630706c689aa">Plus de détails...</a><br /></td></tr>
+<tr class="separator:a3c0e0ccaafe0d5640a98630706c689aa"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8a74374a913d4fb5d06612ed4992170a"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a8a74374a913d4fb5d06612ed4992170a"></a>
 int&#160;</td><td class="memItemRight" valign="bottom"><b>verif_soluce</b> (t_couleurs *mat_prin, t_couleurs *mat_soluce, int dim_mat)</td></tr>
 <tr class="separator:a8a74374a913d4fb5d06612ed4992170a"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -186,11 +179,138 @@ int&#160;</td><td class="memItemRight" valign="bottom"><b>main</b> (void)</td></
 <tr class="separator:a840291bc02cba5474a4cb46a9b9566fe"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Description détaillée</h2>
-<div class="textblock"><p>Fichier permettant de jouer une partie de Picross à partir d'un terminal de commande. </p>
+<div class="textblock"><p>Fichier permettant la génération d'une partie de Picross à partir d'un terminal de commande. </p>
+<p>Fichier permettant de jouer une partie de Picross à partir d'un terminal de commande.</p>
 <dl class="section author"><dt>Auteur</dt><dd>KAJAK Rémi </dd></dl>
 <dl class="section version"><dt>Version</dt><dd>1.0 </dd></dl>
 <dl class="section date"><dt>Date</dt><dd>03/04/2018 </dd></dl>
 </div><h2 class="groupheader">Documentation des fonctions</h2>
+<a class="anchor" id="ab1e6ec88ae60e83eab1cc131a79ad000"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void affichage_jeu </td>
+          <td>(</td>
+          <td class="paramtype">int *&#160;</td>
+          <td class="paramname"><em>mat_hori</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int *&#160;</td>
+          <td class="paramname"><em>mat_verti</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">t_couleurs *&#160;</td>
+          <td class="paramname"><em>mat_prin</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">t_difficulte&#160;</td>
+          <td class="paramname"><em>dim_mat</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Fonction qui rassemble l'affichage des matrices du haut et celles du bas pour afficher le jeu. </p>
+<dl class="params"><dt>Paramètres</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">mat_hori</td><td>La matrice périphérique horizontale.</td></tr>
+    <tr><td class="paramname">mat_verti</td><td>La matrice périphérique verticale.</td></tr>
+    <tr><td class="paramname">mat_prin</td><td>La matrice principale.</td></tr>
+    <tr><td class="paramname">dim_mat</td><td>La taille maximale que la matrice devra posséder. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a class="anchor" id="aa3e98d3cfbf4db36ba1afb4a1bf5a30c"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void afficher_bas </td>
+          <td>(</td>
+          <td class="paramtype">int *&#160;</td>
+          <td class="paramname"><em>mat_verti</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">t_couleurs *&#160;</td>
+          <td class="paramname"><em>mat_prin</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">t_difficulte&#160;</td>
+          <td class="paramname"><em>dim_mat</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Fonction d'affichage de la matrice verticale et de la matrice principale l'une à côté de l'autre. </p>
+<dl class="params"><dt>Paramètres</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">mat_verti</td><td>La matrice périphérique verticale.</td></tr>
+    <tr><td class="paramname">mat_prin</td><td>La matrice principale.</td></tr>
+    <tr><td class="paramname">dim_mat</td><td>La taille maximale que la matrice devra posséder. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a class="anchor" id="a49722fa6c282bc49add2ceeb59f88104"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void afficher_haut </td>
+          <td>(</td>
+          <td class="paramtype">int *&#160;</td>
+          <td class="paramname"><em>mat_hori</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">t_difficulte&#160;</td>
+          <td class="paramname"><em>dim_mat</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Fonction d'affichage d'une matrice vide et de la matrice horizontale l'une à côté de l'autre. </p>
+<dl class="params"><dt>Paramètres</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">mat_hori</td><td>La matrice périphérique horizontale.</td></tr>
+    <tr><td class="paramname">dim_mat</td><td>La taille maximale que la matrice devra posséder. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
 <a class="anchor" id="a7731ac5d32100449a8e2480d599a70cb"></a>
 <div class="memitem">
 <div class="memproto">
@@ -241,6 +361,79 @@ int&#160;</td><td class="memItemRight" valign="bottom"><b>main</b> (void)</td></
 
 </div>
 </div>
+<a class="anchor" id="a9a72073891fc1ec027db352bc45f1628"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void detruire_matrice_peri </td>
+          <td>(</td>
+          <td class="paramtype">int *&#160;</td>
+          <td class="paramname"><em>mat</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Fonction de destruction d'une matrice de type "int*". </p>
+<dl class="params"><dt>Paramètres</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">mat</td><td>La matrice à détruire. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a class="anchor" id="a7b957b79fcc220384d87524b4b85c435"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void detruire_matrice_prin </td>
+          <td>(</td>
+          <td class="paramtype">t_couleurs *&#160;</td>
+          <td class="paramname"><em>mat</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Fonction de destruction d'une matrice de type "t_couleurs*". </p>
+<dl class="params"><dt>Paramètres</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">mat</td><td>La matrice à détruire. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a class="anchor" id="a3c0e0ccaafe0d5640a98630706c689aa"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">dimension_matrice </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>puzzle</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Fonction qui vérifie si les cases de la grille du joueur est correcte par rapport à la grille solution. </p>
+<dl class="params"><dt>Paramètres</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">puzzle</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Renvoie</dt><dd>La difficulté correspondant au numéro du puzzle </dd></dl>
+
+</div>
+</div>
 <a class="anchor" id="a1126745af00395f3f057e7f1c51b0164"></a>
 <div class="memitem">
 <div class="memproto">
@@ -288,6 +481,56 @@ int&#160;</td><td class="memItemRight" valign="bottom"><b>main</b> (void)</td></
   </dd>
 </dl>
 <dl class="section return"><dt>Renvoie</dt><dd>Ne retourne aucun résultat </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="a8422b2d48cb1567687a27006431cde21"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int* init_matrice_peri </td>
+          <td>(</td>
+          <td class="paramtype">t_difficulte&#160;</td>
+          <td class="paramname"><em>dim_mat</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Fonction d'initialisation d'une matrice de type "int*". </p>
+<dl class="params"><dt>Paramètres</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">dim_mat</td><td>La taille maximale que la matrice devra posséder.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Renvoie</dt><dd>La matrice allouée dynamiquement. </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="ac848923fd27c9cbcb10c985e1b11d1a9"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">t_couleurs* init_matrice_prin </td>
+          <td>(</td>
+          <td class="paramtype">t_difficulte&#160;</td>
+          <td class="paramname"><em>dim_mat</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Fonction d'initialisation d'une matrice de type "t_couleurs*" (enum). </p>
+<dl class="params"><dt>Paramètres</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">dim_mat</td><td>La taille maximale que la matrice devra posséder.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Renvoie</dt><dd>La matrice allouée dynamiquement. </dd></dl>
 
 </div>
 </div>
@@ -380,7 +623,7 @@ int&#160;</td><td class="memItemRight" valign="bottom"><b>main</b> (void)</td></
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Généré le Dimanche 8 Avril 2018 18:40:04 pour PROJET PICROSS par &#160;<a href="http://www.doxygen.org/index.html">
+Généré le Dimanche 8 Avril 2018 23:13:35 pour PROJET PICROSS par &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.8
 </small></address>

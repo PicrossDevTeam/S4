@@ -12,4 +12,41 @@ Le Picross est un jeu de réflexion. Une grille de taille fixe contient N cases 
 \end{DoxyVerb}
 
 
-Généralement, un dessin (ou un motif, du moins) se forme au fur et mesure que la grille est complétée. Cela aide aussi le joueur à déterminer la forme finale ainsi que le placement des cases restantes. 
+Généralement, un dessin (ou un motif, du moins) se forme au fur et mesure que la grille est complétée. Cela aide aussi le joueur à déterminer la forme finale ainsi que le placement des cases restantes.
+
+\section*{Instructions pour les démonstrations}
+
+Vous trouverez plusieurs exécutables présents à la racine du répertoire. Les fichiers \char`\"{}demo\textbackslash{}\+\_\+cases\char`\"{} et \char`\"{}demo\textbackslash{}\+\_\+generation\textbackslash{}\+\_\+v1\char`\"{} sont des tests unitaires des fichiers éponymes. Pour les re-\/générer, exécutez les makefiles \char`\"{}makefile\textbackslash{}\+\_\+\+Case\char`\"{} et \char`\"{}makefile\textbackslash{}\+\_\+gen\char`\"{} ; attention avec ce dernier \+: comme \char`\"{}generation.\+c\char`\"{} possède deux versions différentes pour la génération de données, veillez à (dé)commenter les bonnes sections dans le main du fichier.
+
+La commande à utiliser est \char`\"{}make -\/f $<$makefile\textbackslash{}\+\_\+nom$>$\char`\"{}.
+
+L'exécutable \char`\"{}demo\textbackslash{}\+\_\+terminal\char`\"{} permet de jouer à la version en mode console du Picross. Pour re-\/générer l'exécutable, appliquez la commande cité précédemment au fichier \char`\"{}makefile\textbackslash{}\+\_\+terminal\char`\"{}.
+
+Pour générer l'exécutable de l'interface graphique, voici les commandes à entrer dans le terminal \+:
+
+
+\begin{DoxyItemize}
+\item gcc picross\+\_\+sdl.\+c sdl2-\/config --cflags --libs -\/l\+S\+D\+L2\+\_\+ttf
+\item ./a.out
+\end{DoxyItemize}
+
+\section*{Explications du Picross en mode terminal}
+
+Au lancement du jeu, la fenêtre du terminal est nettoyée et la partie se lance automatiquement. Dans cette version, les cases peuvent prendre trois états \+:
+
+
+\begin{DoxyItemize}
+\item 0 -\/$>$ Blanche =$>$ Case vide
+\item 1 -\/$>$ Noire =$>$ Case cochée
+\item 2 -\/$>$ Croix =$>$ Case assurément vide (pour permettre les suppositions)
+\end{DoxyItemize}
+
+Vous devez résoudre les six puzzles proposés dans cette première version (sans solveur) \+:
+
+
+\begin{DoxyItemize}
+\item À chaque tour, le jeu vous demande deux coordonnées x et y, respectivement pour une ligne et une colonne ; =$>$ En cas d'erreur de saisie pour l'une ou pour l'autre, le programme bloquera le tour jusqu'à ce qu'elles soient correctes.
+\item Une fois vos choix effectués, vous pouvez valider votre grille avec les coordonnées -\/1 et -\/1 ;
+\item Le programme vous renverra soit un message de félicitation pour avoir résolu le puzzle, soit un message d'erreur avec le nombre de mauvaises cases cochées ; =$>$ Dans les deux cas, vous pouvez choisir de quitter la partie (et donc le programme) ou de continuer à jouer.
+\item Le jeu se termine automatiquement si vous résolvez tous les puzzles ! 
+\end{DoxyItemize}
