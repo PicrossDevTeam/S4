@@ -10,6 +10,15 @@
 #include <stdlib.h>
 #include "matrice.h"
 
+/**
+ * \fn init_matrice_prin(t_difficulte dim_mat)
+ * \brief Fonction d'initialisation d'une matrice de type "t_couleurs*" (enum).
+ *
+ * \param dim_mat La taille maximale que la matrice devra posséder.
+ *
+ * \return La matrice allouée dynamiquement.
+ */
+
 t_couleurs * init_matrice_prin(t_difficulte dim_mat){
 	t_couleurs * mat = malloc(dim_mat*dim_mat*sizeof(t_couleurs));
 	int i,j;
@@ -21,6 +30,15 @@ t_couleurs * init_matrice_prin(t_difficulte dim_mat){
 	}
 	return mat;
 }
+
+/**
+ * \fn init_matrice_peri(t_difficulte dim_mat)
+ * \brief Fonction d'initialisation d'une matrice de type "int*".
+ *
+ * \param dim_mat La taille maximale que la matrice devra posséder.
+ *
+ * \return La matrice allouée dynamiquement.
+ */
 
 int * init_matrice_peri(t_difficulte dim_mat){
 	int * mat = malloc(dim_mat*dim_mat*sizeof(int));
@@ -34,13 +52,36 @@ int * init_matrice_peri(t_difficulte dim_mat){
 	return mat;
 }
 
+/**
+ * \fn detruire_matrice_peri(int * mat)
+ * \brief Fonction de destruction d'une matrice de type "int*".
+ *
+ * \param mat La matrice à détruire.
+ */
+
 void detruire_matrice_peri(int * mat) {
 	free(mat);
 }
 
+/**
+ * \fn detruire_matrice_prin(t_couleurs * mat)
+ * \brief Fonction de destruction d'une matrice de type "t_couleurs*".
+ *
+ * \param mat La matrice à détruire.
+ */
+
 void detruire_matrice_prin(t_couleurs * mat){
 	free(mat);
 }
+
+/**
+ * \fn afficher_haut(int *mat_hori, t_difficulte dim_mat)
+ * \brief Fonction d'affichage d'une matrice vide et de la matrice horizontale l'une à côté de l'autre.
+ *
+ * \param mat_hori La matrice périphérique horizontale.
+ *
+ * \param dim_mat La taille maximale que la matrice devra posséder.
+ */
 
 void afficher_haut(int *mat_hori, t_difficulte dim_mat){
 	int i,j;
@@ -60,6 +101,17 @@ void afficher_haut(int *mat_hori, t_difficulte dim_mat){
 	}
 	printf("\n");
 }
+
+/**
+ * \fn afficher_bas(int *mat_verti, t_couleurs *mat_prin, t_difficulte dim_mat)
+ * \brief Fonction d'affichage de la matrice verticale et de la matrice principale l'une à côté de l'autre.
+ *
+ * \param mat_verti La matrice périphérique verticale.
+ *
+ * \param mat_prin La matrice principale.
+ *
+ * \param dim_mat La taille maximale que la matrice devra posséder.
+ */
 
 void afficher_bas(int *mat_verti, t_couleurs *mat_prin, t_difficulte dim_mat){
 	int i,j,k;
@@ -86,6 +138,19 @@ void afficher_bas(int *mat_verti, t_couleurs *mat_prin, t_difficulte dim_mat){
 		printf("\n");
 	}
 }
+
+/**
+ * \fn affichage_jeu(int *mat_hori, int *mat_verti, t_couleurs *mat_prin, t_difficulte dim_mat)
+ * \brief Fonction qui rassemble l'affichage des matrices du haut et celles du bas pour afficher le jeu.
+ *
+ * \param mat_hori La matrice périphérique horizontale.
+ *
+ * \param mat_verti La matrice périphérique verticale.
+ *
+ * \param mat_prin La matrice principale.
+ *
+ * \param dim_mat La taille maximale que la matrice devra posséder.
+ */
 
 void affichage_jeu(int *mat_hori, int *mat_verti, t_couleurs *mat_prin, t_difficulte dim_mat){
 	afficher_haut(mat_hori, dim_mat);
