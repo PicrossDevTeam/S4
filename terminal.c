@@ -3,7 +3,7 @@
 * \author KAJAK Rémi
 * \version 1.0
 * \date 03/04/2018
-* \brief Fichier permettant la génération d'une partie de Picross à partir d'un terminal de commande.
+* \brief Fichier permettant de jouer une partie de Picross à partir d'un terminal de commande.
 */
 #include <stdio.h>
 #include <stdlib.h>
