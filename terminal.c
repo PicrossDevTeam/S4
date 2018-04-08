@@ -3,7 +3,7 @@
 * \author KAJAK Rémi
 * \version 1.0
 * \date 03/04/2018
-* \brief Fichier permettant de jouer une partie de Picross à partir d'un terminal de commande.
+* \brief Fichier permettant la génération d'une partie de Picross à partir d'un terminal de commande.
 */
 #include <stdio.h>
 #include <stdlib.h>
@@ -31,7 +31,7 @@ int * init_matrice_peri(t_difficulte dim_mat){
 
 	for(i=0 ; i < dim_mat ; i++) {
 		for(j=0 ; j < dim_mat ; j++) {
-			mat[dim_mat*i+j] = 0;
+			mat[dim_mat*i+j] = Blanche;
 		}
 	}
 	return mat;
@@ -234,57 +234,56 @@ int verif_soluce(t_couleurs *mat_prin, t_couleurs *mat_soluce, int dim_mat){
 
 int main(void){
 	t_difficulte dim_mat;
-	t_couleurs * mat_prin;
-	t_couleurs * mat_soluce;
-	int num_puzzle=6; /* puzzle de départ : 1 */
+	int num_puzzle=1; /* puzzle de départ : 1 */
 	int valid; /* le joueur entre -1 */
-	int mat_ok=1; /* cas où le joueur n'a pas bon mais veut continuer */
 	int choix=0; /* continuer ou arrêter */
 	int jeu_gagne=1; /* Le joueur a gagné le jeu ou non */
-
-	int * mat_verti;
-	int * mat_hori;
 
 	while(num_puzzle<7 && choix==0){
 		dim_mat=dimension_matrice(num_puzzle);
 
-		mat_prin = init_matrice_prin(dim_mat);
-		mat_soluce = init_matrice_prin(dim_mat);
-		mat_verti = init_matrice_peri(dim_mat);
-		mat_hori = init_matrice_peri(dim_mat);
+		t_couleurs * mat_prin = init_matrice_prin(dim_mat);
+		t_couleurs * mat_soluce = init_matrice_prin(dim_mat);
+		int * mat_verti = init_matrice_peri(dim_mat);
+		int * mat_hori = init_matrice_peri(dim_mat);
 
 		lecture_fic_v1("puzzles_binaires.txt", num_puzzle, mat_soluce, dim_mat);
 		gen_peripheriques(mat_soluce, mat_hori, mat_verti, dim_mat);
 
-		while(mat_ok==1){
-			mat_ok=0;
-			do{
-				affichage_jeu(mat_hori, mat_verti, mat_prin, dim_mat);
-			} while(saisir_coord(mat_prin, dim_mat)!=1);
+continuer_partie:
+		do{
+			affichage_jeu(mat_hori, mat_verti, mat_prin, dim_mat);
+		} while(saisir_coord(mat_prin, dim_mat)!=1);
 
-			do{
-				if(verif_soluce(mat_prin, mat_soluce, dim_mat)==1){
-					printf("Votre solution est fausse, entrez 0 pour continuer ou 1 pour arrêter : ");
-					scanf("%i", &choix);
-					if(choix==0)
-						mat_ok=1;
-				} else {
-					printf("Félicitation ! Si vous voulez passer au niveau suivant entrez 0 pour continuer ou 1 pour arrêter : ");
-					scanf("%i", &choix);
-					if(choix==0){
-						num_puzzle++;
-						if(num_puzzle==7)
-							jeu_gagne=0;
-					}
+		do{
+			if(verif_soluce(mat_prin, mat_soluce, dim_mat)==1){
+				printf("Votre solution est fausse, entrez 0 pour continuer ou 1 pour arrêter : ");
+				scanf("%i", &choix);
+				if(choix==1)
+					goto Quit;
+				else
+					goto continuer_partie;
+			} else {
+				if(num_puzzle==6){
+					jeu_gagne=0;
+					goto Quit;
 				}
-			} while(choix!=0 && choix!=1);
-		}
+				printf("Félicitation ! Si vous voulez passer au niveau suivant entrez 0 pour continuer ou 1 pour arrêter : ");
+				scanf("%i", &choix);
+				if(choix==0){
+					num_puzzle++;
+				}
+				else
+					goto Quit;
+			}
+		} while(choix!=0 && choix!=1);
 		detruire_matrice_prin(mat_prin);
 		detruire_matrice_prin(mat_soluce);
 		detruire_matrice_peri(mat_verti);
 		detruire_matrice_peri(mat_hori);
 	}
 
+Quit:
 	if(jeu_gagne==0){
 		printf("Félicitation, vous avez réussi le jeu du Picross, à une prochaine fois !\n");
 	}
