@@ -192,10 +192,12 @@ void gen_peripheriques(t_couleurs *soluce, int *colonnes, int *lignes, t_difficu
 				
 				if(j == taille-1) colonnes[taille*nb_groupes_colonne+i] = taille_groupe_colonne;
 			}
-			else if(soluce[taille*j+i]%2 == 0 && soluce[taille*(j-1)+i]%2 == 1) {
-				colonnes[taille*nb_groupes_colonne+i] = taille_groupe_colonne;
-				taille_groupe_colonne = 0;
-				nb_groupes_colonne++;
+			else {
+				if(j > 0 && soluce[taille*(j-1)+i]%2 == 1) {
+					colonnes[taille*nb_groupes_colonne+i] = taille_groupe_colonne;
+					taille_groupe_colonne = 0;
+					nb_groupes_colonne++;
+				}
 			}
 			// Remplissage de la matrice périphérique des lignes
 			if(soluce[taille*i+j]%2 == 1) {
@@ -203,11 +205,13 @@ void gen_peripheriques(t_couleurs *soluce, int *colonnes, int *lignes, t_difficu
 				
 				if(j == taille-1) lignes[taille*i+nb_groupes_ligne] = taille_groupe_ligne;
 			}
-			else if(soluce[taille*i+j]%2 == 0 && soluce[taille*i+j-1]%2 == 1) {
-				lignes[taille*i+nb_groupes_ligne] = taille_groupe_ligne;
-				taille_groupe_ligne = 0;
-				nb_groupes_ligne++;
-			}
+			else {
+				if(j > 0 && soluce[taille*i+j-1]%2 == 1) {
+					lignes[taille*i+nb_groupes_ligne] = taille_groupe_ligne;
+					taille_groupe_ligne = 0;
+					nb_groupes_ligne++;
+				}
+			} //*/
 		}
 	}
 }
@@ -467,29 +471,46 @@ void gen_peripheriques(t_couleurs *soluce, int *colonnes, int *lignes, t_difficu
 * Puzzle n°5 : Testé rapidement - aucune analyse effectuée entre la génération et le résultat attendu (échec certain avec une seule itération)
 */
 /*int main() {
-	char *saisie = "puzzles_binaires.txt";
-	int *matColonnes = NULL, *matLignes = NULL;
+	char *fic = "puzzles_binaires.txt";
+	int *matColonnes = NULL, *matLignes = NULL, saisie;
 	t_couleurs *soluce = NULL;
-	t_difficulte niveau = facile;
+	t_difficulte niveau;
 	
+	
+	// Génération version n°1
+	printf("Quelle puzzle souhaitez-vous générer ? Entrez un chiffre compris entre 1 et 6 : ");
+	do {
+		scanf("%i",&saisie);
+		if(saisie < 1) printf("\nERREUR : Le chiffre saisi est inférieur à 1 ! Veuillez recommencer : ");
+		else if(saisie > 6) printf("\nERREUR : Le chiffre saisi est supérieur à 6 ! Veuillez recommencer : ");
+	} while(saisie < 1 || saisie > 6);
+	
+	if(saisie == 1 || saisie == 2) niveau = facile;
+	else if(saisie == 3 || saisie == 4) niveau = normal;
+	else niveau = difficile;
+	
+	// Génération des matrices et initialisation par défaut
 	soluce = init_case(niveau);
 	matColonnes = init_matrice_periph(niveau);
 	matLignes = init_matrice_periph(niveau);
 	
-	lecture_fic_v1(saisie,2,soluce,niveau);
+	// Lecture du fichier avec les paramètres sélectionnés
+	lecture_fic_v1(fic,saisie,soluce,niveau);
 	printf("\nMatrice solution :\n");
 	verif_matrice(soluce,niveau);
 	
+	// Initilisation des matrices périphériques avec les données de la matrice solution
 	gen_peripheriques(soluce,matColonnes,matLignes,niveau);
 	afficher_matrice(matColonnes,niveau,'C');
 	afficher_matrice(matLignes,niveau,'L');
 	
+	// Libération de la mémoire allouée aux matrices
 	free(soluce);
 	soluce = NULL;
 	free(matColonnes);
 	matColonnes = NULL;
 	free(matLignes);
-	matLignes = NULL; //*/
+	matLignes = NULL;
 	
 	printf("\n");
 	return 0;

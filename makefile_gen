@@ -1,4 +1,4 @@
-PROG = demo_generation
+PROG = demo_generation_v2
 CC = gcc
 FLAGS = -g -Wall
 CASE = Case

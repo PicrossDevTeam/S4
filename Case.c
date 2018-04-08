@@ -19,7 +19,7 @@
  *
  * \return La matrice allouée dynamiquement
  */
-t_couleurs* init_case(int taille_max) {
+t_couleurs* init_case(t_difficulte taille_max) {
 	t_couleurs* mat = malloc(taille_max * taille_max * sizeof(t_couleurs));
 	int i, j;
 
@@ -35,7 +35,7 @@ t_couleurs* init_case(int taille_max) {
 }
 /*********************************************************************************************/
 /**
- * \fn verif_matrice(t_couleurs* mat)
+ * \fn verif_matrice(t_couleurs* mat, t_difficulte taille_max)
  * \brief Fonction qui affiche les cases.
  *
  * \param mat La matrice représentant la grille
@@ -43,7 +43,7 @@ t_couleurs* init_case(int taille_max) {
  *
  * \return Ne retourne aucune valeur
  */
-void verif_matrice(t_couleurs *mat, int taille_max) {
+void verif_matrice(t_couleurs *mat, t_difficulte taille_max) {
 	int i,j;
 
 	for(i=0 ; i< taille_max ; i++){
@@ -68,7 +68,7 @@ void verif_matrice(t_couleurs *mat, int taille_max) {
  *
  * \return Ne retourne aucune valeur
  */
-void changerEtat(t_couleurs *mat, int taille, int x, int y) {
+void changerEtat(t_couleurs *mat, t_difficulte taille, int x, int y) {
 	if(mat[taille*x+y] == Blanche)
 		mat[taille*x+y] = Noire;
 	else if(mat[taille*x+y] == Noire)
@@ -87,7 +87,7 @@ void changerEtat(t_couleurs *mat, int taille, int x, int y) {
  *
  * \return Retourne l'état de la sélection, si le joueur souhaite soumettre sa grille à la vérification ou pas
  */
-int saisir_coord(t_couleurs *mat, int taille) {
+int saisir_coord(t_couleurs *mat, t_difficulte taille) {
 	int x = 0, y = 0;
 
 	while((x < 1 || x > taille) || (y < 1 || y > taille)) {
@@ -111,21 +111,21 @@ int saisir_coord(t_couleurs *mat, int taille) {
 
 /*********************************************************************************************/
 /**
-* \fn verifierGrille(t_couleurs *matd, t_couleurs *matf, int taille)
+* \fn verifierGrille(t_couleurs *matd, t_couleurs *matf, t_difficulte taille)
  * \brief Fonction qui vérifie si les cases la grille du joueur est correcte.
  *
- * \param matd La matrice de type enum qui représente la grille qu'il faut avoir
- * \param matf La matrice de type enum qui représente la grille du joueur
+ * \param matSoluce La matrice de type enum qui représente la grille solution
+ * \param matJoueur La matrice de type enum qui représente la grille du joueur
  * \param taille La taille de la matrice
  *
  * \return Le nombre de différences relevé entre les deux matrices
  */
-int verifierGrille(t_couleurs *matd, t_couleurs *matf, int taille) {
+int verifierGrille(t_couleurs *matSoluce, t_couleurs *matJoueur, t_difficulte taille) {
 	int i, j, erreurs = 0;
 
 	for(i = 0; i< taille; i++ ) {
 		for(j = 0; j< taille; j++) {
-			if(matd[taille*i+j] != matf[taille*i+j])
+			if(matSoluce[taille*i+j] != matJoueur[taille*i+j])
 				erreurs++;
 
 		}
@@ -142,21 +142,23 @@ int verifierGrille(t_couleurs *matd, t_couleurs *matf, int taille) {
  *
  */
 /*int main() {
-	t_couleurs *U = NULL;
+	t_couleurs *joueur = NULL;
 	t_difficulte niveau = facile;
+	int etat_saisie;
 	
-	U = init_case(niveau);
-	verif_matrice(U,niveau);
+	joueur = init_case(niveau);
+	verif_matrice(joueur,niveau);
 	printf("---------------\n");
 
-	int etat_saisie = saisir_coord(U,niveau);
-	verif_matrice(U,niveau);
-	printf("---------------\n");
+	do {
+		etat_saisie = saisir_coord(joueur,niveau);
+		verif_matrice(joueur,niveau);
+		printf("---------------\n");
 	
-	if(etat_saisie == 0) printf("Pas de vérification entre les matrices jeu et solution.\n\n");
-	else printf("Vérification enclenchée !\n\n");
+	} while(etat_saisie != 1);
+	printf("Vérification enclenchée !\n\n");
 
-	free(U);
-	U = NULL;
+	free(joueur);
+	joueur = NULL;
 	return 0;
 } //*/
