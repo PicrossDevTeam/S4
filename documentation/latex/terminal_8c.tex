@@ -3,30 +3,105 @@
 }
 
 
-Fichier permettant la génération d'une partie de Picross à partir d'un terminal de commande.  
+Fichier permettant de jouer une partie de Picross à partir d'un terminal de commande.  
 
 
 {\ttfamily \#include $<$stdio.\+h$>$}\\*
 {\ttfamily \#include $<$stdlib.\+h$>$}\\*
-{\ttfamily \#include $<$string.\+h$>$}\\*
-{\ttfamily \#include \char`\"{}generation.\+h\char`\"{}}\\*
 Graphe des dépendances par inclusion de terminal.\+c\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
-\includegraphics[width=348pt]{terminal_8c__incl}
+\includegraphics[width=192pt]{terminal_8c__incl}
 \end{center}
 \end{figure}
+\subsection*{Définitions de type}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{terminal_8c_a94756a97e8544e427ec192d822e8d18d}{typedef enum couleurs {\bfseries t\+\_\+couleurs}}\label{terminal_8c_a94756a97e8544e427ec192d822e8d18d}
+
+\item 
+\hypertarget{terminal_8c_ac44c29a89ad2278798bb0c02e4282afb}{typedef enum difficulte {\bfseries t\+\_\+difficulte}}\label{terminal_8c_ac44c29a89ad2278798bb0c02e4282afb}
+
+\end{DoxyCompactItemize}
+\subsection*{Énumérations}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{terminal_8c_ae8772b89c073fcb61b7a2482b1192b3e}{enum {\bfseries couleurs} \{ \\*
+{\bfseries Blanche}, 
+{\bfseries Noire}, 
+{\bfseries Croix}, 
+{\bfseries Blanche}, 
+\\*
+{\bfseries Noire}, 
+{\bfseries Croix}, 
+{\bfseries Blanche}, 
+{\bfseries Noire}, 
+\\*
+{\bfseries Croix}
+ \}}\label{terminal_8c_ae8772b89c073fcb61b7a2482b1192b3e}
+
+\item 
+\hypertarget{terminal_8c_a35aa2d55b501700469097f04b7962297}{enum {\bfseries difficulte} \{ \\*
+{\bfseries facile} = 3, 
+{\bfseries normal}, 
+{\bfseries difficile}, 
+{\bfseries expert} = 10, 
+\\*
+{\bfseries facile} =3, 
+{\bfseries normal} =5, 
+{\bfseries difficile} =7, 
+{\bfseries expert} =10, 
+\\*
+{\bfseries facile} =3, 
+{\bfseries normal} =5, 
+{\bfseries difficile} =7, 
+{\bfseries expert} =10
+ \}}\label{terminal_8c_a35aa2d55b501700469097f04b7962297}
+
+\end{DoxyCompactItemize}
 \subsection*{Fonctions}
 \begin{DoxyCompactItemize}
 \item 
-\hypertarget{terminal_8c_ae66f6b31b5ad750f1fe042a706a4e3d4}{int {\bfseries main} ()}\label{terminal_8c_ae66f6b31b5ad750f1fe042a706a4e3d4}
+\hypertarget{terminal_8c_ac848923fd27c9cbcb10c985e1b11d1a9}{t\+\_\+couleurs $\ast$ {\bfseries init\+\_\+matrice\+\_\+prin} (t\+\_\+difficulte dim\+\_\+mat)}\label{terminal_8c_ac848923fd27c9cbcb10c985e1b11d1a9}
+
+\item 
+\hypertarget{terminal_8c_a8422b2d48cb1567687a27006431cde21}{int $\ast$ {\bfseries init\+\_\+matrice\+\_\+peri} (t\+\_\+difficulte dim\+\_\+mat)}\label{terminal_8c_a8422b2d48cb1567687a27006431cde21}
+
+\item 
+\hypertarget{terminal_8c_a9a72073891fc1ec027db352bc45f1628}{void {\bfseries detruire\+\_\+matrice\+\_\+peri} (int $\ast$mat)}\label{terminal_8c_a9a72073891fc1ec027db352bc45f1628}
+
+\item 
+\hypertarget{terminal_8c_a7b957b79fcc220384d87524b4b85c435}{void {\bfseries detruire\+\_\+matrice\+\_\+prin} (t\+\_\+couleurs $\ast$mat)}\label{terminal_8c_a7b957b79fcc220384d87524b4b85c435}
+
+\item 
+\hypertarget{terminal_8c_a49722fa6c282bc49add2ceeb59f88104}{void {\bfseries afficher\+\_\+haut} (int $\ast$mat\+\_\+hori, t\+\_\+difficulte dim\+\_\+mat)}\label{terminal_8c_a49722fa6c282bc49add2ceeb59f88104}
+
+\item 
+\hypertarget{terminal_8c_aa3e98d3cfbf4db36ba1afb4a1bf5a30c}{void {\bfseries afficher\+\_\+bas} (int $\ast$mat\+\_\+verti, t\+\_\+couleurs $\ast$mat\+\_\+prin, t\+\_\+difficulte dim\+\_\+mat)}\label{terminal_8c_aa3e98d3cfbf4db36ba1afb4a1bf5a30c}
+
+\item 
+\hypertarget{terminal_8c_ab1e6ec88ae60e83eab1cc131a79ad000}{void {\bfseries affichage\+\_\+jeu} (int $\ast$mat\+\_\+hori, int $\ast$mat\+\_\+verti, t\+\_\+couleurs $\ast$mat\+\_\+prin, t\+\_\+difficulte dim\+\_\+mat)}\label{terminal_8c_ab1e6ec88ae60e83eab1cc131a79ad000}
+
+\item 
+void \hyperlink{terminal_8c_a7731ac5d32100449a8e2480d599a70cb}{changer\+Etat} (t\+\_\+couleurs $\ast$mat\+\_\+prin, t\+\_\+difficulte dim\+\_\+mat, int x, int y)
+\begin{DoxyCompactList}\small\item\em Fonction qui permet de changer l'état de la case. \end{DoxyCompactList}\item 
+int \hyperlink{terminal_8c_aaf69df6150ddf60905ed92f6b47447aa}{saisir\+\_\+coord} (t\+\_\+couleurs $\ast$mat\+\_\+prin, t\+\_\+difficulte dim\+\_\+mat)
+\begin{DoxyCompactList}\small\item\em Fonction qui permet à l'utilisateur d'entrer des coordonnées. \end{DoxyCompactList}\item 
+void \hyperlink{terminal_8c_a3e9c8b3fe82c9af0c1dea882df430528}{lecture\+\_\+fic\+\_\+v1} (char $\ast$nom\+\_\+fic, int puzzle, t\+\_\+couleurs $\ast$soluce, t\+\_\+difficulte taille)
+\begin{DoxyCompactList}\small\item\em Lit un fichier avec un format spécifique et remplit une matrice solution (première version du jeu). \end{DoxyCompactList}\item 
+void \hyperlink{terminal_8c_a1126745af00395f3f057e7f1c51b0164}{gen\+\_\+peripheriques} (t\+\_\+couleurs $\ast$soluce, int $\ast$colonnes, int $\ast$lignes, t\+\_\+difficulte taille)
+\begin{DoxyCompactList}\small\item\em Lit la matrice solution et génère les nombres correspondant aux groupes de cases pleines de chaque rangée dans les bonnes matrices périphériques. \end{DoxyCompactList}\item 
+\hypertarget{terminal_8c_a8a74374a913d4fb5d06612ed4992170a}{int {\bfseries verif\+\_\+soluce} (t\+\_\+couleurs $\ast$mat\+\_\+prin, t\+\_\+couleurs $\ast$mat\+\_\+soluce, int dim\+\_\+mat)}\label{terminal_8c_a8a74374a913d4fb5d06612ed4992170a}
+
+\item 
+\hypertarget{terminal_8c_a840291bc02cba5474a4cb46a9b9566fe}{int {\bfseries main} (void)}\label{terminal_8c_a840291bc02cba5474a4cb46a9b9566fe}
 
 \end{DoxyCompactItemize}
 
 
 \subsection{Description détaillée}
-Fichier permettant la génération d'une partie de Picross à partir d'un terminal de commande. 
+Fichier permettant de jouer une partie de Picross à partir d'un terminal de commande. 
 
 \begin{DoxyAuthor}{Auteur}
 K\+A\+J\+A\+K Rémi 
@@ -37,3 +112,112 @@ K\+A\+J\+A\+K Rémi
 \begin{DoxyDate}{Date}
 03/04/2018 
 \end{DoxyDate}
+
+
+\subsection{Documentation des fonctions}
+\hypertarget{terminal_8c_a7731ac5d32100449a8e2480d599a70cb}{\index{terminal.\+c@{terminal.\+c}!changer\+Etat@{changer\+Etat}}
+\index{changer\+Etat@{changer\+Etat}!terminal.\+c@{terminal.\+c}}
+\subsubsection[{changer\+Etat}]{\setlength{\rightskip}{0pt plus 5cm}void changer\+Etat (
+\begin{DoxyParamCaption}
+\item[{t\+\_\+couleurs $\ast$}]{mat\+\_\+prin, }
+\item[{t\+\_\+difficulte}]{dim\+\_\+mat, }
+\item[{int}]{x, }
+\item[{int}]{y}
+\end{DoxyParamCaption}
+)}}\label{terminal_8c_a7731ac5d32100449a8e2480d599a70cb}
+
+
+Fonction qui permet de changer l'état de la case. 
+
+
+\begin{DoxyParams}{Paramètres}
+{\em mat} & La matrice qui représente la grille \\
+\hline
+{\em taille} & La taille de la matrice renseignée \\
+\hline
+{\em x} & Une coordonnée renseignant l'abscisse d'une matrice \\
+\hline
+{\em y} & Une coordonnée renseignant l'ordonnée d'une matrice\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Renvoie}
+Ne retourne aucune valeur 
+\end{DoxyReturn}
+\hypertarget{terminal_8c_a1126745af00395f3f057e7f1c51b0164}{\index{terminal.\+c@{terminal.\+c}!gen\+\_\+peripheriques@{gen\+\_\+peripheriques}}
+\index{gen\+\_\+peripheriques@{gen\+\_\+peripheriques}!terminal.\+c@{terminal.\+c}}
+\subsubsection[{gen\+\_\+peripheriques}]{\setlength{\rightskip}{0pt plus 5cm}void gen\+\_\+peripheriques (
+\begin{DoxyParamCaption}
+\item[{t\+\_\+couleurs $\ast$}]{soluce, }
+\item[{int $\ast$}]{colonnes, }
+\item[{int $\ast$}]{lignes, }
+\item[{t\+\_\+difficulte}]{taille}
+\end{DoxyParamCaption}
+)}}\label{terminal_8c_a1126745af00395f3f057e7f1c51b0164}
+
+
+Lit la matrice solution et génère les nombres correspondant aux groupes de cases pleines de chaque rangée dans les bonnes matrices périphériques. 
+
+
+\begin{DoxyParams}{Paramètres}
+{\em soluce} & La matrice solution de type enum \\
+\hline
+{\em colonnes} & La matrice périphérique des colonnes \\
+\hline
+{\em lignes} & La matrice périphérique des lignes \\
+\hline
+{\em taille} & La taille des matrices renseignées\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Renvoie}
+Ne retourne aucun résultat 
+\end{DoxyReturn}
+\hypertarget{terminal_8c_a3e9c8b3fe82c9af0c1dea882df430528}{\index{terminal.\+c@{terminal.\+c}!lecture\+\_\+fic\+\_\+v1@{lecture\+\_\+fic\+\_\+v1}}
+\index{lecture\+\_\+fic\+\_\+v1@{lecture\+\_\+fic\+\_\+v1}!terminal.\+c@{terminal.\+c}}
+\subsubsection[{lecture\+\_\+fic\+\_\+v1}]{\setlength{\rightskip}{0pt plus 5cm}void lecture\+\_\+fic\+\_\+v1 (
+\begin{DoxyParamCaption}
+\item[{char $\ast$}]{nom\+\_\+fic, }
+\item[{int}]{puzzle, }
+\item[{t\+\_\+couleurs $\ast$}]{soluce, }
+\item[{t\+\_\+difficulte}]{taille}
+\end{DoxyParamCaption}
+)}}\label{terminal_8c_a3e9c8b3fe82c9af0c1dea882df430528}
+
+
+Lit un fichier avec un format spécifique et remplit une matrice solution (première version du jeu). 
+
+
+\begin{DoxyParams}{Paramètres}
+{\em nom\+\_\+fic} & Nom du fichier texte à analyser \\
+\hline
+{\em puzzle} & Numéro du puzzle à trouver dans le fichier \\
+\hline
+{\em soluce} & La matrice solution de type enum \\
+\hline
+{\em taille} & La taille de la matrice renseignée\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Renvoie}
+Ne retourne aucun résultat 
+\end{DoxyReturn}
+\hypertarget{terminal_8c_aaf69df6150ddf60905ed92f6b47447aa}{\index{terminal.\+c@{terminal.\+c}!saisir\+\_\+coord@{saisir\+\_\+coord}}
+\index{saisir\+\_\+coord@{saisir\+\_\+coord}!terminal.\+c@{terminal.\+c}}
+\subsubsection[{saisir\+\_\+coord}]{\setlength{\rightskip}{0pt plus 5cm}int saisir\+\_\+coord (
+\begin{DoxyParamCaption}
+\item[{t\+\_\+couleurs $\ast$}]{mat\+\_\+prin, }
+\item[{t\+\_\+difficulte}]{dim\+\_\+mat}
+\end{DoxyParamCaption}
+)}}\label{terminal_8c_aaf69df6150ddf60905ed92f6b47447aa}
+
+
+Fonction qui permet à l'utilisateur d'entrer des coordonnées. 
+
+
+\begin{DoxyParams}{Paramètres}
+{\em mat} & La matrice de type enum qui représente la grille \\
+\hline
+{\em taille} & La taille de la matrice renseignée\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Renvoie}
+Retourne l'état de la sélection, si le joueur souhaite soumettre sa grille à la vérification ou pas 
+\end{DoxyReturn}

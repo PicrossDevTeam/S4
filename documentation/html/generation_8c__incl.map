@@ -1,3 +1,4 @@
 <map id="generation.c" name="generation.c">
-<area shape="rect" id="node5" href="$generation_8h_source.html" title="generation.h" alt="" coords="269,80,363,107"/>
+<area shape="rect" id="node5" href="$generation_8h.html" title="Fichier contenant les définitions des fonctions de &quot;generation.c&quot;. Fait appel à &quot;Case.h&quot; pour obtenir les définitions et les structures de &quot;Case.c&quot;. " alt="" coords="269,80,363,107"/>
+<area shape="rect" id="node6" href="$Case_8h.html" title="Contient les définitions des structures enum et des fonctions de &quot;Case.c&quot;. " alt="" coords="284,155,348,181"/>
 </map>

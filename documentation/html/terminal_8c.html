@@ -38,7 +38,6 @@ var searchBox = new SearchBox("searchBox", "search",false,'Recherche');
     <ul class="tablist">
       <li><a href="index.html"><span>Page&#160;principale</span></a></li>
       <li><a href="pages.html"><span>Pages&#160;associées</span></a></li>
-      <li><a href="annotated.html"><span>Classes</span></a></li>
       <li class="current"><a href="files.html"><span>Fichiers</span></a></li>
       <li>
         <div id="MSearchBox" class="MSearchBoxInactive">
@@ -69,7 +68,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Recherche');
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>Tout</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Fichiers</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Fonctions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Pages</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>Tout</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Fichiers</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Fonctions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Pages</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -81,41 +80,307 @@ var searchBox = new SearchBox("searchBox", "search",false,'Recherche');
 </div><!-- top -->
 <div class="header">
   <div class="summary">
+<a href="#typedef-members">Définitions de type</a> &#124;
+<a href="#enum-members">Énumérations</a> &#124;
 <a href="#func-members">Fonctions</a>  </div>
   <div class="headertitle">
 <div class="title">Référence du fichier terminal.c</div>  </div>
 </div><!--header-->
 <div class="contents">
 
-<p>Fichier permettant la génération d'une partie de Picross à partir d'un terminal de commande.  
+<p>Fichier permettant de jouer une partie de Picross à partir d'un terminal de commande.  
 <a href="#details">Plus de détails...</a></p>
 <div class="textblock"><code>#include &lt;stdio.h&gt;</code><br />
 <code>#include &lt;stdlib.h&gt;</code><br />
-<code>#include &lt;string.h&gt;</code><br />
-<code>#include &quot;generation.h&quot;</code><br />
 </div><div class="textblock"><div class="dynheader">
 Graphe des dépendances par inclusion de terminal.c:</div>
 <div class="dyncontent">
 <div class="center"><img src="terminal_8c__incl.png" border="0" usemap="#terminal_8c" alt=""/></div>
-<map name="terminal_8c" id="terminal_8c">
-<area shape="rect" id="node5" href="generation_8h_source.html" title="generation.h" alt="" coords="269,80,363,107"/></map>
 </div>
 </div><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="typedef-members"></a>
+Définitions de type</h2></td></tr>
+<tr class="memitem:a94756a97e8544e427ec192d822e8d18d"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a94756a97e8544e427ec192d822e8d18d"></a>
+typedef enum couleurs&#160;</td><td class="memItemRight" valign="bottom"><b>t_couleurs</b></td></tr>
+<tr class="separator:a94756a97e8544e427ec192d822e8d18d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac44c29a89ad2278798bb0c02e4282afb"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ac44c29a89ad2278798bb0c02e4282afb"></a>
+typedef enum difficulte&#160;</td><td class="memItemRight" valign="bottom"><b>t_difficulte</b></td></tr>
+<tr class="separator:ac44c29a89ad2278798bb0c02e4282afb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="enum-members"></a>
+Énumérations</h2></td></tr>
+<tr class="memitem:ae8772b89c073fcb61b7a2482b1192b3e"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ae8772b89c073fcb61b7a2482b1192b3e"></a>enum &#160;</td><td class="memItemRight" valign="bottom"><b>couleurs</b> { <br />
+&#160;&#160;<b>Blanche</b>, 
+<b>Noire</b>, 
+<b>Croix</b>, 
+<b>Blanche</b>, 
+<br />
+&#160;&#160;<b>Noire</b>, 
+<b>Croix</b>, 
+<b>Blanche</b>, 
+<b>Noire</b>, 
+<br />
+&#160;&#160;<b>Croix</b>
+<br />
+ }</td></tr>
+<tr class="separator:ae8772b89c073fcb61b7a2482b1192b3e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a35aa2d55b501700469097f04b7962297"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a35aa2d55b501700469097f04b7962297"></a>enum &#160;</td><td class="memItemRight" valign="bottom"><b>difficulte</b> { <br />
+&#160;&#160;<b>facile</b> = 3, 
+<b>normal</b>, 
+<b>difficile</b>, 
+<b>expert</b> = 10, 
+<br />
+&#160;&#160;<b>facile</b> =3, 
+<b>normal</b> =5, 
+<b>difficile</b> =7, 
+<b>expert</b> =10, 
+<br />
+&#160;&#160;<b>facile</b> =3, 
+<b>normal</b> =5, 
+<b>difficile</b> =7, 
+<b>expert</b> =10
+<br />
+ }</td></tr>
+<tr class="separator:a35aa2d55b501700469097f04b7962297"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Fonctions</h2></td></tr>
-<tr class="memitem:ae66f6b31b5ad750f1fe042a706a4e3d4"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ae66f6b31b5ad750f1fe042a706a4e3d4"></a>
-int&#160;</td><td class="memItemRight" valign="bottom"><b>main</b> ()</td></tr>
-<tr class="separator:ae66f6b31b5ad750f1fe042a706a4e3d4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac848923fd27c9cbcb10c985e1b11d1a9"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ac848923fd27c9cbcb10c985e1b11d1a9"></a>
+t_couleurs *&#160;</td><td class="memItemRight" valign="bottom"><b>init_matrice_prin</b> (t_difficulte dim_mat)</td></tr>
+<tr class="separator:ac848923fd27c9cbcb10c985e1b11d1a9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8422b2d48cb1567687a27006431cde21"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a8422b2d48cb1567687a27006431cde21"></a>
+int *&#160;</td><td class="memItemRight" valign="bottom"><b>init_matrice_peri</b> (t_difficulte dim_mat)</td></tr>
+<tr class="separator:a8422b2d48cb1567687a27006431cde21"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9a72073891fc1ec027db352bc45f1628"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a9a72073891fc1ec027db352bc45f1628"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>detruire_matrice_peri</b> (int *mat)</td></tr>
+<tr class="separator:a9a72073891fc1ec027db352bc45f1628"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7b957b79fcc220384d87524b4b85c435"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a7b957b79fcc220384d87524b4b85c435"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>detruire_matrice_prin</b> (t_couleurs *mat)</td></tr>
+<tr class="separator:a7b957b79fcc220384d87524b4b85c435"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a49722fa6c282bc49add2ceeb59f88104"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a49722fa6c282bc49add2ceeb59f88104"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>afficher_haut</b> (int *mat_hori, t_difficulte dim_mat)</td></tr>
+<tr class="separator:a49722fa6c282bc49add2ceeb59f88104"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa3e98d3cfbf4db36ba1afb4a1bf5a30c"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aa3e98d3cfbf4db36ba1afb4a1bf5a30c"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>afficher_bas</b> (int *mat_verti, t_couleurs *mat_prin, t_difficulte dim_mat)</td></tr>
+<tr class="separator:aa3e98d3cfbf4db36ba1afb4a1bf5a30c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab1e6ec88ae60e83eab1cc131a79ad000"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ab1e6ec88ae60e83eab1cc131a79ad000"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>affichage_jeu</b> (int *mat_hori, int *mat_verti, t_couleurs *mat_prin, t_difficulte dim_mat)</td></tr>
+<tr class="separator:ab1e6ec88ae60e83eab1cc131a79ad000"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7731ac5d32100449a8e2480d599a70cb"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="terminal_8c.html#a7731ac5d32100449a8e2480d599a70cb">changerEtat</a> (t_couleurs *mat_prin, t_difficulte dim_mat, int x, int y)</td></tr>
+<tr class="memdesc:a7731ac5d32100449a8e2480d599a70cb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Fonction qui permet de changer l'état de la case.  <a href="#a7731ac5d32100449a8e2480d599a70cb">Plus de détails...</a><br /></td></tr>
+<tr class="separator:a7731ac5d32100449a8e2480d599a70cb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aaf69df6150ddf60905ed92f6b47447aa"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="terminal_8c.html#aaf69df6150ddf60905ed92f6b47447aa">saisir_coord</a> (t_couleurs *mat_prin, t_difficulte dim_mat)</td></tr>
+<tr class="memdesc:aaf69df6150ddf60905ed92f6b47447aa"><td class="mdescLeft">&#160;</td><td class="mdescRight">Fonction qui permet à l'utilisateur d'entrer des coordonnées.  <a href="#aaf69df6150ddf60905ed92f6b47447aa">Plus de détails...</a><br /></td></tr>
+<tr class="separator:aaf69df6150ddf60905ed92f6b47447aa"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3e9c8b3fe82c9af0c1dea882df430528"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="terminal_8c.html#a3e9c8b3fe82c9af0c1dea882df430528">lecture_fic_v1</a> (char *nom_fic, int puzzle, t_couleurs *soluce, t_difficulte taille)</td></tr>
+<tr class="memdesc:a3e9c8b3fe82c9af0c1dea882df430528"><td class="mdescLeft">&#160;</td><td class="mdescRight">Lit un fichier avec un format spécifique et remplit une matrice solution (première version du jeu).  <a href="#a3e9c8b3fe82c9af0c1dea882df430528">Plus de détails...</a><br /></td></tr>
+<tr class="separator:a3e9c8b3fe82c9af0c1dea882df430528"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1126745af00395f3f057e7f1c51b0164"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="terminal_8c.html#a1126745af00395f3f057e7f1c51b0164">gen_peripheriques</a> (t_couleurs *soluce, int *colonnes, int *lignes, t_difficulte taille)</td></tr>
+<tr class="memdesc:a1126745af00395f3f057e7f1c51b0164"><td class="mdescLeft">&#160;</td><td class="mdescRight">Lit la matrice solution et génère les nombres correspondant aux groupes de cases pleines de chaque rangée dans les bonnes matrices périphériques.  <a href="#a1126745af00395f3f057e7f1c51b0164">Plus de détails...</a><br /></td></tr>
+<tr class="separator:a1126745af00395f3f057e7f1c51b0164"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8a74374a913d4fb5d06612ed4992170a"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a8a74374a913d4fb5d06612ed4992170a"></a>
+int&#160;</td><td class="memItemRight" valign="bottom"><b>verif_soluce</b> (t_couleurs *mat_prin, t_couleurs *mat_soluce, int dim_mat)</td></tr>
+<tr class="separator:a8a74374a913d4fb5d06612ed4992170a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a840291bc02cba5474a4cb46a9b9566fe"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a840291bc02cba5474a4cb46a9b9566fe"></a>
+int&#160;</td><td class="memItemRight" valign="bottom"><b>main</b> (void)</td></tr>
+<tr class="separator:a840291bc02cba5474a4cb46a9b9566fe"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Description détaillée</h2>
-<div class="textblock"><p>Fichier permettant la génération d'une partie de Picross à partir d'un terminal de commande. </p>
+<div class="textblock"><p>Fichier permettant de jouer une partie de Picross à partir d'un terminal de commande. </p>
 <dl class="section author"><dt>Auteur</dt><dd>KAJAK Rémi </dd></dl>
 <dl class="section version"><dt>Version</dt><dd>1.0 </dd></dl>
 <dl class="section date"><dt>Date</dt><dd>03/04/2018 </dd></dl>
-</div></div><!-- contents -->
+</div><h2 class="groupheader">Documentation des fonctions</h2>
+<a class="anchor" id="a7731ac5d32100449a8e2480d599a70cb"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void changerEtat </td>
+          <td>(</td>
+          <td class="paramtype">t_couleurs *&#160;</td>
+          <td class="paramname"><em>mat_prin</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">t_difficulte&#160;</td>
+          <td class="paramname"><em>dim_mat</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>x</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>y</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Fonction qui permet de changer l'état de la case. </p>
+<dl class="params"><dt>Paramètres</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">mat</td><td>La matrice qui représente la grille </td></tr>
+    <tr><td class="paramname">taille</td><td>La taille de la matrice renseignée </td></tr>
+    <tr><td class="paramname">x</td><td>Une coordonnée renseignant l'abscisse d'une matrice </td></tr>
+    <tr><td class="paramname">y</td><td>Une coordonnée renseignant l'ordonnée d'une matrice</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Renvoie</dt><dd>Ne retourne aucune valeur </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="a1126745af00395f3f057e7f1c51b0164"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void gen_peripheriques </td>
+          <td>(</td>
+          <td class="paramtype">t_couleurs *&#160;</td>
+          <td class="paramname"><em>soluce</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int *&#160;</td>
+          <td class="paramname"><em>colonnes</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int *&#160;</td>
+          <td class="paramname"><em>lignes</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">t_difficulte&#160;</td>
+          <td class="paramname"><em>taille</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Lit la matrice solution et génère les nombres correspondant aux groupes de cases pleines de chaque rangée dans les bonnes matrices périphériques. </p>
+<dl class="params"><dt>Paramètres</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">soluce</td><td>La matrice solution de type enum </td></tr>
+    <tr><td class="paramname">colonnes</td><td>La matrice périphérique des colonnes </td></tr>
+    <tr><td class="paramname">lignes</td><td>La matrice périphérique des lignes </td></tr>
+    <tr><td class="paramname">taille</td><td>La taille des matrices renseignées</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Renvoie</dt><dd>Ne retourne aucun résultat </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="a3e9c8b3fe82c9af0c1dea882df430528"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void lecture_fic_v1 </td>
+          <td>(</td>
+          <td class="paramtype">char *&#160;</td>
+          <td class="paramname"><em>nom_fic</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>puzzle</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">t_couleurs *&#160;</td>
+          <td class="paramname"><em>soluce</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">t_difficulte&#160;</td>
+          <td class="paramname"><em>taille</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Lit un fichier avec un format spécifique et remplit une matrice solution (première version du jeu). </p>
+<dl class="params"><dt>Paramètres</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">nom_fic</td><td>Nom du fichier texte à analyser </td></tr>
+    <tr><td class="paramname">puzzle</td><td>Numéro du puzzle à trouver dans le fichier </td></tr>
+    <tr><td class="paramname">soluce</td><td>La matrice solution de type enum </td></tr>
+    <tr><td class="paramname">taille</td><td>La taille de la matrice renseignée</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Renvoie</dt><dd>Ne retourne aucun résultat </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="aaf69df6150ddf60905ed92f6b47447aa"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int saisir_coord </td>
+          <td>(</td>
+          <td class="paramtype">t_couleurs *&#160;</td>
+          <td class="paramname"><em>mat_prin</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">t_difficulte&#160;</td>
+          <td class="paramname"><em>dim_mat</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Fonction qui permet à l'utilisateur d'entrer des coordonnées. </p>
+<dl class="params"><dt>Paramètres</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">mat</td><td>La matrice de type enum qui représente la grille </td></tr>
+    <tr><td class="paramname">taille</td><td>La taille de la matrice renseignée</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Renvoie</dt><dd>Retourne l'état de la sélection, si le joueur souhaite soumettre sa grille à la vérification ou pas </dd></dl>
+
+</div>
+</div>
+</div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Généré le Mercredi 4 Avril 2018 15:14:21 pour PROJET PICROSS par &#160;<a href="http://www.doxygen.org/index.html">
+Généré le Dimanche 8 Avril 2018 18:40:04 pour PROJET PICROSS par &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.8
 </small></address>

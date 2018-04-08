@@ -1,0 +1,370 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+<meta name="generator" content="Doxygen 1.8.8"/>
+<title>PROJET PICROSS: Référence du fichier Case.h</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/search.js"></script>
+<script type="text/javascript">
+  $(document).ready(function() { searchBox.OnSelectItem(0); });
+</script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td style="padding-left: 0.5em;">
+   <div id="projectname">PROJET PICROSS
+   </div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Généré par Doxygen 1.8.8 -->
+<script type="text/javascript">
+var searchBox = new SearchBox("searchBox", "search",false,'Recherche');
+</script>
+  <div id="navrow1" class="tabs">
+    <ul class="tablist">
+      <li><a href="index.html"><span>Page&#160;principale</span></a></li>
+      <li><a href="pages.html"><span>Pages&#160;associées</span></a></li>
+      <li class="current"><a href="files.html"><span>Fichiers</span></a></li>
+      <li>
+        <div id="MSearchBox" class="MSearchBoxInactive">
+        <span class="left">
+          <img id="MSearchSelect" src="search/mag_sel.png"
+               onmouseover="return searchBox.OnSearchSelectShow()"
+               onmouseout="return searchBox.OnSearchSelectHide()"
+               alt=""/>
+          <input type="text" id="MSearchField" value="Recherche" accesskey="S"
+               onfocus="searchBox.OnSearchFieldFocus(true)" 
+               onblur="searchBox.OnSearchFieldFocus(false)" 
+               onkeyup="searchBox.OnSearchFieldChange(event)"/>
+          </span><span class="right">
+            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><img id="MSearchCloseImg" border="0" src="search/close.png" alt=""/></a>
+          </span>
+        </div>
+      </li>
+    </ul>
+  </div>
+  <div id="navrow2" class="tabs2">
+    <ul class="tablist">
+      <li><a href="files.html"><span>Liste&#160;des&#160;fichiers</span></a></li>
+      <li><a href="globals.html"><span>Membres&#160;de&#160;fichier</span></a></li>
+    </ul>
+  </div>
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>Tout</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Fichiers</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Fonctions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Pages</a></div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+</div><!-- top -->
+<div class="header">
+  <div class="summary">
+<a href="#typedef-members">Définitions de type</a> &#124;
+<a href="#enum-members">Énumérations</a> &#124;
+<a href="#func-members">Fonctions</a>  </div>
+  <div class="headertitle">
+<div class="title">Référence du fichier Case.h</div>  </div>
+</div><!--header-->
+<div class="contents">
+
+<p>Contient les définitions des structures enum et des fonctions de "Case.c".  
+<a href="#details">Plus de détails...</a></p>
+<div class="textblock"><div class="dynheader">
+Ce graphe montre quels fichiers incluent directement ou indirectement ce fichier :</div>
+<div class="dyncontent">
+<div class="center"><img src="Case_8h__dep__incl.png" border="0" usemap="#Case_8hdep" alt=""/></div>
+<map name="Case_8hdep" id="Case_8hdep">
+<area shape="rect" id="node2" href="Case_8c.html" title="Représentation des cases. " alt="" coords="5,80,69,107"/><area shape="rect" id="node3" href="generation_8h.html" title="Fichier contenant les définitions des fonctions de &quot;generation.c&quot;. Fait appel à &quot;Case.h&quot; pour obtenir les définitions et les structures de &quot;Case.c&quot;. " alt="" coords="93,80,187,107"/><area shape="rect" id="node4" href="generation_8c.html" title="Fichier ayant servi à l&#39;élaboration des différentes fonctions de génération des trois matrices princi..." alt="" coords="93,155,187,181"/></map>
+</div>
+</div>
+<p><a href="Case_8h_source.html">Aller au code source de ce fichier.</a></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="typedef-members"></a>
+Définitions de type</h2></td></tr>
+<tr class="memitem:a94756a97e8544e427ec192d822e8d18d"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a94756a97e8544e427ec192d822e8d18d"></a>
+typedef enum couleurs&#160;</td><td class="memItemRight" valign="bottom"><b>t_couleurs</b></td></tr>
+<tr class="separator:a94756a97e8544e427ec192d822e8d18d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac44c29a89ad2278798bb0c02e4282afb"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ac44c29a89ad2278798bb0c02e4282afb"></a>
+typedef enum difficulte&#160;</td><td class="memItemRight" valign="bottom"><b>t_difficulte</b></td></tr>
+<tr class="separator:ac44c29a89ad2278798bb0c02e4282afb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="enum-members"></a>
+Énumérations</h2></td></tr>
+<tr class="memitem:ae8772b89c073fcb61b7a2482b1192b3e"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ae8772b89c073fcb61b7a2482b1192b3e"></a>enum &#160;</td><td class="memItemRight" valign="bottom"><b>couleurs</b> { <br />
+&#160;&#160;<b>Blanche</b>, 
+<b>Noire</b>, 
+<b>Croix</b>, 
+<b>Blanche</b>, 
+<br />
+&#160;&#160;<b>Noire</b>, 
+<b>Croix</b>, 
+<b>Blanche</b>, 
+<b>Noire</b>, 
+<br />
+&#160;&#160;<b>Croix</b>
+<br />
+ }</td></tr>
+<tr class="separator:ae8772b89c073fcb61b7a2482b1192b3e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a35aa2d55b501700469097f04b7962297"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a35aa2d55b501700469097f04b7962297"></a>enum &#160;</td><td class="memItemRight" valign="bottom"><b>difficulte</b> { <br />
+&#160;&#160;<b>facile</b> = 3, 
+<b>normal</b>, 
+<b>difficile</b>, 
+<b>expert</b> = 10, 
+<br />
+&#160;&#160;<b>facile</b> =3, 
+<b>normal</b> =5, 
+<b>difficile</b> =7, 
+<b>expert</b> =10, 
+<br />
+&#160;&#160;<b>facile</b> =3, 
+<b>normal</b> =5, 
+<b>difficile</b> =7, 
+<b>expert</b> =10
+<br />
+ }</td></tr>
+<tr class="separator:a35aa2d55b501700469097f04b7962297"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
+Fonctions</h2></td></tr>
+<tr class="memitem:af2ceb20553135e3056f7cb2f79c53768"><td class="memItemLeft" align="right" valign="top">t_couleurs *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="Case_8h.html#af2ceb20553135e3056f7cb2f79c53768">init_case</a> (t_difficulte taille_max)</td></tr>
+<tr class="memdesc:af2ceb20553135e3056f7cb2f79c53768"><td class="mdescLeft">&#160;</td><td class="mdescRight">Fonction d'initialisation d'une matrice de type "t_couleurs*" (enum).  <a href="#af2ceb20553135e3056f7cb2f79c53768">Plus de détails...</a><br /></td></tr>
+<tr class="separator:af2ceb20553135e3056f7cb2f79c53768"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad0d1c0ad597074815fb33d66b24b3dac"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="Case_8h.html#ad0d1c0ad597074815fb33d66b24b3dac">verif_matrice</a> (t_couleurs *mat, t_difficulte taille_max)</td></tr>
+<tr class="memdesc:ad0d1c0ad597074815fb33d66b24b3dac"><td class="mdescLeft">&#160;</td><td class="mdescRight">Fonction qui affiche les cases de la matrice solution.  <a href="#ad0d1c0ad597074815fb33d66b24b3dac">Plus de détails...</a><br /></td></tr>
+<tr class="separator:ad0d1c0ad597074815fb33d66b24b3dac"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af39cce046775ba3a3ccc347bf94e1147"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="Case_8h.html#af39cce046775ba3a3ccc347bf94e1147">changerEtat</a> (t_couleurs *mat, t_difficulte taille, int x, int y)</td></tr>
+<tr class="memdesc:af39cce046775ba3a3ccc347bf94e1147"><td class="mdescLeft">&#160;</td><td class="mdescRight">Fonction qui permet de changer l'état de la case.  <a href="#af39cce046775ba3a3ccc347bf94e1147">Plus de détails...</a><br /></td></tr>
+<tr class="separator:af39cce046775ba3a3ccc347bf94e1147"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a135729639d9860fe0cb7ee2cd60ffe55"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="Case_8h.html#a135729639d9860fe0cb7ee2cd60ffe55">saisir_coord</a> (t_couleurs *mat, t_difficulte taille)</td></tr>
+<tr class="memdesc:a135729639d9860fe0cb7ee2cd60ffe55"><td class="mdescLeft">&#160;</td><td class="mdescRight">Fonction qui permet à l'utilisateur d'entrer des coordonnées.  <a href="#a135729639d9860fe0cb7ee2cd60ffe55">Plus de détails...</a><br /></td></tr>
+<tr class="separator:a135729639d9860fe0cb7ee2cd60ffe55"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab9a252525af327dfef9ab156e4521c8e"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="Case_8h.html#ab9a252525af327dfef9ab156e4521c8e">verifierGrille</a> (t_couleurs *matSoluce, t_couleurs *matJoueur, t_difficulte taille)</td></tr>
+<tr class="memdesc:ab9a252525af327dfef9ab156e4521c8e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Fonction qui vérifie si les cases de la grille du joueur est correcte par rapport à la grille solution.  <a href="#ab9a252525af327dfef9ab156e4521c8e">Plus de détails...</a><br /></td></tr>
+<tr class="separator:ab9a252525af327dfef9ab156e4521c8e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">Description détaillée</h2>
+<div class="textblock"><p>Contient les définitions des structures enum et des fonctions de "Case.c". </p>
+<dl class="section author"><dt>Auteur</dt><dd>MAROUF Taous, corrigé par KAJAK Rémi </dd></dl>
+<dl class="section version"><dt>Version</dt><dd>1.0 </dd></dl>
+<dl class="section date"><dt>Date</dt><dd>08/04/2018 </dd></dl>
+</div><h2 class="groupheader">Documentation des fonctions</h2>
+<a class="anchor" id="af39cce046775ba3a3ccc347bf94e1147"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void changerEtat </td>
+          <td>(</td>
+          <td class="paramtype">t_couleurs *&#160;</td>
+          <td class="paramname"><em>mat</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">t_difficulte&#160;</td>
+          <td class="paramname"><em>taille</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>x</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>y</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Fonction qui permet de changer l'état de la case. </p>
+<dl class="params"><dt>Paramètres</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">mat</td><td>La matrice qui représente la grille </td></tr>
+    <tr><td class="paramname">taille</td><td>La taille de la matrice renseignée </td></tr>
+    <tr><td class="paramname">x</td><td>Une coordonnée renseignant l'abscisse d'une matrice </td></tr>
+    <tr><td class="paramname">y</td><td>Une coordonnée renseignant l'ordonnée d'une matrice</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Renvoie</dt><dd>Ne retourne aucune valeur </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="af2ceb20553135e3056f7cb2f79c53768"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">t_couleurs* init_case </td>
+          <td>(</td>
+          <td class="paramtype">t_difficulte&#160;</td>
+          <td class="paramname"><em>taille_max</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Fonction d'initialisation d'une matrice de type "t_couleurs*" (enum). </p>
+<dl class="params"><dt>Paramètres</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">taille_max</td><td>La taille maximale que la matrice devra posséder</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Renvoie</dt><dd>La matrice allouée dynamiquement </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="a135729639d9860fe0cb7ee2cd60ffe55"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int saisir_coord </td>
+          <td>(</td>
+          <td class="paramtype">t_couleurs *&#160;</td>
+          <td class="paramname"><em>mat</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">t_difficulte&#160;</td>
+          <td class="paramname"><em>taille</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Fonction qui permet à l'utilisateur d'entrer des coordonnées. </p>
+<dl class="params"><dt>Paramètres</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">mat</td><td>La matrice de type enum qui représente la grille </td></tr>
+    <tr><td class="paramname">taille</td><td>La taille de la matrice renseignée</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Renvoie</dt><dd>Retourne l'état de la sélection, si le joueur souhaite soumettre sa grille à la vérification ou pas </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="ad0d1c0ad597074815fb33d66b24b3dac"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void verif_matrice </td>
+          <td>(</td>
+          <td class="paramtype">t_couleurs *&#160;</td>
+          <td class="paramname"><em>mat</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">t_difficulte&#160;</td>
+          <td class="paramname"><em>taille_max</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Fonction qui affiche les cases de la matrice solution. </p>
+<dl class="params"><dt>Paramètres</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">mat</td><td>La matrice représentant la grille </td></tr>
+    <tr><td class="paramname">taille_max</td><td>La taille de la matrice utilisée</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Renvoie</dt><dd>Ne retourne aucune valeur </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="ab9a252525af327dfef9ab156e4521c8e"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int verifierGrille </td>
+          <td>(</td>
+          <td class="paramtype">t_couleurs *&#160;</td>
+          <td class="paramname"><em>matSoluce</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">t_couleurs *&#160;</td>
+          <td class="paramname"><em>matJoueur</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">t_difficulte&#160;</td>
+          <td class="paramname"><em>taille</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Fonction qui vérifie si les cases de la grille du joueur est correcte par rapport à la grille solution. </p>
+<dl class="params"><dt>Paramètres</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">matSoluce</td><td>La matrice de type enum qui représente la grille solution </td></tr>
+    <tr><td class="paramname">matJoueur</td><td>La matrice de type enum qui représente la grille du joueur </td></tr>
+    <tr><td class="paramname">taille</td><td>La taille de la matrice renseignée</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Renvoie</dt><dd>Le nombre de différences relevées entre les deux matrices </dd></dl>
+
+</div>
+</div>
+</div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+Généré le Dimanche 8 Avril 2018 18:40:04 pour PROJET PICROSS par &#160;<a href="http://www.doxygen.org/index.html">
+<img class="footer" src="doxygen.png" alt="doxygen"/>
+</a> 1.8.8
+</small></address>
+</body>
+</html>

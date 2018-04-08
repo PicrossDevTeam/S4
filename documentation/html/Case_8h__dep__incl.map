@@ -1,0 +1,5 @@
+<map id="Case.h" name="Case.h">
+<area shape="rect" id="node2" href="$Case_8c.html" title="Représentation des cases. " alt="" coords="5,80,69,107"/>
+<area shape="rect" id="node3" href="$generation_8h.html" title="Fichier contenant les définitions des fonctions de &quot;generation.c&quot;. Fait appel à &quot;Case.h&quot; pour obtenir les définitions et les structures de &quot;Case.c&quot;. " alt="" coords="93,80,187,107"/>
+<area shape="rect" id="node4" href="$generation_8c.html" title="Fichier ayant servi à l&#39;élaboration des différentes fonctions de génération des trois matrices princi..." alt="" coords="93,155,187,181"/>
+</map>

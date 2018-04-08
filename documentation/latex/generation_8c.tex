@@ -3,7 +3,7 @@
 }
 
 
-Fichier ayant servi à l'élaboration des différentes fonctions de génération des trois matrices principales. Les fonctions ne possédant pas leur documentation Doxygen sont uniquement dédiées aux tests unitaires de ce fichier.  
+Fichier ayant servi à l'élaboration des différentes fonctions de génération des trois matrices principales.  
 
 
 {\ttfamily \#include $<$stdio.\+h$>$}\\*
@@ -20,31 +20,18 @@ Graphe des dépendances par inclusion de generation.\+c\+:\nopagebreak
 \subsection*{Fonctions}
 \begin{DoxyCompactItemize}
 \item 
-void \hyperlink{generation_8c_ab2b6856c86730ac614fd0578750fcc56}{init\+\_\+matrice} (int mat\mbox{[}N\mbox{]}\mbox{[}N\mbox{]})
+int $\ast$ \hyperlink{generation_8c_a75844feaf083b06c8757f2ade3239305}{init\+\_\+matrice\+\_\+periph} (t\+\_\+difficulte taille\+\_\+max)
 \begin{DoxyCompactList}\small\item\em Initialise une matrice avec des 0. \end{DoxyCompactList}\item 
-void \hyperlink{generation_8c_a7e5741984227568d6673547379170eaf}{afficher\+\_\+matrice} (int mat\mbox{[}N\mbox{]}\mbox{[}N\mbox{]}, int niveau, int taille\+\_\+max, char cle)
+void \hyperlink{generation_8c_aecb99c4032546fdf1fae4a3ab2ed8b80}{afficher\+\_\+matrice} (int $\ast$mat, t\+\_\+difficulte taille, char cle)
 \begin{DoxyCompactList}\small\item\em Affiche une matrice reçue en paramètre selon un modèle prédéfini. \end{DoxyCompactList}\item 
-\hypertarget{generation_8c_aeff4fc12f7319f96bc93b56595119c4e}{void {\bfseries afficher\+\_\+matrice\+\_\+claire} (int mat\mbox{[}N\mbox{]}\mbox{[}N\mbox{]})}\label{generation_8c_aeff4fc12f7319f96bc93b56595119c4e}
-
-\item 
-int \hyperlink{generation_8c_a09b1103f4fabcbb720d21039b247c534}{lecture\+\_\+fic} (char $\ast$nom\+\_\+fic, int puzzle, int C\mbox{[}N\mbox{]}\mbox{[}N\mbox{]}, int L\mbox{[}N\mbox{]}\mbox{[}N\mbox{]}, int solveur)
-\begin{DoxyCompactList}\small\item\em Lit un fichier avec un format spécifique et renseigne les nombres contenus dans les matrices périphériques. \end{DoxyCompactList}\item 
-void \hyperlink{generation_8c_ae6e1bc7dd2ef2ffbd41b12c549ecb5ac}{gen\+\_\+peripheriques} (int S\mbox{[}N\mbox{]}\mbox{[}N\mbox{]}, int C\mbox{[}N\mbox{]}\mbox{[}N\mbox{]}, int L\mbox{[}N\mbox{]}\mbox{[}N\mbox{]}, int taille\+\_\+max)
-\begin{DoxyCompactList}\small\item\em Lit la matrice solution et génère les nombres correspondant aux groupes de cases pleines de chaque rangée dans les bonnes matrices périphériques. \end{DoxyCompactList}\item 
-int \hyperlink{generation_8c_a7434f3ce262fae716119736b914f244f}{init\+\_\+compteur\+\_\+groupes} (int S\mbox{[}N\mbox{]}\mbox{[}N\mbox{]}, int nombres\mbox{[}N\mbox{]}, int rangee, char type\+\_\+rangee)
-\begin{DoxyCompactList}\small\item\em Initialise une liste d'entiers avec, pour chaque entier, le nombre de cases pleines d'un groupe analysé verticalement ou horizontalement. \end{DoxyCompactList}\item 
-void \hyperlink{generation_8c_a2bbf30f7c3bae82eebb0a23b11e8a26b}{verif\+\_\+adequation\+\_\+globale} (int soluce\mbox{[}N\mbox{]}\mbox{[}N\mbox{]}, int C\mbox{[}N\mbox{]}\mbox{[}N\mbox{]}, int L\mbox{[}N\mbox{]}\mbox{[}N\mbox{]}, int respect\+\_\+\+C\mbox{[}N\mbox{]}, int respect\+\_\+\+L\mbox{[}N\mbox{]})
-\begin{DoxyCompactList}\small\item\em Lorsqu'une itération de la boucle principale de la fonction \char`\"{}gen\+\_\+solution\char`\"{} a été effectuée, cette fonction a pour rôle de vérifier l'état de toutes les rangées. \end{DoxyCompactList}\item 
-int \hyperlink{generation_8c_a598c8580eddc01743c3d146157842232}{adequation\+\_\+rangee\+\_\+et\+\_\+nombres} (int S\mbox{[}N\mbox{]}\mbox{[}N\mbox{]}, int periph\mbox{[}N\mbox{]}\mbox{[}N\mbox{]}, int nb\+\_\+groupes\+\_\+defaut, int rangee, char type\+\_\+rangee)
-\begin{DoxyCompactList}\small\item\em Vérifie dans la matrice solution, pour une matrice périphérique, un compteur d'indice et une rangée précise donnés, si le remplissage d'une rangée de type \char`\"{}ligne\char`\"{} correspond aux nombres de la rangée de type \char`\"{}colonne\char`\"{} (et inversement). \end{DoxyCompactList}\item 
-void \hyperlink{generation_8c_a2255a5f398e1a373aa825dd97e539084}{init\+\_\+compteurs\+\_\+periph} (int periph\+\_\+\+C\mbox{[}N\mbox{]}\mbox{[}N\mbox{]}, int cpt\+\_\+\+C\mbox{[}N\mbox{]}, int periph\+\_\+\+L\mbox{[}N\mbox{]}\mbox{[}N\mbox{]}, int cpt\+\_\+\+L\mbox{[}N\mbox{]})
-\begin{DoxyCompactList}\small\item\em Initialise les compteurs des matrices périphériques. \end{DoxyCompactList}\item 
-void \hyperlink{generation_8c_a7f10b5c7e502fefd028a9a5f992130f2}{gen\+\_\+solution} (int S\mbox{[}N\mbox{]}\mbox{[}N\mbox{]}, int C\mbox{[}N\mbox{]}\mbox{[}N\mbox{]}, int L\mbox{[}N\mbox{]}\mbox{[}N\mbox{]}, int largeur)
-\begin{DoxyCompactList}\small\item\em Initialise la matrice solution grâce aux données des matrices périphériques. \end{DoxyCompactList}\end{DoxyCompactItemize}
+void \hyperlink{generation_8c_a021a69096e7e1b7e11c2e21d360faa64}{lecture\+\_\+fic\+\_\+v1} (char $\ast$nom\+\_\+fic, int puzzle, t\+\_\+couleurs $\ast$soluce, t\+\_\+difficulte taille)
+\begin{DoxyCompactList}\small\item\em Lit un fichier avec un format spécifique et remplit une matrice solution (première version du jeu). \end{DoxyCompactList}\item 
+void \hyperlink{generation_8c_a901f56ea1ee28707a99d258553a4efca}{gen\+\_\+peripheriques} (t\+\_\+couleurs $\ast$soluce, int $\ast$colonnes, int $\ast$lignes, t\+\_\+difficulte taille)
+\begin{DoxyCompactList}\small\item\em Lit la matrice solution et génère les nombres correspondant aux groupes de cases pleines de chaque rangée dans les bonnes matrices périphériques. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
 \subsection{Description détaillée}
-Fichier ayant servi à l'élaboration des différentes fonctions de génération des trois matrices principales. Les fonctions ne possédant pas leur documentation Doxygen sont uniquement dédiées aux tests unitaires de ce fichier. 
+Fichier ayant servi à l'élaboration des différentes fonctions de génération des trois matrices principales. 
 
 \begin{DoxyAuthor}{Auteur}
 K\+A\+J\+A\+K Rémi 
@@ -53,52 +40,20 @@ K\+A\+J\+A\+K Rémi
 1.\+2 
 \end{DoxyVersion}
 \begin{DoxyDate}{Date}
-04/04/2018 
+07/04/2018 
 \end{DoxyDate}
 
 
 \subsection{Documentation des fonctions}
-\hypertarget{generation_8c_a598c8580eddc01743c3d146157842232}{\index{generation.\+c@{generation.\+c}!adequation\+\_\+rangee\+\_\+et\+\_\+nombres@{adequation\+\_\+rangee\+\_\+et\+\_\+nombres}}
-\index{adequation\+\_\+rangee\+\_\+et\+\_\+nombres@{adequation\+\_\+rangee\+\_\+et\+\_\+nombres}!generation.\+c@{generation.\+c}}
-\subsubsection[{adequation\+\_\+rangee\+\_\+et\+\_\+nombres}]{\setlength{\rightskip}{0pt plus 5cm}adequation\+\_\+rangee\+\_\+et\+\_\+nombres (
-\begin{DoxyParamCaption}
-\item[{int}]{S\mbox{[}\+N\mbox{]}\mbox{[}\+N\mbox{]}, }
-\item[{int}]{periph\mbox{[}\+N\mbox{]}\mbox{[}\+N\mbox{]}, }
-\item[{int}]{nb\+\_\+groupes\+\_\+defaut, }
-\item[{int}]{rangee, }
-\item[{char}]{type\+\_\+rangee}
-\end{DoxyParamCaption}
-)}}\label{generation_8c_a598c8580eddc01743c3d146157842232}
-
-
-Vérifie dans la matrice solution, pour une matrice périphérique, un compteur d'indice et une rangée précise donnés, si le remplissage d'une rangée de type \char`\"{}ligne\char`\"{} correspond aux nombres de la rangée de type \char`\"{}colonne\char`\"{} (et inversement). 
-
-
-\begin{DoxyParams}{Paramètres}
-{\em S} & La matrice solution dans laquelle on vérifie l'adéquation d'une rangée par rapport à une autre \\
-\hline
-{\em periph} & La matrice périphérique qui contient les nombres nécessaires à la vérification \\
-\hline
-{\em nb\+\_\+groupes\+\_\+defaut} & La taille normale du groupe de nombres de la rangée \\
-\hline
-{\em rangee} & La rangée de la matrice solution qui va être vérifiée \\
-\hline
-{\em type\+\_\+rangee} & La nature de la rangée (ligne ou colonne) \\
-\hline
-\end{DoxyParams}
-\begin{DoxyReturn}{Renvoie}
-Cinq valeurs possibles \+: 2 si un groupe possède plus de cases que prévu, 1 si des groupes supplémentaires sont détectés, 0 si les données correspondent, -\/1 s'il reste des groupes à créer, -\/2 s'il reste des cases à compléter 
-\end{DoxyReturn}
-\hypertarget{generation_8c_a7e5741984227568d6673547379170eaf}{\index{generation.\+c@{generation.\+c}!afficher\+\_\+matrice@{afficher\+\_\+matrice}}
+\hypertarget{generation_8c_aecb99c4032546fdf1fae4a3ab2ed8b80}{\index{generation.\+c@{generation.\+c}!afficher\+\_\+matrice@{afficher\+\_\+matrice}}
 \index{afficher\+\_\+matrice@{afficher\+\_\+matrice}!generation.\+c@{generation.\+c}}
 \subsubsection[{afficher\+\_\+matrice}]{\setlength{\rightskip}{0pt plus 5cm}afficher\+\_\+matrice (
 \begin{DoxyParamCaption}
-\item[{int}]{mat\mbox{[}\+N\mbox{]}\mbox{[}\+N\mbox{]}, }
-\item[{int}]{niveau, }
-\item[{int}]{taille\+\_\+max, }
+\item[{int $\ast$}]{mat, }
+\item[{t\+\_\+difficulte}]{taille, }
 \item[{char}]{cle}
 \end{DoxyParamCaption}
-)}}\label{generation_8c_a7e5741984227568d6673547379170eaf}
+)}}\label{generation_8c_aecb99c4032546fdf1fae4a3ab2ed8b80}
 
 
 Affiche une matrice reçue en paramètre selon un modèle prédéfini. 
@@ -107,206 +62,86 @@ Affiche une matrice reçue en paramètre selon un modèle prédéfini.
 \begin{DoxyParams}{Paramètres}
 {\em mat} & Une matrice de taille fixe \\
 \hline
-{\em niveau} & Un chiffre indiquant la taille de la longueur des matrices \\
+{\em taille} & La taille de la matrice indiquée par le niveau de difficulté \\
 \hline
-{\em taille\+\_\+max} & La taille maximum relevée pour les matrices périphériques \\
-\hline
-{\em cle} & Un caractère qui définit le mode d'affichage \+: \char`\"{}\+C\char`\"{} pour afficher horizontalement les nombres de la matrice périphérique des colonnes, \char`\"{}\+L\char`\"{} pour afficher verticalement les nombres de la matrice périphérique des lignes et \char`\"{}\+S\char`\"{} pour afficher une grille complète \\
+{\em cle} & Un caractère qui définit le mode d'affichage \+: \char`\"{}\+C\char`\"{} pour afficher horizontalement les nombres de la matrice périphérique des colonnes et \char`\"{}\+L\char`\"{} pour afficher verticalement les nombres de la matrice périphérique des lignes\\
 \hline
 \end{DoxyParams}
 \begin{DoxyReturn}{Renvoie}
 Ne retourne aucun résultat 
 \end{DoxyReturn}
-\hypertarget{generation_8c_ae6e1bc7dd2ef2ffbd41b12c549ecb5ac}{\index{generation.\+c@{generation.\+c}!gen\+\_\+peripheriques@{gen\+\_\+peripheriques}}
+\hypertarget{generation_8c_a901f56ea1ee28707a99d258553a4efca}{\index{generation.\+c@{generation.\+c}!gen\+\_\+peripheriques@{gen\+\_\+peripheriques}}
 \index{gen\+\_\+peripheriques@{gen\+\_\+peripheriques}!generation.\+c@{generation.\+c}}
 \subsubsection[{gen\+\_\+peripheriques}]{\setlength{\rightskip}{0pt plus 5cm}gen\+\_\+peripheriques (
 \begin{DoxyParamCaption}
-\item[{int}]{S\mbox{[}\+N\mbox{]}\mbox{[}\+N\mbox{]}, }
-\item[{int}]{C\mbox{[}\+N\mbox{]}\mbox{[}\+N\mbox{]}, }
-\item[{int}]{L\mbox{[}\+N\mbox{]}\mbox{[}\+N\mbox{]}, }
-\item[{int}]{taille\+\_\+max}
+\item[{t\+\_\+couleurs $\ast$}]{soluce, }
+\item[{int $\ast$}]{colonnes, }
+\item[{int $\ast$}]{lignes, }
+\item[{t\+\_\+difficulte}]{taille}
 \end{DoxyParamCaption}
-)}}\label{generation_8c_ae6e1bc7dd2ef2ffbd41b12c549ecb5ac}
+)}}\label{generation_8c_a901f56ea1ee28707a99d258553a4efca}
 
 
 Lit la matrice solution et génère les nombres correspondant aux groupes de cases pleines de chaque rangée dans les bonnes matrices périphériques. 
 
 
 \begin{DoxyParams}{Paramètres}
-{\em S} & La matrice solution \\
+{\em soluce} & La matrice solution de type enum \\
 \hline
-{\em C} & La matrice périphérique des colonnes \\
+{\em colonnes} & La matrice périphérique des colonnes \\
 \hline
-{\em L} & La matrice périphérique des lignes \\
+{\em lignes} & La matrice périphérique des lignes \\
 \hline
-{\em taille\+\_\+max} & La taille maximum de la largeur des matrices périphériques ; elle permet de limiter les traitements sur la matrice solution de taille N$\ast$\+N \\
-\hline
-\end{DoxyParams}
-\begin{DoxyReturn}{Renvoie}
-Ne retourne aucune valeur 
-\end{DoxyReturn}
-\hypertarget{generation_8c_a7f10b5c7e502fefd028a9a5f992130f2}{\index{generation.\+c@{generation.\+c}!gen\+\_\+solution@{gen\+\_\+solution}}
-\index{gen\+\_\+solution@{gen\+\_\+solution}!generation.\+c@{generation.\+c}}
-\subsubsection[{gen\+\_\+solution}]{\setlength{\rightskip}{0pt plus 5cm}gen\+\_\+solution (
-\begin{DoxyParamCaption}
-\item[{int}]{S\mbox{[}\+N\mbox{]}\mbox{[}\+N\mbox{]}, }
-\item[{int}]{C\mbox{[}\+N\mbox{]}\mbox{[}\+N\mbox{]}, }
-\item[{int}]{L\mbox{[}\+N\mbox{]}\mbox{[}\+N\mbox{]}, }
-\item[{int}]{largeur}
-\end{DoxyParamCaption}
-)}}\label{generation_8c_a7f10b5c7e502fefd028a9a5f992130f2}
-
-
-Initialise la matrice solution grâce aux données des matrices périphériques. 
-
-Pour gérer le remplissage progressif et les cas d'erreur, un système de numérotation des cases a été mis en place \+: 0 =$>$ case vide non-\/testée, 1 =$>$ case cochée, 2 =$>$ case vide déjà testée, 3 =$>$ case cochée validée. 
-\begin{DoxyParams}{Paramètres}
-{\em S} & La matrice solution qui va contenir le motif du puzzle \\
-\hline
-{\em C} & La matrice périphérique des colonnes (situé en haut de la grille du Picross) \\
-\hline
-{\em L} & La matrice périphérique des lignes (situé à gauche de la grille du Picross) \\
-\hline
-{\em largeur} & La taille maximum des rangées pour les matrices périphériques \\
+{\em taille} & La taille des matrices renseignées\\
 \hline
 \end{DoxyParams}
 \begin{DoxyReturn}{Renvoie}
 Ne retourne aucun résultat 
 \end{DoxyReturn}
-\hypertarget{generation_8c_a7434f3ce262fae716119736b914f244f}{\index{generation.\+c@{generation.\+c}!init\+\_\+compteur\+\_\+groupes@{init\+\_\+compteur\+\_\+groupes}}
-\index{init\+\_\+compteur\+\_\+groupes@{init\+\_\+compteur\+\_\+groupes}!generation.\+c@{generation.\+c}}
-\subsubsection[{init\+\_\+compteur\+\_\+groupes}]{\setlength{\rightskip}{0pt plus 5cm}init\+\_\+compteur\+\_\+groupes (
+\hypertarget{generation_8c_a75844feaf083b06c8757f2ade3239305}{\index{generation.\+c@{generation.\+c}!init\+\_\+matrice\+\_\+periph@{init\+\_\+matrice\+\_\+periph}}
+\index{init\+\_\+matrice\+\_\+periph@{init\+\_\+matrice\+\_\+periph}!generation.\+c@{generation.\+c}}
+\subsubsection[{init\+\_\+matrice\+\_\+periph}]{\setlength{\rightskip}{0pt plus 5cm}init\+\_\+matrice\+\_\+periph (
 \begin{DoxyParamCaption}
-\item[{int}]{S\mbox{[}\+N\mbox{]}\mbox{[}\+N\mbox{]}, }
-\item[{int}]{nombres\mbox{[}\+N\mbox{]}, }
-\item[{int}]{rangee, }
-\item[{char}]{type\+\_\+rangee}
+\item[{t\+\_\+difficulte}]{taille\+\_\+max}
 \end{DoxyParamCaption}
-)}}\label{generation_8c_a7434f3ce262fae716119736b914f244f}
-
-
-Initialise une liste d'entiers avec, pour chaque entier, le nombre de cases pleines d'un groupe analysé verticalement ou horizontalement. 
-
-
-\begin{DoxyParams}{Paramètres}
-{\em S} & La matrice solution qui contient les données nécessaires à l'anaylse \\
-\hline
-{\em nombres} & La liste cotnenant chaque nombre qui correspond individuellement à un groupe de cases pleines trouvé par la fonction \\
-\hline
-{\em rangee} & L'indice numérique de la rangée analysée \\
-\hline
-{\em type\+\_\+rangee} & La nature de la rangée (ligne ou colonne) \\
-\hline
-\end{DoxyParams}
-\begin{DoxyReturn}{Renvoie}
-La taille finale de la liste d'entiers. 
-\end{DoxyReturn}
-\hypertarget{generation_8c_a2255a5f398e1a373aa825dd97e539084}{\index{generation.\+c@{generation.\+c}!init\+\_\+compteurs\+\_\+periph@{init\+\_\+compteurs\+\_\+periph}}
-\index{init\+\_\+compteurs\+\_\+periph@{init\+\_\+compteurs\+\_\+periph}!generation.\+c@{generation.\+c}}
-\subsubsection[{init\+\_\+compteurs\+\_\+periph}]{\setlength{\rightskip}{0pt plus 5cm}init\+\_\+compteurs\+\_\+periph (
-\begin{DoxyParamCaption}
-\item[{int}]{periph\+\_\+\+C\mbox{[}\+N\mbox{]}\mbox{[}\+N\mbox{]}, }
-\item[{int}]{cpt\+C\mbox{[}\+N\mbox{]}, }
-\item[{int}]{periph\+\_\+\+L\mbox{[}\+N\mbox{]}\mbox{[}\+N\mbox{]}, }
-\item[{int}]{cpt\+L\mbox{[}\+N\mbox{]}}
-\end{DoxyParamCaption}
-)}}\label{generation_8c_a2255a5f398e1a373aa825dd97e539084}
-
-
-Initialise les compteurs des matrices périphériques. 
-
-Leur rôle est d'indiquer combien de nombres sont contenus dans chaque rangée (ligne/colonne) de chaque matrice périphérique. Ces compteurs sont utilisés dans la fonction \char`\"{}gen\+\_\+solution\char`\"{}. 
-\begin{DoxyParams}{Paramètres}
-{\em periph\+\_\+\+C} & La matrice périphérique des colonnes \\
-\hline
-{\em cpt\+C} & Tableau d'indices de la matrice périphérique des colonnes \\
-\hline
-{\em periph\+\_\+\+L} & La matrice périphérique des lignes \\
-\hline
-{\em cpt\+L} & Tableau d'indices de la matrice périphérique des lignes \\
-\hline
-\end{DoxyParams}
-\begin{DoxyReturn}{Renvoie}
-Ne retourne aucun résultat 
-\end{DoxyReturn}
-\hypertarget{generation_8c_ab2b6856c86730ac614fd0578750fcc56}{\index{generation.\+c@{generation.\+c}!init\+\_\+matrice@{init\+\_\+matrice}}
-\index{init\+\_\+matrice@{init\+\_\+matrice}!generation.\+c@{generation.\+c}}
-\subsubsection[{init\+\_\+matrice}]{\setlength{\rightskip}{0pt plus 5cm}init\+\_\+matrice (
-\begin{DoxyParamCaption}
-\item[{int}]{mat\mbox{[}\+N\mbox{]}\mbox{[}\+N\mbox{]}}
-\end{DoxyParamCaption}
-)}}\label{generation_8c_ab2b6856c86730ac614fd0578750fcc56}
+)}}\label{generation_8c_a75844feaf083b06c8757f2ade3239305}
 
 
 Initialise une matrice avec des 0. 
 
 
 \begin{DoxyParams}{Paramètres}
-{\em mat} & Une matrice de taille fixe \\
+{\em taille\+\_\+max} & La taille maximum de la matrice à initialiser\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Renvoie}
+Une matrice de type int allouée dynamiquement 
+\end{DoxyReturn}
+\hypertarget{generation_8c_a021a69096e7e1b7e11c2e21d360faa64}{\index{generation.\+c@{generation.\+c}!lecture\+\_\+fic\+\_\+v1@{lecture\+\_\+fic\+\_\+v1}}
+\index{lecture\+\_\+fic\+\_\+v1@{lecture\+\_\+fic\+\_\+v1}!generation.\+c@{generation.\+c}}
+\subsubsection[{lecture\+\_\+fic\+\_\+v1}]{\setlength{\rightskip}{0pt plus 5cm}lecture\+\_\+fic\+\_\+v1 (
+\begin{DoxyParamCaption}
+\item[{char $\ast$}]{nom\+\_\+fic, }
+\item[{int}]{puzzle, }
+\item[{t\+\_\+couleurs $\ast$}]{soluce, }
+\item[{t\+\_\+difficulte}]{taille}
+\end{DoxyParamCaption}
+)}}\label{generation_8c_a021a69096e7e1b7e11c2e21d360faa64}
+
+
+Lit un fichier avec un format spécifique et remplit une matrice solution (première version du jeu). 
+
+
+\begin{DoxyParams}{Paramètres}
+{\em nom\+\_\+fic} & Nom du fichier texte à analyser \\
+\hline
+{\em puzzle} & Numéro du puzzle à trouver dans le fichier \\
+\hline
+{\em soluce} & La matrice solution de type enum \\
+\hline
+{\em taille} & La taille de la matrice renseignée\\
 \hline
 \end{DoxyParams}
 \begin{DoxyReturn}{Renvoie}
 Ne retourne aucun résultat 
-\end{DoxyReturn}
-\hypertarget{generation_8c_a09b1103f4fabcbb720d21039b247c534}{\index{generation.\+c@{generation.\+c}!lecture\+\_\+fic@{lecture\+\_\+fic}}
-\index{lecture\+\_\+fic@{lecture\+\_\+fic}!generation.\+c@{generation.\+c}}
-\subsubsection[{lecture\+\_\+fic}]{\setlength{\rightskip}{0pt plus 5cm}lecture\+\_\+fic (
-\begin{DoxyParamCaption}
-\item[{char $\ast$}]{nom, }
-\item[{int}]{puzzle, }
-\item[{int}]{C\mbox{[}\+N\mbox{]}\mbox{[}\+N\mbox{]}, }
-\item[{int}]{L\mbox{[}\+N\mbox{]}\mbox{[}\+N\mbox{]}, }
-\item[{int}]{solveur}
-\end{DoxyParamCaption}
-)}}\label{generation_8c_a09b1103f4fabcbb720d21039b247c534}
-
-
-Lit un fichier avec un format spécifique et renseigne les nombres contenus dans les matrices périphériques. 
-
-Elle renvoie la largeur maximum d'une rangée pour améliorer les affichages et les traitements des matrices. 
-\begin{DoxyParams}{Paramètres}
-{\em nom} & Nom du fichier texte à analyser \\
-\hline
-{\em puzzle} & Numéro du puzzle à trouver dans le fichier \\
-\hline
-{\em C} & La matrice périphérique des colonnes \\
-\hline
-{\em L} & La matrice périphérique des lignes \\
-\hline
-{\em solveur} & Booléen qui indique si la lecture du fichier concerne le solveur ou pas \\
-\hline
-\end{DoxyParams}
-\begin{DoxyReturn}{Renvoie}
-Retourne la largeur maximum d'une matrice 
-\end{DoxyReturn}
-\hypertarget{generation_8c_a2bbf30f7c3bae82eebb0a23b11e8a26b}{\index{generation.\+c@{generation.\+c}!verif\+\_\+adequation\+\_\+globale@{verif\+\_\+adequation\+\_\+globale}}
-\index{verif\+\_\+adequation\+\_\+globale@{verif\+\_\+adequation\+\_\+globale}!generation.\+c@{generation.\+c}}
-\subsubsection[{verif\+\_\+adequation\+\_\+globale}]{\setlength{\rightskip}{0pt plus 5cm}verif\+\_\+adequation\+\_\+globale (
-\begin{DoxyParamCaption}
-\item[{int}]{soluce\mbox{[}\+N\mbox{]}\mbox{[}\+N\mbox{]}, }
-\item[{int}]{C\mbox{[}\+N\mbox{]}\mbox{[}\+N\mbox{]}, }
-\item[{int}]{L\mbox{[}\+N\mbox{]}\mbox{[}\+N\mbox{]}, }
-\item[{int}]{respect\+\_\+\+C\mbox{[}\+N\mbox{]}, }
-\item[{int}]{respect\+\_\+\+L\mbox{[}\+N\mbox{]}}
-\end{DoxyParamCaption}
-)}}\label{generation_8c_a2bbf30f7c3bae82eebb0a23b11e8a26b}
-
-
-Lorsqu'une itération de la boucle principale de la fonction \char`\"{}gen\+\_\+solution\char`\"{} a été effectuée, cette fonction a pour rôle de vérifier l'état de toutes les rangées. 
-
-Elle remplie les tableaux \char`\"{}respect\+\_\+\char`\"{} avec un indicateur numérique \+: 0 pour une rangée qui ne respecte pas ses règles, 1 pour un résultat positif. 
-\begin{DoxyParams}{Paramètres}
-{\em soluce} & La matrice solution \\
-\hline
-{\em C} & La matrice périphérique des colonnes \\
-\hline
-{\em L} & La matrice périphérique des lignes \\
-\hline
-{\em respect\+\_\+\+C} & Le tableau qui va contenir les résultats du test pour les colonnes des matrices soluce et C \\
-\hline
-{\em respect\+\_\+\+L} & Le tableau qui va contenir les résultats du test pour les lignes des matrices soluce et L \\
-\hline
-\end{DoxyParams}
-\begin{DoxyReturn}{Renvoie}
-Ne retourne aucune variable 
 \end{DoxyReturn}

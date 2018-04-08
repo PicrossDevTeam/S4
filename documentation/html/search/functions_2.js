@@ -1,6 +1,5 @@
 var searchData=
 [
-  ['init_5fcompteur_5fgroupes',['init_compteur_groupes',['../generation_8c.html#a7434f3ce262fae716119736b914f244f',1,'generation.c']]],
-  ['init_5fcompteurs_5fperiph',['init_compteurs_periph',['../generation_8c.html#a2255a5f398e1a373aa825dd97e539084',1,'generation.c']]],
-  ['init_5fmatrice',['init_matrice',['../generation_8c.html#ab2b6856c86730ac614fd0578750fcc56',1,'generation.c']]]
+  ['gen_5fperipheriques',['gen_peripheriques',['../generation_8c.html#a901f56ea1ee28707a99d258553a4efca',1,'gen_peripheriques(t_couleurs *soluce, int *colonnes, int *lignes, t_difficulte taille):&#160;generation.c'],['../generation_8h.html#a1126745af00395f3f057e7f1c51b0164',1,'gen_peripheriques(t_couleurs *soluce, int *colonnes, int *lignes, t_difficulte taille):&#160;generation.c'],['../terminal_8c.html#a1126745af00395f3f057e7f1c51b0164',1,'gen_peripheriques(t_couleurs *soluce, int *colonnes, int *lignes, t_difficulte taille):&#160;terminal.c']]],
+  ['gen_5fsolution',['gen_solution',['../generation_8h.html#a666cbbab969e8289c4c837901c2a52fe',1,'generation.h']]]
 ];

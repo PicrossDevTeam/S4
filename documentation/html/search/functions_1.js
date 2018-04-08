@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['gen_5fperipheriques',['gen_peripheriques',['../generation_8c.html#ae6e1bc7dd2ef2ffbd41b12c549ecb5ac',1,'generation.c']]],
-  ['gen_5fsolution',['gen_solution',['../generation_8c.html#a7f10b5c7e502fefd028a9a5f992130f2',1,'generation.c']]]
+  ['changeretat',['changerEtat',['../Case_8c.html#add6985659d4931bf8795c5ba87056a9b',1,'changerEtat(t_couleurs *mat, t_difficulte taille, int x, int y):&#160;Case.c'],['../Case_8h.html#af39cce046775ba3a3ccc347bf94e1147',1,'changerEtat(t_couleurs *mat, t_difficulte taille, int x, int y):&#160;Case.c'],['../terminal_8c.html#a7731ac5d32100449a8e2480d599a70cb',1,'changerEtat(t_couleurs *mat_prin, t_difficulte dim_mat, int x, int y):&#160;terminal.c']]]
 ];

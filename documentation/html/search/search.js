@@ -7,20 +7,18 @@
 
 var indexSectionsWithContent =
 {
-  0: "acgilptv",
-  1: "c",
-  2: "gt",
-  3: "agilv",
-  4: "p"
+  0: "acgilpstv",
+  1: "cgt",
+  2: "acgilsv",
+  3: "p"
 };
 
 var indexSectionNames =
 {
   0: "all",
-  1: "classes",
-  2: "files",
-  3: "functions",
-  4: "pages"
+  1: "files",
+  2: "functions",
+  3: "pages"
 };
 
 function convertToId(search)

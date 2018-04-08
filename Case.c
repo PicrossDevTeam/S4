@@ -3,16 +3,15 @@
  * \brief Représentation des cases.
  * \author MAROUF Taous, correction par KAJAK Rémi
  * \version 1.0
- * \date 7 avril 2018
+ * \date 08/04/2018
  *
  */
 #include <stdio.h>
 #include <stdlib.h>
-#include <stdbool.h>
 #include "Case.h"
 
 /**
- * \fn init_case(void)
+ * \fn init_case(t_difficulte taille_max)
  * \brief Fonction d'initialisation d'une matrice de type "t_couleurs*" (enum).
  *
  * \param taille_max La taille maximale que la matrice devra posséder
@@ -36,7 +35,7 @@ t_couleurs* init_case(t_difficulte taille_max) {
 /*********************************************************************************************/
 /**
  * \fn verif_matrice(t_couleurs* mat, t_difficulte taille_max)
- * \brief Fonction qui affiche les cases.
+ * \brief Fonction qui affiche les cases de la matrice solution.
  *
  * \param mat La matrice représentant la grille
  * \param taille_max La taille de la matrice utilisée
@@ -58,7 +57,7 @@ void verif_matrice(t_couleurs *mat, t_difficulte taille_max) {
 }
 /*********************************************************************************************/
 /**
- * \fn changerEtat(t_couleurs* mat, int x, int y)
+ * \fn changerEtat(t_couleurs* mat, t_difficulte taille, int x, int y)
  * \brief Fonction qui permet de changer l'état de la case.
  *
  * \param mat La matrice qui représente la grille
@@ -79,11 +78,11 @@ void changerEtat(t_couleurs *mat, t_difficulte taille, int x, int y) {
 
 /*********************************************************************************************/
 /**
- * \fn saisir_coord(t_couleurs *mat, int taille)
+ * \fn saisir_coord(t_couleurs *mat, t_difficulte taille)
  * \brief Fonction qui permet à l'utilisateur d'entrer des coordonnées
  *
- * \param mat La matrice qui représente la grille
- * \param taille La taille de la matrice
+ * \param mat La matrice de type enum qui représente la grille
+ * \param taille La taille de la matrice renseignée
  *
  * \return Retourne l'état de la sélection, si le joueur souhaite soumettre sa grille à la vérification ou pas
  */
@@ -111,19 +110,19 @@ int saisir_coord(t_couleurs *mat, t_difficulte taille) {
 
 /*********************************************************************************************/
 /**
-* \fn verifierGrille(t_couleurs *matd, t_couleurs *matf, t_difficulte taille)
- * \brief Fonction qui vérifie si les cases la grille du joueur est correcte.
+* \fn verifierGrille(t_couleurs *matSoluce, t_couleurs *matJoueur, t_difficulte taille)
+ * \brief Fonction qui vérifie si les cases de la grille du joueur est correcte par rapport à la grille solution.
  *
  * \param matSoluce La matrice de type enum qui représente la grille solution
  * \param matJoueur La matrice de type enum qui représente la grille du joueur
- * \param taille La taille de la matrice
+ * \param taille La taille de la matrice renseignée
  *
- * \return Le nombre de différences relevé entre les deux matrices
+ * \return Le nombre de différences relevées entre les deux matrices
  */
 int verifierGrille(t_couleurs *matSoluce, t_couleurs *matJoueur, t_difficulte taille) {
 	int i, j, erreurs = 0;
 
-	for(i = 0; i< taille; i++ ) {
+	for(i = 0; i< taille; i++) {
 		for(j = 0; j< taille; j++) {
 			if(matSoluce[taille*i+j] != matJoueur[taille*i+j])
 				erreurs++;

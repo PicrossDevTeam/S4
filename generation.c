@@ -11,9 +11,11 @@
 #include "generation.h"
 
 /**
-* \fn init_matrice_periph(int taille_max)
+* \fn init_matrice_periph(t_difficulte taille_max)
 * \brief Initialise une matrice avec des 0.
+* 
 * \param taille_max La taille maximum de la matrice à initialiser
+* 
 * \return Une matrice de type int allouée dynamiquement
 */
 int* init_matrice_periph(t_difficulte taille_max) {
@@ -30,9 +32,11 @@ int* init_matrice_periph(t_difficulte taille_max) {
 /**
 * \fn afficher_matrice(int *mat, t_difficulte taille, char cle)
 * \brief Affiche une matrice reçue en paramètre selon un modèle prédéfini.
+* 
 * \param mat Une matrice de taille fixe
 * \param taille La taille de la matrice indiquée par le niveau de difficulté
 * \param cle Un caractère qui définit le mode d'affichage : "C" pour afficher horizontalement les nombres de la matrice périphérique des colonnes et "L" pour afficher verticalement les nombres de la matrice périphérique des lignes
+* 
 * \return Ne retourne aucun résultat
 */
 void afficher_matrice(int *mat, t_difficulte taille, char cle) {
@@ -83,13 +87,15 @@ void afficher_matrice(int *mat, t_difficulte taille, char cle) {
 }
 
 /**
-* \fn lecture_fic_v1(char *nom, int puzzle, t_couleurs *soluce, t_difficulte taille)
+* \fn lecture_fic_v1(char *nom_fic, int puzzle, t_couleurs *soluce, t_difficulte taille)
 * \brief Lit un fichier avec un format spécifique et remplit une matrice solution (première version du jeu).
+* 
 * \param nom_fic Nom du fichier texte à analyser
 * \param puzzle Numéro du puzzle à trouver dans le fichier
-* \param soluce La matrice solution de type_enum
-* \param taille La taille de la matrice reinseignée
-* \return Ne retourne aucune valeur
+* \param soluce La matrice solution de type enum
+* \param taille La taille de la matrice renseignée
+* 
+* \return Ne retourne aucun résultat
 */
 void lecture_fic_v1(char *nom_fic, int puzzle, t_couleurs *soluce, t_difficulte taille) {
 	FILE *fic_gen;
@@ -122,16 +128,18 @@ void lecture_fic_v1(char *nom_fic, int puzzle, t_couleurs *soluce, t_difficulte 
 }
 
 /**
-* \fn lecture_fic_v2(char *nom, int puzzle, int *colonnes, int *lignes, int taille)
+* \fn lecture_fic_v2(char *nom_fic, int puzzle, int *colonnes, int *lignes, t_difficulte taille)
 * \brief Lit un fichier avec un format spécifique et renseigne les nombres contenus dans les matrices périphériques (seconde version du jeu). Elle renvoie la largeur maximum d'une rangée pour améliorer les affichages et les traitements des matrices.
-* \param nom Nom du fichier texte à analyser
+* 
+* \param nom_fic Nom du fichier texte à analyser
 * \param puzzle Numéro du puzzle à trouver dans le fichier
-* \param colonnes La matrice périphérique des colonnes ou la matrice solution (version 1 du jeu)
+* \param colonnes La matrice périphérique des colonnes
 * \param lignes La matrice périphérique des lignes
-* \param taille La taille des matrices
-* \return Ne retourne aucune valeur
+* \param taille La taille des matrices renseignées
+* 
+* \return Ne retourne aucun résultat
 */
-/*void lecture_fic_v2(char *nom_fic, int puzzle, int *colonnes, int *lignes, int taille) {
+/*void lecture_fic_v2(char *nom_fic, int puzzle, int *colonnes, int *lignes, t_difficulte taille) {
 	FILE * fic_gen;
 	char *cle = "PCLF", carac;
 	int rangee, curseur, num_puz, nb_case, i;
@@ -168,13 +176,15 @@ void lecture_fic_v1(char *nom_fic, int puzzle, t_couleurs *soluce, t_difficulte 
 } //*/
 
 /**
-* \fn gen_peripheriques(int *soluce, int *colonnes, int *lignes, int taille)
+* \fn gen_peripheriques(t_couleurs *soluce, int *colonnes, int *lignes, t_difficulte taille)
 * \brief Lit la matrice solution et génère les nombres correspondant aux groupes de cases pleines de chaque rangée dans les bonnes matrices périphériques.
+* 
 * \param soluce La matrice solution de type enum
 * \param colonnes La matrice périphérique des colonnes
 * \param lignes La matrice périphérique des lignes
-* \param taille La taille maximum de la largeur des matrices périphériques ; elle permet de limiter les traitements sur la matrice solution de taille N*N
-* \return Ne retourne aucune valeur
+* \param taille La taille des matrices renseignées
+* 
+* \return Ne retourne aucun résultat
 */
 void gen_peripheriques(t_couleurs *soluce, int *colonnes, int *lignes, t_difficulte taille) {
 	int i, j, nb_groupes_colonne, nb_groupes_ligne, taille_groupe_colonne, taille_groupe_ligne;
@@ -217,15 +227,17 @@ void gen_peripheriques(t_couleurs *soluce, int *colonnes, int *lignes, t_difficu
 }
 
 /**
-* \fn init_compteur_groupes(int *soluce, int nombres[N], int rangee, char type_rangee)
+* \fn init_compteur_groupes(t_couleurs *soluce, t_difficulte taille_mat, int rangee, char type_rangee)
 * \brief Initialise une liste d'entiers avec, pour chaque entier, le nombre de cases pleines d'un groupe analysé verticalement ou horizontalement.
+* 
 * \param soluce La matrice solution de type enum qui contient les données nécessaires à l'anaylse
 * \param taille_mat La taille de la matrice solution 
 * \param rangee L'indice numérique de la rangée analysée
 * \param type_rangee La nature de la rangée (ligne ou colonne)
+* 
 * \return La taille finale de la liste d'entiers.
 */
-/*int* init_compteur_groupes(t_couleurs *soluce, int taille_mat, int rangee, char type_rangee) {
+/*int* init_compteur_groupes(t_couleurs *soluce, t_difficulte taille_mat, int rangee, char type_rangee) {
 	int i, j, groupe = 0, *nombres = malloc(taille_mat * sizeof(int));
 	
 	// Avant toute opération, on initialise la liste de vérification des nombres
@@ -256,17 +268,19 @@ void gen_peripheriques(t_couleurs *soluce, int *colonnes, int *lignes, t_difficu
 } //*/
 
 /**
-* \fn verif_adequation_globale(t_couleurs *soluce, int *colonnes, int *lignes, int *respect_colonnes, int *respect_lignes, int taille)
-* \brief Lorsqu'une itération de la boucle principale de la fonction "gen_solution" a été effectuée, cette fonction a pour rôle de vérifier l'état de toutes les rangées. Elle remplie les tableaux "respect_" avec un indicateur numérique : 0 pour une rangée qui ne respecte pas ses règles, 1 pour un résultat positif. 
+* \fn verif_adequation_globale(t_couleurs *soluce, int *colonnes, int *lignes, int *respect_colonnes, int *respect_lignes, t_difficulte taille)
+* \brief Lorsqu'une itération de la boucle principale de la fonction "gen_solution" a été effectuée, cette fonction a pour rôle de vérifier l'état de toutes les rangées. Elle remplie les tableaux "respect_" avec un indicateur numérique : 0 pour une rangée qui ne respecte pas ses règles, 1 pour un résultat positif.
+*
 * \param soluce La matrice solution de type enum
 * \param colonnes La matrice périphérique des colonnes
 * \param lignes La matrice périphérique des lignes
 * \param respect_colonnes Le tableau qui va contenir les résultats du test pour les colonnes des matrices soluce et colonnes
 * \param respect_lignes Le tableau qui va contenir les résultats du test pour les lignes des matrices soluce et lignes
 * \param taille La taille des matrices renseignées
-* \return Ne retourne aucune variable
+*
+* \return Ne retourne aucun résultat
 */
-/*void verif_adequation_globale(t_couleurs *soluce, int *colonnes, int *lignes, int *respect_colonnes, int *respect_lignes, int taille) {
+/*void verif_adequation_globale(t_couleurs *soluce, int *colonnes, int *lignes, int *respect_colonnes, int *respect_lignes, t_difficulte taille) {
 	int i, j;
 	
 	// On commence par vérifier l'état des lignes
@@ -284,17 +298,19 @@ void gen_peripheriques(t_couleurs *soluce, int *colonnes, int *lignes, t_difficu
 } //*/
 
 /**
-* \fn adequation_rangee_et_nombres(t_couleurs *soluce, int *periph, int taille, int nb_groupes_defaut, int rangee, char type_rangee)
+* \fn adequation_rangee_et_nombres(t_couleurs *soluce, int *periph, t_difficulte taille, int nb_groupes_defaut, int rangee, char type_rangee)
 * \brief Vérifie dans la matrice solution, pour une matrice périphérique, un compteur d'indice et une rangée précise donnés, si le remplissage d'une rangée de type "ligne" correspond aux nombres de la rangée de type "colonne" (et inversement).
+*
 * \param soluce La matrice solution de type enum dans laquelle on vérifie l'adéquation d'une rangée par rapport à une autre
 * \param periph La matrice périphérique qui contient les nombres nécessaires à la vérification
 * \param taille La taille des matrices renseignées
 * \param nb_groupes_defaut La taille normale du groupe de nombres de la rangée
 * \param rangee La rangée de la matrice solution qui va être vérifiée
 * \param type_rangee La nature de la rangée (ligne ou colonne)
+*
 * \return Cinq valeurs possibles : 2 si un groupe possède plus de cases que prévu, 1 si des groupes supplémentaires sont détectés, 0 si les données correspondent, -1 s'il reste des groupes à créer, -2 s'il reste des cases à compléter
 */
-/*int adequation_rangee_et_nombres(t_couleurs *soluce, int *periph, int taille, int nb_groupes_defaut, int rangee, char type_rangee) {
+/*int adequation_rangee_et_nombres(t_couleurs *soluce, int *periph, t_difficulte taille, int nb_groupes_defaut, int rangee, char type_rangee) {
 	int i, j, k, taille_groupe[nb_groupes_defaut], *nb_groupes = NULL;
 	
 	nb_groupes = init_compteur_groupes(soluce,taille_groupe,rangee,type_rangee);
@@ -323,14 +339,16 @@ void gen_peripheriques(t_couleurs *soluce, int *colonnes, int *lignes, t_difficu
 } //*/
 
 /**
-* \fn init_compteurs_periph(int *periph, int *cpt, int taille)
+* \fn init_compteurs_periph(int *periph, int *cpt, t_difficulte taille)
 * \brief Initialise les compteurs des matrices périphériques. Leur rôle est d'indiquer combien de nombres sont contenus dans chaque rangée (ligne/colonne) de chaque matrice périphérique. Ces compteurs sont utilisés dans la fonction "gen_solution".
+*
 * \param periph Une matrice périphérique renseignée
 * \param cpt Tableau d'indices de la matrice périphérique associée
 * \param taille La taille de la matrice périphérique renseignée
+* 
 * \return Retourne une liste d'entiers allouée dynamiquement
 */
-/*int* init_compteurs_periph(int *periph, int taille) {
+/*int* init_compteurs_periph(int *periph, t_difficulte taille) {
 	int i, j, *liste_cpt = malloc(taille * sizeof(int));
 	
 	// Initialisation de la liste
@@ -344,15 +362,17 @@ void gen_peripheriques(t_couleurs *soluce, int *colonnes, int *lignes, t_difficu
 } //*/
 
 /**
-* \fn gen_solution(t_couleurs *soluce, int *colonnes, int *lignes, int taille)
+* \fn gen_solution(t_couleurs *soluce, int *colonnes, int *lignes, t_difficulte taille)
 * \brief Initialise la matrice solution grâce aux données des matrices périphériques. Pour gérer le remplissage progressif et les cas d'erreur, un système de numérotation des cases a été mis en place : 0 => case vide non-testée, 1 => case cochée, 2 => case vide déjà testée, 3 => case cochée validée.
+* 
 * \param soluce La matrice solution de type enum qui va contenir le motif du puzzle
 * \param colonnes La matrice périphérique des colonnes (situé en haut de la grille du Picross)
 * \param lignes La matrice périphérique des lignes (situé à gauche de la grille du Picross)
 * \param taille La taille maximum des rangées pour les matrices périphériques
+*
 * \return Ne retourne aucun résultat
 */
-/*void gen_solution(t_couleurs *soluce, int *colonnes, int *lignes, int taille) {
+/*void gen_solution(t_couleurs *soluce, int *colonnes, int *lignes, t_difficulte taille) {
 	int *nombres_colonnes = NULL, *nombres_lignes = NULL, *completion_colonnes = NULL, *completion_lignes = NULL; // Listes
 	int i, j, k, l, decalage, verif, lecture_grille = 0, respect_regles = 0, tour_ligne = 1;
 	

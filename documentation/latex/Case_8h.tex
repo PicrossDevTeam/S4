@@ -1,0 +1,206 @@
+\hypertarget{Case_8h}{\section{Référence du fichier Case.\+h}
+\label{Case_8h}\index{Case.\+h@{Case.\+h}}
+}
+
+
+Contient les définitions des structures enum et des fonctions de \char`\"{}\+Case.\+c\char`\"{}.  
+
+
+Ce graphe montre quels fichiers incluent directement ou indirectement ce fichier \+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=216pt]{Case_8h__dep__incl}
+\end{center}
+\end{figure}
+\subsection*{Définitions de type}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{Case_8h_a94756a97e8544e427ec192d822e8d18d}{typedef enum couleurs {\bfseries t\+\_\+couleurs}}\label{Case_8h_a94756a97e8544e427ec192d822e8d18d}
+
+\item 
+\hypertarget{Case_8h_ac44c29a89ad2278798bb0c02e4282afb}{typedef enum difficulte {\bfseries t\+\_\+difficulte}}\label{Case_8h_ac44c29a89ad2278798bb0c02e4282afb}
+
+\end{DoxyCompactItemize}
+\subsection*{Énumérations}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{Case_8h_ae8772b89c073fcb61b7a2482b1192b3e}{enum {\bfseries couleurs} \{ \\*
+{\bfseries Blanche}, 
+{\bfseries Noire}, 
+{\bfseries Croix}, 
+{\bfseries Blanche}, 
+\\*
+{\bfseries Noire}, 
+{\bfseries Croix}, 
+{\bfseries Blanche}, 
+{\bfseries Noire}, 
+\\*
+{\bfseries Croix}
+ \}}\label{Case_8h_ae8772b89c073fcb61b7a2482b1192b3e}
+
+\item 
+\hypertarget{Case_8h_a35aa2d55b501700469097f04b7962297}{enum {\bfseries difficulte} \{ \\*
+{\bfseries facile} = 3, 
+{\bfseries normal}, 
+{\bfseries difficile}, 
+{\bfseries expert} = 10, 
+\\*
+{\bfseries facile} =3, 
+{\bfseries normal} =5, 
+{\bfseries difficile} =7, 
+{\bfseries expert} =10, 
+\\*
+{\bfseries facile} =3, 
+{\bfseries normal} =5, 
+{\bfseries difficile} =7, 
+{\bfseries expert} =10
+ \}}\label{Case_8h_a35aa2d55b501700469097f04b7962297}
+
+\end{DoxyCompactItemize}
+\subsection*{Fonctions}
+\begin{DoxyCompactItemize}
+\item 
+t\+\_\+couleurs $\ast$ \hyperlink{Case_8h_af2ceb20553135e3056f7cb2f79c53768}{init\+\_\+case} (t\+\_\+difficulte taille\+\_\+max)
+\begin{DoxyCompactList}\small\item\em Fonction d'initialisation d'une matrice de type \char`\"{}t\+\_\+couleurs$\ast$\char`\"{} (enum). \end{DoxyCompactList}\item 
+void \hyperlink{Case_8h_ad0d1c0ad597074815fb33d66b24b3dac}{verif\+\_\+matrice} (t\+\_\+couleurs $\ast$mat, t\+\_\+difficulte taille\+\_\+max)
+\begin{DoxyCompactList}\small\item\em Fonction qui affiche les cases de la matrice solution. \end{DoxyCompactList}\item 
+void \hyperlink{Case_8h_af39cce046775ba3a3ccc347bf94e1147}{changer\+Etat} (t\+\_\+couleurs $\ast$mat, t\+\_\+difficulte taille, int x, int y)
+\begin{DoxyCompactList}\small\item\em Fonction qui permet de changer l'état de la case. \end{DoxyCompactList}\item 
+int \hyperlink{Case_8h_a135729639d9860fe0cb7ee2cd60ffe55}{saisir\+\_\+coord} (t\+\_\+couleurs $\ast$mat, t\+\_\+difficulte taille)
+\begin{DoxyCompactList}\small\item\em Fonction qui permet à l'utilisateur d'entrer des coordonnées. \end{DoxyCompactList}\item 
+int \hyperlink{Case_8h_ab9a252525af327dfef9ab156e4521c8e}{verifier\+Grille} (t\+\_\+couleurs $\ast$mat\+Soluce, t\+\_\+couleurs $\ast$mat\+Joueur, t\+\_\+difficulte taille)
+\begin{DoxyCompactList}\small\item\em Fonction qui vérifie si les cases de la grille du joueur est correcte par rapport à la grille solution. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Description détaillée}
+Contient les définitions des structures enum et des fonctions de \char`\"{}\+Case.\+c\char`\"{}. 
+
+\begin{DoxyAuthor}{Auteur}
+M\+A\+R\+O\+U\+F Taous, corrigé par K\+A\+J\+A\+K Rémi 
+\end{DoxyAuthor}
+\begin{DoxyVersion}{Version}
+1.\+0 
+\end{DoxyVersion}
+\begin{DoxyDate}{Date}
+08/04/2018 
+\end{DoxyDate}
+
+
+\subsection{Documentation des fonctions}
+\hypertarget{Case_8h_af39cce046775ba3a3ccc347bf94e1147}{\index{Case.\+h@{Case.\+h}!changer\+Etat@{changer\+Etat}}
+\index{changer\+Etat@{changer\+Etat}!Case.\+h@{Case.\+h}}
+\subsubsection[{changer\+Etat}]{\setlength{\rightskip}{0pt plus 5cm}void changer\+Etat (
+\begin{DoxyParamCaption}
+\item[{t\+\_\+couleurs $\ast$}]{mat, }
+\item[{t\+\_\+difficulte}]{taille, }
+\item[{int}]{x, }
+\item[{int}]{y}
+\end{DoxyParamCaption}
+)}}\label{Case_8h_af39cce046775ba3a3ccc347bf94e1147}
+
+
+Fonction qui permet de changer l'état de la case. 
+
+
+\begin{DoxyParams}{Paramètres}
+{\em mat} & La matrice qui représente la grille \\
+\hline
+{\em taille} & La taille de la matrice renseignée \\
+\hline
+{\em x} & Une coordonnée renseignant l'abscisse d'une matrice \\
+\hline
+{\em y} & Une coordonnée renseignant l'ordonnée d'une matrice\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Renvoie}
+Ne retourne aucune valeur 
+\end{DoxyReturn}
+\hypertarget{Case_8h_af2ceb20553135e3056f7cb2f79c53768}{\index{Case.\+h@{Case.\+h}!init\+\_\+case@{init\+\_\+case}}
+\index{init\+\_\+case@{init\+\_\+case}!Case.\+h@{Case.\+h}}
+\subsubsection[{init\+\_\+case}]{\setlength{\rightskip}{0pt plus 5cm}t\+\_\+couleurs$\ast$ init\+\_\+case (
+\begin{DoxyParamCaption}
+\item[{t\+\_\+difficulte}]{taille\+\_\+max}
+\end{DoxyParamCaption}
+)}}\label{Case_8h_af2ceb20553135e3056f7cb2f79c53768}
+
+
+Fonction d'initialisation d'une matrice de type \char`\"{}t\+\_\+couleurs$\ast$\char`\"{} (enum). 
+
+
+\begin{DoxyParams}{Paramètres}
+{\em taille\+\_\+max} & La taille maximale que la matrice devra posséder\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Renvoie}
+La matrice allouée dynamiquement 
+\end{DoxyReturn}
+\hypertarget{Case_8h_a135729639d9860fe0cb7ee2cd60ffe55}{\index{Case.\+h@{Case.\+h}!saisir\+\_\+coord@{saisir\+\_\+coord}}
+\index{saisir\+\_\+coord@{saisir\+\_\+coord}!Case.\+h@{Case.\+h}}
+\subsubsection[{saisir\+\_\+coord}]{\setlength{\rightskip}{0pt plus 5cm}int saisir\+\_\+coord (
+\begin{DoxyParamCaption}
+\item[{t\+\_\+couleurs $\ast$}]{mat, }
+\item[{t\+\_\+difficulte}]{taille}
+\end{DoxyParamCaption}
+)}}\label{Case_8h_a135729639d9860fe0cb7ee2cd60ffe55}
+
+
+Fonction qui permet à l'utilisateur d'entrer des coordonnées. 
+
+
+\begin{DoxyParams}{Paramètres}
+{\em mat} & La matrice de type enum qui représente la grille \\
+\hline
+{\em taille} & La taille de la matrice renseignée\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Renvoie}
+Retourne l'état de la sélection, si le joueur souhaite soumettre sa grille à la vérification ou pas 
+\end{DoxyReturn}
+\hypertarget{Case_8h_ad0d1c0ad597074815fb33d66b24b3dac}{\index{Case.\+h@{Case.\+h}!verif\+\_\+matrice@{verif\+\_\+matrice}}
+\index{verif\+\_\+matrice@{verif\+\_\+matrice}!Case.\+h@{Case.\+h}}
+\subsubsection[{verif\+\_\+matrice}]{\setlength{\rightskip}{0pt plus 5cm}void verif\+\_\+matrice (
+\begin{DoxyParamCaption}
+\item[{t\+\_\+couleurs $\ast$}]{mat, }
+\item[{t\+\_\+difficulte}]{taille\+\_\+max}
+\end{DoxyParamCaption}
+)}}\label{Case_8h_ad0d1c0ad597074815fb33d66b24b3dac}
+
+
+Fonction qui affiche les cases de la matrice solution. 
+
+
+\begin{DoxyParams}{Paramètres}
+{\em mat} & La matrice représentant la grille \\
+\hline
+{\em taille\+\_\+max} & La taille de la matrice utilisée\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Renvoie}
+Ne retourne aucune valeur 
+\end{DoxyReturn}
+\hypertarget{Case_8h_ab9a252525af327dfef9ab156e4521c8e}{\index{Case.\+h@{Case.\+h}!verifier\+Grille@{verifier\+Grille}}
+\index{verifier\+Grille@{verifier\+Grille}!Case.\+h@{Case.\+h}}
+\subsubsection[{verifier\+Grille}]{\setlength{\rightskip}{0pt plus 5cm}int verifier\+Grille (
+\begin{DoxyParamCaption}
+\item[{t\+\_\+couleurs $\ast$}]{mat\+Soluce, }
+\item[{t\+\_\+couleurs $\ast$}]{mat\+Joueur, }
+\item[{t\+\_\+difficulte}]{taille}
+\end{DoxyParamCaption}
+)}}\label{Case_8h_ab9a252525af327dfef9ab156e4521c8e}
+
+
+Fonction qui vérifie si les cases de la grille du joueur est correcte par rapport à la grille solution. 
+
+
+\begin{DoxyParams}{Paramètres}
+{\em mat\+Soluce} & La matrice de type enum qui représente la grille solution \\
+\hline
+{\em mat\+Joueur} & La matrice de type enum qui représente la grille du joueur \\
+\hline
+{\em taille} & La taille de la matrice renseignée\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Renvoie}
+Le nombre de différences relevées entre les deux matrices 
+\end{DoxyReturn}
