@@ -56,6 +56,8 @@ void afficher_haut(int *mat_hori, t_difficulte dim_mat){
 		for(j = 0; j < dim_mat; j++){
 			if(mat_hori[dim_mat*i+j]!=0)
 				printf("%i ",mat_hori[dim_mat*i+j]);
+			if(mat_hori[dim_mat*i+j]==0)
+				printf("  ");
 		}
 		printf("\n");
 	}
@@ -234,7 +236,7 @@ int main(void){
 	t_difficulte dim_mat;
 	t_couleurs * mat_prin;
 	t_couleurs * mat_soluce;
-	int num_puzzle=4; /* puzzle de départ */
+	int num_puzzle=6; /* puzzle de départ : 1 */
 	int valid; /* le joueur entre -1 */
 	int mat_ok=1; /* cas où le joueur n'a pas bon mais veut continuer */
 	int choix=0; /* continuer ou arrêter */
@@ -258,8 +260,7 @@ int main(void){
 			mat_ok=0;
 			do{
 				affichage_jeu(mat_hori, mat_verti, mat_prin, dim_mat);
-				valid=saisir_coord(mat_prin, dim_mat);
-			} while(valid!=1);
+			} while(saisir_coord(mat_prin, dim_mat)!=1);
 
 			do{
 				if(verif_soluce(mat_prin, mat_soluce, dim_mat)==1){
@@ -273,17 +274,17 @@ int main(void){
 					if(choix==0){
 						num_puzzle++;
 						if(num_puzzle==7)
-							jeu_gagne==0;
+							jeu_gagne=0;
 					}
 				}
 			} while(choix!=0 && choix!=1);
 		}
-
 		detruire_matrice_prin(mat_prin);
+		detruire_matrice_prin(mat_soluce);
 		detruire_matrice_peri(mat_verti);
 		detruire_matrice_peri(mat_hori);
-		detruire_matrice_prin(mat_soluce);
 	}
+
 	if(jeu_gagne==0){
 		printf("Félicitation, vous avez réussi le jeu du Picross, à une prochaine fois !\n");
 	}
