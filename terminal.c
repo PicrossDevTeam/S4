@@ -192,26 +192,72 @@ void gen_peripheriques(t_couleurs *soluce, int *colonnes, int *lignes, t_difficu
 
 /* -------------------------------------- */
 
+int verif_soluce(t_couleurs *mat_prin, t_couleurs *mat_soluce, int dim_mat){
+	int i,j;
+
+	for(i=0; i<dim_mat; i++){
+		for(j=0; j<dim_mat; j++){
+			if(mat_soluce[dim_mat*i+j]==1){
+				if(mat_prin[dim_mat*i+j]!=1){
+					return 1;
+				}
+			}
+		}
+	}
+	return 0;
+}
+
+/* -------------------------------------- */
+
 int main(void){
 	t_difficulte dim_mat=facile;
 	t_couleurs * mat_prin = init_matrice_prin(dim_mat);
 	t_couleurs * mat_soluce = init_matrice_prin(dim_mat);
+	int num_puzzle=2;
 	int quit;
+	int mat_ok=1;
+	int choix=0;
+	int jeu_gagne=1;
 
 	int * mat_verti = init_matrice_peri(dim_mat);
 	int * mat_hori = init_matrice_peri(dim_mat);
 
-	lecture_fic_v1("puzzles_binaires.txt", 2, mat_soluce, dim_mat);
-	gen_peripheriques(mat_soluce, mat_hori, mat_verti, dim_mat);
+	while(num_puzzle<7 && choix==0){
+		lecture_fic_v1("puzzles_binaires.txt", num_puzzle, mat_soluce, dim_mat);
+		gen_peripheriques(mat_soluce, mat_hori, mat_verti, dim_mat);
 
-	do{
-		affichage_jeu(mat_hori, mat_verti, mat_prin, dim_mat);
-		quit=saisir_coord(mat_prin, dim_mat);
-	} while(quit!=1);
+		while(mat_ok==1){
+			mat_ok=0;
+			do{
+				affichage_jeu(mat_hori, mat_verti, mat_prin, dim_mat);
+				quit=saisir_coord(mat_prin, dim_mat);
+			} while(quit!=1);
 
-	detruire_matrice_prin(mat_prin);
-	detruire_matrice_peri(mat_verti);
-	detruire_matrice_peri(mat_hori);
+			do{
+				if(verif_soluce(mat_prin, mat_soluce, dim_mat)==1){
+					printf("Votre solution est fausse, entrez 0 pour continuer ou 1 pour arrêter : ");
+					scanf("%i", &choix);
+					if(choix==0)
+						mat_ok=1;
+				} else {
+					printf("Félicitation ! Si vous voulez passer au niveau suivant entrez 0 pour continuer ou 1 pour arrêter : ");
+					scanf("%i", &choix);
+					if(choix==0){
+						num_puzzle++;
+						if(num_puzzle==7)
+							jeu_gagne==0;
+					}
+				}
+			} while(choix!=0 && choix!=1);
+		}
 
+		detruire_matrice_prin(mat_prin);
+		detruire_matrice_peri(mat_verti);
+		detruire_matrice_peri(mat_hori);
+	}
+	if(jeu_gagne==0){
+		printf("Félicitation, vous avez réussi le jeu du Picross, à une prochaine fois !\n");
+	}
+	printf("Merci d'avoir joué à notre jeu, à une prochaine fois !\n");
 	return 0;
 }
