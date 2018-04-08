@@ -311,31 +311,33 @@ void verif_adequation_globale(t_couleurs *soluce, int *colonnes, int *lignes, in
 * \return Cinq valeurs possibles : 2 si un groupe possède plus de cases que prévu, 1 si des groupes supplémentaires sont détectés, 0 si les données correspondent, -1 s'il reste des groupes à créer, -2 s'il reste des cases à compléter
 */
 int adequation_rangee_et_nombres(t_couleurs *soluce, int *periph, t_difficulte taille, int nb_groupes_defaut, int rangee, char type_rangee) {
-	int i, taille_groupe[nb_groupes_defaut], *nb_groupes = NULL;
+	int i = 0, etat_rangee, taille_groupe[nb_groupes_defaut], *nb_groupes = NULL;
 	
 	nb_groupes = init_compteur_groupes(soluce,taille,rangee,type_rangee);
 	
 	printf("\nNombre de groupes par défaut : %i, rangée %c vérifiée : %i",nb_groupes_defaut,type_rangee,rangee);
-	printf("\nNombre de groupes identifiés dans la rangée : %d",nb_groupes);
-	for(i = 0; i < nb_groupes; i++) printf("\nNombre de cases pour le groupe n°%i : %i",i+1,taille_groupe[taille*i]);
+	printf("\nNombre de groupes identifiés dans la rangée : %d",nb_groupes[taille*i]);
+	for(i = 0; i < nb_groupes[taille*i]; i++) printf("\nNombre de cases pour le groupe n°%i : %i",i+1,taille_groupe[taille*i]);
 	i = 0;
 	
 	while(i < nb_groupes_defaut) {
-		if(nb_groupes < nb_groupes_defaut) return -1;		// Moins de groupes que prévu
-		else if(nb_groupes > nb_groupes_defaut) return 1;	// Plus de groupes que prévu (cas improbable, néanmoins)
+		if(nb_groupes[taille*i] < nb_groupes_defaut) etat_rangee = -1;		// Moins de groupes que prévu
+		else if(nb_groupes[taille*i] > nb_groupes_defaut) etat_rangee = 1;	// Plus de groupes que prévu (cas improbable, néanmoins)
 		else {
 			if(type_rangee == 'C') {
-				if(taille_groupe[taille*i] < periph[taille*i+rangee]) return -2;		// Un groupe possède moins de cases que prévu
-				else if(taille_groupe[taille*i] > periph[taille*i+rangee]) return 2;	// Un groupe possède plus de cases que prévu
+				if(taille_groupe[taille*i] < periph[taille*i+rangee]) etat_rangee = -2;		// Un groupe possède moins de cases que prévu
+				else if(taille_groupe[taille*i] > periph[taille*i+rangee]) etat_rangee = 2;	// Un groupe possède plus de cases que prévu
 			}
 			else if(type_rangee == 'L') {
-				if(taille_groupe[taille*i] < periph[taille*rangee+i]) return -2;
-				else if(taille_groupe[taille*i] > periph[taille*rangee+i]) return 2;
+				if(taille_groupe[taille*i] < periph[taille*rangee+i]) etat_rangee = -2;
+				else if(taille_groupe[taille*i] > periph[taille*rangee+i]) etat_rangee = 2;
 			}
 		}
 		i++;
 	}
-	return 0; // La rangée analysée correspond aux attentes de la rangée de la matrice périphérique
+	free(nb_groupes);
+	nb_groupes = NULL;
+	return etat_rangee; // La rangée analysée correspond aux attentes de la rangée de la matrice périphérique
 } //*/
 
 /**
@@ -384,12 +386,10 @@ void gen_solution(t_couleurs *soluce, int *colonnes, int *lignes, t_difficulte t
 	i = 0;
 	j = 0;
 	
-	afficher_matrice(colonnes,taille,'C');
-	
 	// Ensuite, on boucle la matrice jusqu'à ce que la solution soit correctement générée
 	while(respect_regles != 1) {
 		printf("\nLecture de la grille n°%i",lecture_grille);
-		printf("\nTour n°%i",i);
+		printf("\nTour n°%i\n\n",i);
 		
 		// Lorsque toutes les rangées auront été lues au moins une fois pour la complétion, on effectue une vérification globale pour passer à la troisième étape de la génération
 		if(lecture_grille >= 1) verif_adequation_globale(soluce,colonnes,lignes,completion_colonnes,completion_lignes,taille);
@@ -415,7 +415,7 @@ void gen_solution(t_couleurs *soluce, int *colonnes, int *lignes, t_difficulte t
 			if(lecture_grille == 0) {
 				if(lignes[taille*i+i] > 0 && lignes[taille*i+i] < taille) {
 					verif = adequation_rangee_et_nombres(soluce,colonnes,taille,nombres_colonnes[taille*i],j,'C');
-					printf("\nVérification : %i ",verif);
+					printf("\nVérification : %i\n\n",verif);
 			
 					if(verif == 0) { // Si la complétion correspond aux rangées lues
 						i++;
@@ -480,6 +480,10 @@ void gen_solution(t_couleurs *soluce, int *colonnes, int *lignes, t_difficulte t
 		}
 		if(lecture_grille == 1) respect_regles = 1;
 	}
+	free(nombres_colonnes);
+	nombres_colonnes = NULL;
+	free(nombres_lignes);
+	nombres_lignes = NULL;
 } //*/
 
 
