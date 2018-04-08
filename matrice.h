@@ -5,11 +5,7 @@
 * \date 08/04/2018
 * \brief Fichier contenant les définitions de "matrice.c".
 */
-
-typedef enum couleurs {Blanche, Noire, Croix} t_couleurs;
-typedef enum difficulte {facile=3, normal=4, difficile=5} t_diff
-
-iculte;
+#include "generation.h"
 
 t_couleurs * init_matrice_prin(t_difficulte);
 int * init_matrice_peri(t_difficulte);

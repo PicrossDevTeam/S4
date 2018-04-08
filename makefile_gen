@@ -1,4 +1,4 @@
-PROG = demo_generation_v2
+PROG = demo_generation_v1
 CC = gcc
 FLAGS = -g -Wall
 CASE = Case
@@ -13,4 +13,4 @@ ${GEN}.o: ${GEN}.c ${GEN}.h
 	${CC} -c $^ ${FLAGS}
 clean:
 	rm *.o
-	rm *.*~
+	rm *.*~	

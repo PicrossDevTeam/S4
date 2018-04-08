@@ -1,12 +1,22 @@
 PROG = demo_terminal
 CC = gcc
 FLAGS = -g -Wall
+CASE = Case
 GEN = generation
-TERM = terminal
+MAT = matrice
+TERM = terminal_integration
 
-${PROG}: ${GEN}.o ${TERM}.c
+${PROG}: ${CASE}.o ${GEN}.o ${MAT}.o ${TERM}.o
 	${CC} $^ -o $@
-${GEN}.o: ${GEN}.c ${GEN}.h
+${TERM}.o: ${TERM}.c
+	${CC} -c $<
+${CASE}.o: ${CASE}.c ${CASE}.h
 	${CC} -c $^
+${GEN}.o: ${GEN}.c ${GEN}.h 
+	${CC} -c $^
+${MAT}.o: ${MAT}.c ${MAT}.h
+	${CC} -c $^
+
 clean:
 	rm *.o
+	rm *.*~

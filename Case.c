@@ -124,7 +124,7 @@ int verifierGrille(t_couleurs *matSoluce, t_couleurs *matJoueur, t_difficulte ta
 
 	for(i = 0; i< taille; i++) {
 		for(j = 0; j< taille; j++) {
-			if(matSoluce[taille*i+j] != matJoueur[taille*i+j])
+			if(matSoluce[taille*i+j]%2 != matJoueur[taille*i+j]%2)
 				erreurs++;
 
 		}
