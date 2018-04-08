@@ -139,7 +139,7 @@ void lecture_fic_v1(char *nom_fic, int puzzle, t_couleurs *soluce, t_difficulte 
 * 
 * \return Ne retourne aucun résultat
 */
-/*void lecture_fic_v2(char *nom_fic, int puzzle, int *colonnes, int *lignes, t_difficulte taille) {
+void lecture_fic_v2(char *nom_fic, int puzzle, int *colonnes, int *lignes, t_difficulte taille) {
 	FILE * fic_gen;
 	char *cle = "PCLF", carac;
 	int rangee, curseur, num_puz, nb_case, i;
@@ -237,7 +237,7 @@ void gen_peripheriques(t_couleurs *soluce, int *colonnes, int *lignes, t_difficu
 * 
 * \return La taille finale de la liste d'entiers.
 */
-/*int* init_compteur_groupes(t_couleurs *soluce, t_difficulte taille_mat, int rangee, char type_rangee) {
+int* init_compteur_groupes(t_couleurs *soluce, t_difficulte taille_mat, int rangee, char type_rangee) {
 	int i, j, groupe = 0, *nombres = malloc(taille_mat * sizeof(int));
 	
 	// Avant toute opération, on initialise la liste de vérification des nombres
@@ -256,7 +256,7 @@ void gen_peripheriques(t_couleurs *soluce, int *colonnes, int *lignes, t_difficu
 		if(soluce[taille_mat*i+j]%2 == 1) nombres[taille_mat*groupe] = nombres[taille_mat*groupe] + 1;	// Si on rentre dans un groupe de cases pleines
 	
 		if(type_rangee == 'C') {
-			if(i != 0 && soluce[taille*(i-1)+j]%2 == 1 && soluce[taille*i+j]%2 == 0) groupe++; // Si on sort du groupe vertical vérfié
+			if(i != 0 && soluce[taille_mat*(i-1)+j]%2 == 1 && soluce[taille_mat*i+j]%2 == 0) groupe++; // Si on sort du groupe vertical vérfié
 			i++;
 		}
 		else {
@@ -280,7 +280,7 @@ void gen_peripheriques(t_couleurs *soluce, int *colonnes, int *lignes, t_difficu
 *
 * \return Ne retourne aucun résultat
 */
-/*void verif_adequation_globale(t_couleurs *soluce, int *colonnes, int *lignes, int *respect_colonnes, int *respect_lignes, t_difficulte taille) {
+void verif_adequation_globale(t_couleurs *soluce, int *colonnes, int *lignes, int *respect_colonnes, int *respect_lignes, t_difficulte taille) {
 	int i, j;
 	
 	// On commence par vérifier l'état des lignes
@@ -299,7 +299,7 @@ void gen_peripheriques(t_couleurs *soluce, int *colonnes, int *lignes, t_difficu
 
 /**
 * \fn adequation_rangee_et_nombres(t_couleurs *soluce, int *periph, t_difficulte taille, int nb_groupes_defaut, int rangee, char type_rangee)
-* \brief Vérifie dans la matrice solution, pour une matrice périphérique, un compteur d'indice et une rangée précise donnés, si le remplissage d'une rangée de type "ligne" correspond aux nombres de la rangée de type "colonne" (et inversement).
+* \brief Vérifie dans la matrice solution - pour une matrice périphérique, un compteur d'indice et une rangée précise donnés - si le remplissage d'une rangée de type "ligne" correspond aux nombres de la rangée de type "colonne" (et inversement).
 *
 * \param soluce La matrice solution de type enum dans laquelle on vérifie l'adéquation d'une rangée par rapport à une autre
 * \param periph La matrice périphérique qui contient les nombres nécessaires à la vérification
@@ -310,30 +310,30 @@ void gen_peripheriques(t_couleurs *soluce, int *colonnes, int *lignes, t_difficu
 *
 * \return Cinq valeurs possibles : 2 si un groupe possède plus de cases que prévu, 1 si des groupes supplémentaires sont détectés, 0 si les données correspondent, -1 s'il reste des groupes à créer, -2 s'il reste des cases à compléter
 */
-/*int adequation_rangee_et_nombres(t_couleurs *soluce, int *periph, t_difficulte taille, int nb_groupes_defaut, int rangee, char type_rangee) {
-	int i, j, k, taille_groupe[nb_groupes_defaut], *nb_groupes = NULL;
+int adequation_rangee_et_nombres(t_couleurs *soluce, int *periph, t_difficulte taille, int nb_groupes_defaut, int rangee, char type_rangee) {
+	int i, taille_groupe[nb_groupes_defaut], *nb_groupes = NULL;
 	
-	nb_groupes = init_compteur_groupes(soluce,taille_groupe,rangee,type_rangee);
+	nb_groupes = init_compteur_groupes(soluce,taille,rangee,type_rangee);
 	
 	printf("\nNombre de groupes par défaut : %i, rangée %c vérifiée : %i",nb_groupes_defaut,type_rangee,rangee);
-	printf("\nNombre de groupes identifiés dans la rangée : %i",nb_groupes);
-	for(k = 0; k < nb_groupes; k++) printf("\nNombre de cases pour le groupe n°%i : %i",k+1,taille_groupe[k]);
-	k = 0;
+	printf("\nNombre de groupes identifiés dans la rangée : %d",nb_groupes);
+	for(i = 0; i < nb_groupes; i++) printf("\nNombre de cases pour le groupe n°%i : %i",i+1,taille_groupe[taille*i]);
+	i = 0;
 	
-	while(k < nb_groupes_defaut) {
+	while(i < nb_groupes_defaut) {
 		if(nb_groupes < nb_groupes_defaut) return -1;		// Moins de groupes que prévu
 		else if(nb_groupes > nb_groupes_defaut) return 1;	// Plus de groupes que prévu (cas improbable, néanmoins)
 		else {
 			if(type_rangee == 'C') {
-				if(taille_groupe[taille*k] < periph[taille*k+j]) return -2;		// Un groupe possède moins de cases que prévu
-				else if(taille_groupe[taille*k] > periph[taille*k+j]) return 2;	// Un groupe possède plus de cases que prévu
+				if(taille_groupe[taille*i] < periph[taille*i+rangee]) return -2;		// Un groupe possède moins de cases que prévu
+				else if(taille_groupe[taille*i] > periph[taille*i+rangee]) return 2;	// Un groupe possède plus de cases que prévu
 			}
 			else if(type_rangee == 'L') {
-				if(taille_groupe[taille*k] < periph[taille*i+k]) return -2;
-				else if(taille_groupe[taille*k] > periph[taille*i+k]) return 2;
+				if(taille_groupe[taille*i] < periph[taille*rangee+i]) return -2;
+				else if(taille_groupe[taille*i] > periph[taille*rangee+i]) return 2;
 			}
 		}
-		k++;
+		i++;
 	}
 	return 0; // La rangée analysée correspond aux attentes de la rangée de la matrice périphérique
 } //*/
@@ -348,7 +348,7 @@ void gen_peripheriques(t_couleurs *soluce, int *colonnes, int *lignes, t_difficu
 * 
 * \return Retourne une liste d'entiers allouée dynamiquement
 */
-/*int* init_compteurs_periph(int *periph, t_difficulte taille) {
+int* init_compteurs_periph(int *periph, t_difficulte taille) {
 	int i, j, *liste_cpt = malloc(taille * sizeof(int));
 	
 	// Initialisation de la liste
@@ -372,7 +372,7 @@ void gen_peripheriques(t_couleurs *soluce, int *colonnes, int *lignes, t_difficu
 *
 * \return Ne retourne aucun résultat
 */
-/*void gen_solution(t_couleurs *soluce, int *colonnes, int *lignes, t_difficulte taille) {
+void gen_solution(t_couleurs *soluce, int *colonnes, int *lignes, t_difficulte taille) {
 	int *nombres_colonnes = NULL, *nombres_lignes = NULL, *completion_colonnes = NULL, *completion_lignes = NULL; // Listes
 	int i, j, k, l, decalage, verif, lecture_grille = 0, respect_regles = 0, tour_ligne = 1;
 	
@@ -384,7 +384,7 @@ void gen_peripheriques(t_couleurs *soluce, int *colonnes, int *lignes, t_difficu
 	i = 0;
 	j = 0;
 	
-	afficher_matrice(colonnes,3,taille,'C');
+	afficher_matrice(colonnes,taille,'C');
 	
 	// Ensuite, on boucle la matrice jusqu'à ce que la solution soit correctement générée
 	while(respect_regles != 1) {
@@ -433,7 +433,7 @@ void gen_peripheriques(t_couleurs *soluce, int *colonnes, int *lignes, t_difficu
 				i = 0;
 				j = 0;
 			}
-			//afficher_matrice(soluce,3,taille,'S');
+			verif_matrice(soluce,taille);
 			printf("\n\n");
 		}
 		else { // Puis on passe au remplissage des colonnes
@@ -475,7 +475,7 @@ void gen_peripheriques(t_couleurs *soluce, int *colonnes, int *lignes, t_difficu
 				i = 0;
 				j = 0;
 			}
-			//afficher_matrice(soluce,3,taille,'S');
+			verif_matrice(soluce,taille);
 			printf("\n\n");
 		}
 		if(lecture_grille == 1) respect_regles = 1;
@@ -490,14 +490,13 @@ void gen_peripheriques(t_couleurs *soluce, int *colonnes, int *lignes, t_difficu
 * Puzzle n°4 : Échec avec une seule itération de gen_solution
 * Puzzle n°5 : Testé rapidement - aucune analyse effectuée entre la génération et le résultat attendu (échec certain avec une seule itération)
 */
-/*int main() {
-	char *fic = "puzzles_binaires.txt";
+int main() {
 	int *matColonnes = NULL, *matLignes = NULL, saisie;
 	t_couleurs *soluce = NULL;
 	t_difficulte niveau;
 	
-	
 	// Génération version n°1
+	/*char *fic1 = "puzzles_binaires.txt";
 	printf("Quelle puzzle souhaitez-vous générer ? Entrez un chiffre compris entre 1 et 6 : ");
 	do {
 		scanf("%i",&saisie);
@@ -515,14 +514,41 @@ void gen_peripheriques(t_couleurs *soluce, int *colonnes, int *lignes, t_difficu
 	matLignes = init_matrice_periph(niveau);
 	
 	// Lecture du fichier avec les paramètres sélectionnés
-	lecture_fic_v1(fic,saisie,soluce,niveau);
+	lecture_fic_v1(fic1,saisie,soluce,niveau);
 	printf("\nMatrice solution :\n");
 	verif_matrice(soluce,niveau);
 	
 	// Initilisation des matrices périphériques avec les données de la matrice solution
 	gen_peripheriques(soluce,matColonnes,matLignes,niveau);
 	afficher_matrice(matColonnes,niveau,'C');
+	afficher_matrice(matLignes,niveau,'L'); //*/
+	
+	// Génération version n°2
+	char *fic2 = "nombres_puzzle.txt";
+	printf("Quelle puzzle souhaitez-vous générer ? Entrez un chiffre compris entre 1 et 5 : ");
+	do {
+		scanf("%i",&saisie);
+		if(saisie < 1) printf("\nERREUR : Le chiffre saisi est inférieur à 1 ! Veuillez recommencer : ");
+		else if(saisie > 5) printf("\nERREUR : Le chiffre saisi est supérieur à 5 ! Veuillez recommencer : ");
+	} while(saisie < 1 || saisie > 5);
+	
+	if(saisie >= 1 && saisie <= 4) niveau = difficile;
+	else niveau = expert;
+	
+	// Génération des matrices et initialisation par défaut
+	soluce = init_case(niveau);
+	matColonnes = init_matrice_periph(niveau);
+	matLignes = init_matrice_periph(niveau);
+	
+	// Lecture du fichier avec les paramètres sélectionnés
+	lecture_fic_v2(fic2,saisie,matColonnes,matLignes,niveau);
+	afficher_matrice(matColonnes,niveau,'C');
 	afficher_matrice(matLignes,niveau,'L');
+	
+	// Initilisation des matrices périphériques avec les données de la matrice solution
+	gen_solution(soluce,matColonnes,matLignes,niveau);
+	printf("\nMatrice solution :\n");
+	verif_matrice(soluce,niveau); //*/
 	
 	// Libération de la mémoire allouée aux matrices
 	free(soluce);
